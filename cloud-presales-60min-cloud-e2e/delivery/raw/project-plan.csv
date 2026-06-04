@@ -1,0 +1,108 @@
+# Project Timeline
+#WIDTH: 15,35,12,14,14,35,28,14
+#ALIGN: left,left,center,center,center,left,left,center
+Phase,Task,Duration,Start Date,End Date,Dependencies,Owner,Status
+Phase 1 — Foundation & Security,Project Kickoff Meeting,1 day,2026-02-02,2026-02-02,None,Project Manager,Not Started
+Phase 1 — Foundation & Security,Kickoff Minutes & Scope Confirmation,1 day,2026-02-03,2026-02-03,Project Kickoff Meeting,Technical Writer,Not Started
+Phase 1 — Foundation & Security,Current State Assessment (eof-tools module map),5 days,2026-02-04,2026-02-10,Kickoff Minutes & Scope Confirmation,Solution Architect,Not Started
+Phase 1 — Foundation & Security,Cloud Readiness & AI/ML Capability Assessment,5 days,2026-02-04,2026-02-10,Kickoff Minutes & Scope Confirmation,Solution Architect,Not Started
+Phase 1 — Foundation & Security,Requirements Finalisation (CLI / API / Agents / Cognito),5 days,2026-02-04,2026-02-10,Kickoff Minutes & Scope Confirmation,Project Manager,Not Started
+Phase 1 — Foundation & Security,Detailed Architecture Design (multi-agent graph / Cognito / DynamoDB),10 days,2026-02-11,2026-02-20,Current State Assessment (eof-tools module map),Solution Architect,Not Started
+Phase 1 — Foundation & Security,Risk Register & Phased Delivery Plan,3 days,2026-02-11,2026-02-13,Requirements Finalisation (CLI / API / Agents / Cognito),Project Manager,Not Started
+Phase 1 — Foundation & Security,CTO Architecture Review & Sign-Off Gate,3 days,2026-02-18,2026-02-20,Detailed Architecture Design (multi-agent graph / Cognito / DynamoDB),Solution Architect,Not Started
+Phase 1 — Foundation & Security,AWS Foundation Infrastructure Provisioning (Cognito / DynamoDB / S3 / IAM / API GW),7 days,2026-02-23,2026-03-01,CTO Architecture Review & Sign-Off Gate,Senior Solutions Engineer,Not Started
+Phase 1 — Foundation & Security,Cognito Post-Confirmation Lambda & DynamoDB Quota Schema,5 days,2026-02-23,2026-02-27,CTO Architecture Review & Sign-Off Gate,Senior Solutions Engineer,Not Started
+Phase 2 — Agent Build & Integration,Input Validator Agent (Agent 0) Development & Unit Testing,5 days,2026-03-02,2026-03-06,AWS Foundation Infrastructure Provisioning (Cognito / DynamoDB / S3 / IAM / API GW),Senior ML/AI Engineer,Not Started
+Phase 2 — Agent Build & Integration,Pre-Sales Generator Agent (5-artifact workflow) Development & Unit Testing,7 days,2026-03-09,2026-03-17,Input Validator Agent (Agent 0) Development & Unit Testing,Senior ML/AI Engineer,Not Started
+Phase 2 — Agent Build & Integration,Delivery Generator Agent (6-artifact workflow) Development & Unit Testing,7 days,2026-03-16,2026-03-24,Pre-Sales Generator Agent (5-artifact workflow) Development & Unit Testing,Senior ML/AI Engineer,Not Started
+Phase 2 — Agent Build & Integration,Code Generator Agent (Terraform IaC + terraform validate gate) Development & Unit Testing,5 days,2026-03-23,2026-03-27,Delivery Generator Agent (6-artifact workflow) Development & Unit Testing,Senior ML/AI Engineer,Not Started
+Phase 2 — Agent Build & Integration,EO Validator Agent (format-check + Haiku 4.5 + 3-retry logic) Development & Unit Testing,5 days,2026-03-23,2026-03-27,Code Generator Agent (Terraform IaC + terraform validate gate) Development & Unit Testing,Senior ML/AI Engineer,Not Started
+Phase 2 — Agent Build & Integration,Docker Image Pipeline (multi-stage Dockerfile / ECR push / AgentCore registration),5 days,2026-03-23,2026-03-27,EO Validator Agent (format-check + Haiku 4.5 + 3-retry logic) Development & Unit Testing,DevOps Engineer,Not Started
+Phase 2 — Agent Build & Integration,Pip-Installable CLI Development (14 subcommands / JWT auth),7 days,2026-03-09,2026-03-17,AWS Foundation Infrastructure Provisioning (Cognito / DynamoDB / S3 / IAM / API GW),Senior Solutions Engineer,Not Started
+Phase 2 — Agent Build & Integration,Lambda Route Handlers — All 11 Routes (JWT-protected),7 days,2026-03-09,2026-03-17,AWS Foundation Infrastructure Provisioning (Cognito / DynamoDB / S3 / IAM / API GW),Senior Solutions Engineer,Not Started
+Phase 2 — Agent Build & Integration,GitHub Artifact Commit Pipeline (PAT-based),3 days,2026-03-18,2026-03-20,Lambda Route Handlers — All 11 Routes (JWT-protected),Senior Solutions Engineer,Not Started
+Phase 2 — Agent Build & Integration,CloudWatch Observability Implementation (token metrics / dashboards / alarms),5 days,2026-03-23,2026-03-27,GitHub Artifact Commit Pipeline (PAT-based),DevOps Engineer,Not Started
+Phase 2 — Agent Build & Integration,Security Hardening (Secrets Manager / WAF / CloudTrail / KMS),5 days,2026-03-23,2026-03-27,Lambda Route Handlers — All 11 Routes (JWT-protected),Security Engineer,Not Started
+Phase 2 — Agent Build & Integration,Platform Integration End-to-End Smoke Test,3 days,2026-03-30,2026-04-01,CloudWatch Observability Implementation (token metrics / dashboards / alarms),QA Engineer,Not Started
+Phase 3 — Validation & Go-Live,Comprehensive Test Plan Authoring,3 days,2026-04-06,2026-04-08,Platform Integration End-to-End Smoke Test,QA Engineer,Not Started
+Phase 3 — Validation & Go-Live,Unit & Integration Testing — All 12 Artifact Types,5 days,2026-04-07,2026-04-13,Comprehensive Test Plan Authoring,QA Engineer,Not Started
+Phase 3 — Validation & Go-Live,API Route Testing — All 11 Lambda Routes,3 days,2026-04-07,2026-04-09,Unit & Integration Testing — All 12 Artifact Types,QA Engineer,Not Started
+Phase 3 — Validation & Go-Live,Performance & Quota Contention Testing,3 days,2026-04-09,2026-04-13,API Route Testing — All 11 Lambda Routes,QA Engineer,Not Started
+Phase 3 — Validation & Go-Live,Security Testing (JWT bypass / WAF / IAM / Secrets Manager),3 days,2026-04-09,2026-04-13,API Route Testing — All 11 Lambda Routes,Security Engineer,Not Started
+Phase 3 — Validation & Go-Live,CloudWatch Green Baseline Validation,2 days,2026-04-14,2026-04-15,Performance & Quota Contention Testing,DevOps Engineer,Not Started
+Phase 3 — Validation & Go-Live,UAT Coordination with Marcus Patel — Pre-Sales Engineering,3 days,2026-04-14,2026-04-16,Unit & Integration Testing — All 12 Artifact Types,Project Manager,Not Started
+Phase 3 — Validation & Go-Live,Production Deployment via Terraform (CTO sign-off gate),1 day,2026-04-20,2026-04-20,UAT Coordination with Marcus Patel — Pre-Sales Engineering,DevOps Engineer,Not Started
+Phase 3 — Validation & Go-Live,CLI Package Published to PyPI,1 day,2026-04-20,2026-04-20,Production Deployment via Terraform (CTO sign-off gate),Senior Solutions Engineer,Not Started
+Phase 3 — Validation & Go-Live,Executive Demonstration Delivered to Sarah Lin (CRO),1 day,2026-04-21,2026-04-21,Production Deployment via Terraform (CTO sign-off gate),Project Manager,Not Started
+Phase 3 — Validation & Go-Live,Knowledge Transfer Sessions (Pre-Sales Engineering + Delivery Operations),3 days,2026-04-21,2026-04-23,Executive Demonstration Delivered to Sarah Lin (CRO),Solution Architect,Not Started
+Phase 3 — Validation & Go-Live,As-Built Documentation & API/CLI Reference Delivery,2 days,2026-04-21,2026-04-22,Executive Demonstration Delivered to Sarah Lin (CRO),Technical Writer,Not Started
+Phase 3 — Validation & Go-Live,Operational Runbooks Delivery,2 days,2026-04-21,2026-04-22,Executive Demonstration Delivered to Sarah Lin (CRO),Technical Writer,Not Started
+Phase 3 — Validation & Go-Live,Optimisation Recommendations & Phase 2 Roadmap,2 days,2026-04-22,2026-04-23,As-Built Documentation & API/CLI Reference Delivery,Solution Architect,Not Started
+Phase 3 — Validation & Go-Live,Formal Project Acceptance & Closeout Report,1 day,2026-04-24,2026-04-24,Optimisation Recommendations & Phase 2 Roadmap,Project Manager,Not Started
+Hypercare,Hypercare Week 1 — Production Monitoring & Incident Response,5 days,2026-04-27,2026-05-01,Formal Project Acceptance & Closeout Report,Senior ML/AI Engineer,Not Started
+Hypercare,Hypercare Week 2 — Agent Prompt Tuning & Quota Adjustment,5 days,2026-05-04,2026-05-08,Hypercare Week 1 — Production Monitoring & Incident Response,Senior ML/AI Engineer,Not Started
+Hypercare,Hypercare Week 3 — Defect Remediation & Platform Stabilisation,5 days,2026-05-11,2026-05-15,Hypercare Week 2 — Agent Prompt Tuning & Quota Adjustment,Senior ML/AI Engineer,Not Started
+Hypercare,Hypercare Week 4 — BAU Transition & Hypercare Closeout,5 days,2026-05-18,2026-05-22,Hypercare Week 3 — Defect Remediation & Platform Stabilisation,Project Manager,Not Started
+
+# Milestones
+#WIDTH: 14,40,14,30,60,26,12,14
+#ALIGN: left,left,center,left,left,left,center,center
+Milestone ID,Milestone Name,Target Date,Phase,Success Criteria,Owner,Status,Actual Date
+MS-001,Kickoff Complete,2026-02-02,Phase 1 — Foundation & Security,Scope confirmed; architecture design initiated; CTO sign-off process commenced; kickoff minutes distributed,Project Manager,Not Started,
+MS-002,Architecture Approved,2026-02-20,Phase 1 — Foundation & Security,Multi-agent graph design and AWS foundation design approved by CTO and Marcus Patel; risk register baselined,Solution Architect,Not Started,
+MS-003,Foundation Live,2026-03-01,Phase 1 — Foundation & Security,Cognito auth flow operational; API Gateway scaffold responding; DynamoDB quota schema deployed in us-west-2; accepted by Marcus Patel,Senior Solutions Engineer,Not Started,
+MS-004,All Agents Registered,2026-03-27,Phase 2 — Agent Build & Integration,All five Strands agents unit-tested and registered with Bedrock AgentCore Runtime; Docker image published to ECR,Senior ML/AI Engineer,Not Started,
+MS-005,Platform Integration Complete,2026-04-01,Phase 2 — Agent Build & Integration,CLI pip-installable and passing local integration tests; all 11 Lambda routes responding to authenticated requests; GitHub commit pipeline validated end-to-end,Senior Solutions Engineer,Not Started,
+MS-006,Validation Green,2026-04-15,Phase 3 — Validation & Go-Live,All 12 artifact types passing end-to-end validation; 95%+ first-attempt pass rate; green CloudWatch metrics baseline confirmed,QA Engineer,Not Started,
+MS-007,Go-Live,2026-04-21,Phase 3 — Validation & Go-Live,Production deployment complete with CTO sign-off; executive demonstration delivered to Sarah Lin (CRO); all smoke tests passing,Project Manager,Not Started,
+MS-008,Handover Complete,2026-04-24,Phase 3 — Validation & Go-Live,All documentation delivered; knowledge transfer sessions completed; formal project acceptance sign-off obtained from Sarah Lin,Project Manager,Not Started,
+MS-009,Hypercare End,2026-05-22,Hypercare,Four-week hypercare support period complete; no open Severity 1 or Severity 2 defects; platform transitions to BAU under Daniel Park,Project Manager,Not Started,
+
+# RACI Matrix
+#WIDTH: 46,14,16,14,16,16,14,12
+#ALIGN: left,center,center,center,center,center,center,center
+Task/Deliverable,Vendor PM,Vendor Arch,Vendor Eng,Vendor QA,Client IT Lead,Client Sec,CTO
+Project Governance & Status Reporting,A,C,R,I,C,I,I
+Architecture Design & CTO Review,C,A,R,I,C,C,I
+AWS Foundation Infrastructure Provisioning,C,A,R,I,C,I,I
+Cognito Auth & API Gateway Configuration,C,A,R,I,C,C,I
+Agent Development — All 5 Strands Agents,I,A,R,C,I,I,I
+eof-Tools Docker Image Pipeline & ECR,I,A,R,C,I,I,I
+CLI Development — 14 Subcommands,I,A,R,C,I,I,I
+Lambda Route Handler Development — 11 Routes,I,A,R,C,I,I,I
+DynamoDB Quota Enforcement Implementation,C,A,R,C,I,I,I
+GitHub Artifact Commit Pipeline,I,A,R,C,I,I,I
+CloudWatch Observability Implementation,C,A,R,C,I,I,I
+Security Hardening & Compliance Controls,C,C,R,C,C,A,I
+Test Plan Authoring,C,C,R,A,I,I,I
+Unit & Integration Testing — All 12 Artifact Types,C,C,R,A,I,I,I
+API Route & Quota Contention Testing,C,I,R,A,I,I,I
+Security Testing,C,C,R,A,C,C,I
+UAT Coordination & Acceptance,A,C,C,R,C,I,I
+Production Deployment & CTO Sign-Off Gate,C,A,R,I,I,I,I
+CLI Package Publication,I,A,R,I,I,I,I
+Operational Runbooks Authoring,A,C,R,I,C,I,I
+As-Built Architecture Documentation & API Reference,C,A,R,I,I,I,I
+Knowledge Transfer Session Delivery,A,R,C,I,C,I,I
+Optimisation Recommendations & Phase 2 Roadmap,C,A,R,I,I,I,I
+Formal Project Acceptance & Closeout,A,C,R,C,C,I,I
+Hypercare Incident Management,A,C,R,C,I,I,I
+R = Responsible | A = Accountable | C = Consulted | I = Informed,,,,,,,
+
+# Communications Plan
+#WIDTH: 30,18,45,50,24,20
+#ALIGN: left,center,left,left,left,center
+Meeting Type,Frequency,Participants,Purpose,Owner,Day/Time
+Project Kickoff,Once,"Sarah Lin; Marcus Patel; Daniel Park; CTO; Vendor delivery team",Launch project; align on scope; confirm RACI; establish governance cadence; initiate CTO sign-off process,Project Manager,2026-02-02 09:00 PT
+Weekly Status Call,Weekly,"Marcus Patel; Project Manager; Vendor team leads",Review progress against plan; surface blockers and decisions; update risk register,Project Manager,Mondays 10:00 PT
+Architecture Design Review,Once,"CTO; Marcus Patel; Solution Architect; Security Engineer",Review and approve multi-agent graph design; Cognito user pool configuration; DynamoDB schema; AWS foundation design,Solution Architect,2026-02-18 10:00 PT
+Steering Committee Review,Monthly,"Sarah Lin (CRO); Marcus Patel; Daniel Park; Project Manager",Executive-level review of project progress; budget status; risk escalations; milestone sign-off authority,Project Manager,Monthly — first Monday 09:00 PT
+Phase 1 Gate Review,Once,"Marcus Patel; Project Manager; Solution Architect",Confirm Phase 1 completion criteria met; approve Phase 2 start; review Foundation Live milestone sign-off,Project Manager,2026-03-01 10:00 PT
+Phase 2 Gate Review,Once,"Marcus Patel; Daniel Park; Project Manager; Solution Architect",Confirm all five agents registered; CLI and Lambda routes integrated; platform smoke test passed; approve Phase 3 start,Project Manager,2026-04-03 10:00 PT
+UAT Briefing & Walkthrough,Once,"Marcus Patel; representative Pre-Sales consultants; QA Engineer",Walk through UAT scenarios; confirm acceptance criteria; schedule UAT execution sessions,Project Manager,2026-04-06 10:00 PT
+Go-Live Readiness Review,Once,"Marcus Patel; Daniel Park; CTO; Sarah Lin; Project Manager; Solution Architect",Present test results; confirm all go-live readiness criteria met; obtain CTO sign-off for production deployment,Project Manager,2026-04-17 10:00 PT
+Executive Demonstration,Once,"Sarah Lin (CRO); Marcus Patel; Project Manager; Solution Architect",Live demonstration of end-to-end presales bundle generation via CLI; showcase 12 artifact types and CloudWatch metrics,Project Manager,2026-04-21 09:00 PT
+Knowledge Transfer Sessions,"Once (Week 12)","Marcus Patel; Daniel Park; Pre-Sales Engineering team; Delivery Operations team",Platform architecture walk-through; CLI and API usage hands-on; operations runbooks; admin API and quota reporting,Solution Architect,2026-04-21 to 2026-04-23
+Hypercare Incident Escalation,As required,"Marcus Patel or Daniel Park; Project Manager; Senior ML/AI Engineer",Notify and resolve Severity 1 incidents during hypercare period; assess impact; communicate workaround,Senior ML/AI Engineer,Within 2 business hours of detection
+Hypercare Weekly Check-In,"Weekly (Weeks 13-16)","Marcus Patel; Daniel Park; Project Manager",Review open defects; confirm platform health; track quota utilisation; discuss BAU transition readiness,Project Manager,Mondays 10:00 PT
+Project Closeout & BAU Handover,Once,"Sarah Lin; Marcus Patel; Daniel Park; Project Manager",Formal project closure confirmation; 90% effort-reduction metric validation; BAU operations transfer to Daniel Park's team,Project Manager,2026-05-22 10:00 PT

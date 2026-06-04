@@ -1,0 +1,52 @@
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
+Category,Component,Small,Medium,Large,Notes
+Cloud Services,Solutions per Month,<50 solutions,50-200 solutions,>200 solutions,Monthly EO Framework solution packages generated
+Cloud Services,Bedrock Token Volume,<5M tokens/mo,5M-20M tokens/mo,>20M tokens/mo,Aggregate Claude Sonnet + Haiku token consumption
+Cloud Services,Concurrent Agents,1-5 agents,5-15 agents,15+ agents,AgentCore Runtime concurrent agent executions
+Cloud Services,Artifacts per Solution,3-5 artifacts,6-9 artifacts,10-12 artifacts,Presales + delivery + automation artifacts
+Cloud Services,S3 Storage Volume,<100 GB,100-500 GB,>500 GB,Raw and converted artifact storage
+Software Licenses,Cognito MAUs,<200 MAUs,200-1000 MAUs,>1000 MAUs,Monthly active users (consultants accessing platform)
+Support & Maintenance,Support Level,Developer,Business,Enterprise,AWS support tier based on criticality
+Connectivity,API Request Volume,<100K req/mo,100K-500K req/mo,>500K req/mo,API Gateway HTTP API v2 request throughput
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,16,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
+Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
+Cloud Services,Amazon Bedrock (Sonnet),Claude Sonnet 4.6 for primary artifact generation (~200 solutions/mo),1500,Tokens-K/Month,1.00,18000,21600,25920,65520,Primary generation model; 20% YoY growth as solution volume scales
+Cloud Services,Amazon Bedrock (Haiku),Claude Haiku 4.5 for validation passes and format checks (~200 solutions/mo),150,Tokens-K/Month,1.00,1800,2160,2592,6552,Cost-efficient validation model; 20% YoY growth
+Cloud Services,AgentCore Runtime,Bedrock AgentCore Runtime hosting for 5 agents (Input Validator + Pre-Sales + Delivery + Code + EO Validator),800,Service/Month,1.00,9600,9600,9600,28800,Serverless agent hosting; flat rate at steady-state 200 solutions/mo
+Cloud Services,API Gateway HTTP API,HTTP API v2 with 11 Lambda routes (~50K requests/month),18,Service/Month,1.00,216,216,216,648,JWT-authorised API surface for CLI and web consumers
+Cloud Services,AWS Lambda,11 Lambda functions (API routes + post-confirmation Cognito trigger + converter invocations),2.20,Service/Month,1.00,26.40,26.40,26.40,79.20,"Lambda, Cognito trigger, and converter pipeline functions"
+Cloud Services,Amazon DynamoDB,On-demand capacity for solution metadata + user profiles + quota enforcement tables,25,Service/Month,1.00,300,300,300,900,Per-user monthly quota (10 solutions) and global pool (1000/mo) enforced atomically
+Cloud Services,Amazon S3,Artifact object storage — raw MD/CSV + converted DOCX/PPTX/XLSX + Terraform bundles,11.50,GB/Month,1.00,138,138,138,414,500 GB estimated; 12 artifacts per solution at ~200 solutions/mo
+Cloud Services,Amazon Cognito,User Pools for 120 consultant MAUs with 30-day refresh tokens,10,Service/Month,1.00,120,120,120,360,Post-confirmation Lambda trigger writes user profiles to DynamoDB
+Cloud Services,Amazon CloudWatch,Logs + metrics + dashboards for per-phase token usage and pipeline observability,200,Service/Month,1.00,2400,2400,2400,7200,Per-artifact validation metrics and admin usage endpoint telemetry
+Cloud Services,Amazon ECR,Container registry for eof-tools agent Docker images (~50 GB repository),5,GB/Month,1.00,60,60,60,180,Agent container images baked with eof-tools converter library (~30 Python modules)
+Cloud Services,AWS CodeBuild,Docker image build pipeline for agent container images,50,Service/Month,1.00,600,600,600,1800,Builds and pushes agent images to ECR on release
+Cloud Services,AWS Secrets Manager,Secrets storage for GitHub PAT + Cognito client secrets + API keys (10 secrets),4,Service/Month,1.00,48,48,48,144,GitHub personal access token + JWT signing keys securely stored
+Support & Maintenance,AWS Business Support,AWS Business Support — 24x7 access + <1hr critical response SLA,500,Service/Month,1.00,6000,6000,6000,18000,Required for production platform; covers all AWS services in us-west-2
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Hardware,Equipment Credit,0,No hardware credits — cloud-only solution with no physical infrastructure
+Cloud Services,AWS Activate Credit,-5000,AWS Activate or Solutions Partner program credit applicable against Bedrock and compute spend in Year 1
+Cloud Services,AWS MAP Credit,0,Migration Acceleration Program not applicable — greenfield build engagement
+Cloud Services,Reserved Instance Savings,0,No Reserved Instances — serverless and on-demand architecture; savings reflected in AgentCore flat-rate pricing
+Software Licenses,Partner Tool Credit,0,No third-party SaaS tool credits applicable at this time
+Connectivity,Network Credit,0,No connectivity circuit credits — API Gateway egress costs minimal
+Support & Maintenance,Program Credit,0,No support credits — standard Business Support plan pricing
+Facilities,Facilities Credit,0,No facilities costs — fully cloud-native deployment in us-west-2
+# 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
+Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
+Hardware,0,0,0,0,0,0
+Cloud Services,33308,-5000,28308,37268,41810,107386
+Software Licenses,0,0,0,0,0,0
+Connectivity,0,0,0,0,0,0
+Support & Maintenance,6000,0,6000,6000,6000,18000
+Facilities,0,0,0,0,0,0
+TOTAL,39308,-5000,34308,43268,47810,125386

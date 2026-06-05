@@ -1,0 +1,94 @@
+# SCOPE ASSUMPTIONS
+#WIDTH: 25,35,30,25,25,30,40
+#ALIGN: left,left,left,left,left,left,left
+Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes
+Users / Consultants,Single business unit,~120 consultants across US and Canada,Up to 50 users,51–200 users,200+ users,Amatra team is ~120 consultants; all will use the CLI and API
+Regions / Geographies,Single AWS region,us-west-2 (primary),1 region,2 regions,3+ regions,New footprint isolated in us-west-2; existing workloads remain in us-east-1
+Agents / Microservices,3–4 Lambda functions,5 agents + 14 CLI subcommands + 11 API Lambda routes,3–5 functions,6–15 functions,16+ functions,"Five Strands agents: Input Validator, Pre-Sales Generator, Delivery Generator, Code Generator, EO Validator"
+Artifact Types,4–6 artifact types,12 artifacts per solution (5 presales + 6 delivery + 1 automation),Up to 6 artifacts,7–12 artifacts,13+ artifacts,EO Framework defines 12 artifacts; each has format-check + LLM quality validation with up to 3 retries
+Integrations / External Systems,1–2 integrations,4 integrations (Bedrock AgentCore + Cognito + GitHub + DynamoDB quota),1–2 integrations,3–5 integrations,6+ integrations,"GitHub PAT push, Cognito JWT auth, DynamoDB atomic quotas, Bedrock model calls"
+Environments,Dev + Prod,Dev / Staging / Prod (3 environments),Dev + Prod,Dev + Staging + Prod,Dev + Staging + Prod + DR,Blast-radius isolation between POC (us-west-2) and existing managed-services (us-east-1)
+Compliance / Security,Standard AWS security baseline,CTO sign-off required; JWT auth; per-user + global quotas; audit trail,Basic IAM,IAM + Cognito + audit logging,IAM + Cognito + SIEM + compliance reporting,CTO approval gate for Cognito user pool and production deployment
+SLA / Availability Target,Business-hours availability,POC target; production path to 99.9% uptime,Best effort,99.5% uptime,99.9%+ with DR,12-week POC hard deadline (end of April 2026); Bedrock + AgentCore SLAs inherited
+
+# ESTIMATE SETTINGS
+#WIDTH: 25,30,15,80
+#ALIGN: left,left,center,left
+Phase,Variable Name,Multiplier,Description / Applies To Tasks
+Discovery,discovery_factor,1.0,Baseline stakeholder interviews; current-state review of legacy CLI workflow and eof-tools library
+Planning,planning_factor,1.2,Elevated for multi-agent graph design; AWS Landing Zone and IAM architecture complexity
+Development,development_factor,1.3,"Core build phase; AgentCore Runtime + Strands framework integration, Docker image pipeline, 12-artifact converters"
+Testing,testing_factor,1.1,End-to-end artifact validation across all 12 artifact types; CloudWatch metrics baseline; multi-agent retry logic
+Deployment,deployment_factor,1.0,Production deployment; knowledge transfer to Amatra team; runbook delivery
+Management,management_factor,1.0,Project management and technical leadership overhead (10% of engineering tasks)
+
+# LEVEL OF EFFORT
+#WIDTH: 15,25,50,15,12,14,12,12,15,25,40
+#ALIGN: left,left,left,left,right,center,right,right,right,left,left
+Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
+Discovery,Project Kickoff,Kickoff meeting with Sarah Lin / Marcus Patel / Daniel Park; align on scope and success criteria,Project Manager,8,1.0,8,$175,"$1,400",,Week 1
+Discovery,Current-State Assessment,Document legacy CLI workflow; map eof-tools converter library (~30 modules) and 12 artifact types,Solution Architect,24,1.0,24,$225,"$5,400",Project Kickoff,Produces as-is architecture baseline
+Discovery,Requirements Gathering,"Gather requirements for 14 CLI subcommands, 11 API routes, 5-agent graph, quota model, and GitHub push",Solution Architect,32,1.0,32,$225,"$7,200",Current-State Assessment,Interviews with Marcus Patel and Daniel Park
+Discovery,AWS Cloud Readiness Assessment,"Review existing AWS account; define us-west-2 landing zone, blast-radius controls, and account strategy",Cloud Engineer,16,1.0,16,$200,"$3,200",Requirements Gathering,Ensures new footprint isolation
+Discovery,Data & Quota Model Design,Design DynamoDB schema for per-user (10/month) and global (1000/month) atomic quota enforcement,Solution Architect,16,1.0,16,$225,"$3,600",Requirements Gathering,Drives DynamoDB partition key strategy
+Discovery,Gap Analysis,Identify gaps between current manual process and target agentic engine; document risk register,Solution Architect,16,1.0,16,$225,"$3,600",Current-State Assessment,
+Discovery,Assessment Report,Document findings; produce architecture decision record (ADR) and phase-1 scope baseline,Technical Writer,16,1.0,16,$125,"$2,000",Gap Analysis,Delivered to Marcus Patel for CTO review
+Planning,AWS Landing Zone Setup,"Design VPC, IAM roles, S3 bucket policies, and CloudTrail in us-west-2 for POC footprint",Cloud Engineer,40,1.2,48,$200,"$9,600",Assessment Report,Phase 1 (Weeks 1–4) foundation
+Planning,API Gateway & Lambda Architecture,"Design HTTP API v2 structure: 11 routes, JWT authoriser, Lambda integration patterns, throttling",Solution Architect,32,1.2,38,$225,"$8,550",AWS Landing Zone Setup,
+Planning,Cognito User Pool Design,"Design user pool, app client, post-confirmation trigger Lambda, 30-day refresh token policy",Solution Architect,24,1.2,29,$225,"$6,525",API Gateway & Lambda Architecture,CTO sign-off required before provisioning
+Planning,DynamoDB Schema Design,"Design tables for user profiles, solution records, quota counters, and audit events",Solution Architect,24,1.2,29,$225,"$6,525",Data & Quota Model Design,
+Planning,Strands Multi-Agent Graph Design,"Design 5-agent orchestration graph: Input Validator, Pre-Sales Generator, Delivery Generator, Code Generator, EO Validator",Solution Architect,48,1.2,58,$225,"$13,050",Requirements Gathering,Phase 2 (Weeks 5–9) core design
+Planning,Bedrock AgentCore Runtime Design,"Design AgentCore Runtime hosting config for serverless agents; Claude Sonnet 4.6 primary + Haiku 4.5 validator",ML/AI Engineer,32,1.2,38,$275,"$10,450",Strands Multi-Agent Graph Design,ML/AI rate adjusted for specialised Bedrock expertise
+Planning,Container Image Pipeline Design,"Design Docker image build pipeline: bake eof-tools converters, Python deps, agent code; ECR repo strategy",DevOps Engineer,24,1.2,29,$200,"$5,800",Strands Multi-Agent Graph Design,
+Planning,Security Baseline Design,"IAM least-privilege roles, KMS key design, Cognito JWT validation, GitHub PAT secret storage in Secrets Manager",Security Engineer,32,1.2,38,$200,"$7,600",Cognito User Pool Design,
+Planning,CLI Architecture Design,"Design pip-installable CLI: 14 subcommands, auth flow, status command with per-phase token usage display",Solutions Engineer,24,1.2,29,$200,"$5,800",API Gateway & Lambda Architecture,
+Planning,Design Documentation,"Produce detailed architecture diagrams, ADRs, and design specification for all components",Technical Writer,24,1.2,29,$125,"$3,625",All design tasks,
+Development,AWS Foundation Build,"Provision VPC, subnets, S3 buckets, IAM roles, CloudTrail, and KMS keys in us-west-2",Cloud Engineer,40,1.3,52,$200,"$10,400",Design Documentation,Phase 1 delivery (Weeks 1–4)
+Development,API Gateway HTTP API v2,"Implement all 11 Lambda routes, JWT Cognito authoriser, CORS config, and throttling rules",Solutions Engineer,48,1.3,62,$200,"$12,400",AWS Foundation Build,
+Development,Cognito User Pool Implementation,"Implement user pool, app client, post-confirmation Lambda writing profiles to DynamoDB",Solutions Engineer,32,1.3,42,$200,"$8,400",API Gateway HTTP API v2,Requires CTO approval gate before production
+Development,DynamoDB Implementation,"Implement user, solution, quota, and audit tables; atomic counter logic for quota enforcement",Solutions Engineer,32,1.3,42,$200,"$8,400",DynamoDB Schema Design,
+Development,Strands Agent Framework Integration,"Implement 5-agent Strands graph; wire agent-to-agent message passing and retry orchestration",ML/AI Engineer,80,1.3,104,$275,"$28,600",Strands Multi-Agent Graph Design,Largest single work package — core platform capability
+Development,Bedrock AgentCore Runtime Integration,"Register agents in AgentCore Runtime; configure Claude Sonnet 4.6 and Haiku 4.5 model bindings",ML/AI Engineer,48,1.3,62,$275,"$17,050",Strands Agent Framework Integration,
+Development,eof-tools Converter Integration,"Integrate ~30 Python eof-tools modules for DOCX, PPTX, XLSX conversion; bake into container image",Solutions Engineer,64,1.3,83,$200,"$16,600",Container Image Pipeline Design,12 artifact types × format-check + LLM quality validation
+Development,Per-Artifact Validation Pipeline,"Implement deterministic format-check + LLM quality-check loop with up to 3 retries per artifact",Solutions Engineer,48,1.3,62,$200,"$12,400",eof-tools Converter Integration,Covers all 12 artifact types
+Development,GitHub Integration,"Implement GitHub PAT push logic; commit generated artifacts to fixed public repository per solution",Solutions Engineer,24,1.3,31,$200,"$6,200",Per-Artifact Validation Pipeline,
+Development,CLI Implementation,"Build pip-installable CLI with 14 subcommands including auth, generate, status (with per-phase token usage), and admin",Solutions Engineer,48,1.3,62,$200,"$12,400",API Gateway HTTP API v2,
+Development,Quota Enforcement Implementation,"Implement atomic per-user (10/month) and global (1000/month) quota checks in DynamoDB; admin override endpoint",Solutions Engineer,24,1.3,31,$200,"$6,200",DynamoDB Implementation,
+Development,Graded Artifact-Delivery Policy,"Implement policy engine that surfaces partial results if some artifacts pass while others fail validation",Solutions Engineer,24,1.3,31,$200,"$6,200",Per-Artifact Validation Pipeline,
+Development,Security Hardening,"Implement Secrets Manager for GitHub PAT; enforce IAM boundaries; enable GuardDuty and Security Hub",Security Engineer,32,1.3,42,$200,"$8,400",AWS Foundation Build,
+Development,Observability & Monitoring,"Implement CloudWatch dashboards, alarms, and per-phase token-usage metrics; X-Ray tracing on Lambda",DevOps Engineer,32,1.3,42,$200,"$8,400",Strands Agent Framework Integration,Phase 3 requirement (green CloudWatch baseline)
+Development,Terraform IaC for Automation Bundle,"Author Terraform modules for all infrastructure; implement terraform validate as syntax gate in CI",DevOps Engineer,48,1.3,62,$200,"$12,400",AWS Foundation Build,12th artifact is automation bundle with Terraform
+Development,CI/CD Pipeline,"Implement CodePipeline or GitHub Actions: Docker build, ECR push, Lambda deploy, terraform validate gate",DevOps Engineer,48,1.3,62,$200,"$12,400",Container Image Pipeline Design,
+Testing,Test Plan Development,Create comprehensive test plan covering all 5 agents; 12 artifact types; API routes; CLI subcommands,QA Engineer,16,1.1,18,$150,"$2,700",Development (all),
+Testing,Unit & Integration Testing,"Test each Lambda function, agent, and converter module in isolation and in combination",Solutions Engineer,40,1.1,44,$200,"$8,800",Test Plan Development,
+Testing,End-to-End Artifact Validation,"Run full solution generation for all 12 artifacts; verify format-check pass and LLM quality-check pass",QA Engineer,40,1.1,44,$150,"$6,600",Unit & Integration Testing,Phase 3 deliverable
+Testing,Multi-Agent Retry Logic Testing,"Stress-test validation retry loop (up to 3 retries per artifact); confirm no infinite-loop edge cases",Solutions Engineer,24,1.1,26,$200,"$5,200",End-to-End Artifact Validation,
+Testing,Performance & Load Testing,"Load test API at projected 200 solutions/month; measure per-solution Bedrock token cost (target <$5)",Solutions Engineer,24,1.1,26,$200,"$5,200",End-to-End Artifact Validation,Validates cost target
+Testing,Security Testing,"Penetration test JWT auth; test quota bypass scenarios; validate Secrets Manager PAT protection",Security Engineer,24,1.1,26,$200,"$5,200",Security Hardening,
+Testing,CLI Acceptance Testing,Test all 14 CLI subcommands end-to-end including auth flow and status token-usage display,QA Engineer,16,1.1,18,$150,"$2,700",CLI Implementation,
+Testing,UAT Coordination,"Coordinate UAT with Marcus Patel and Daniel Park; facilitate demo run for executive sponsor (Sarah Lin)",Project Manager,16,1.1,18,$175,"$3,150",End-to-End Artifact Validation,Required for CTO sign-off
+Testing,Defect Resolution,Triage and resolve defects identified during testing phases,Solutions Engineer,32,1.1,35,$200,"$7,000",All testing tasks,
+Testing,CloudWatch Metrics Baseline,Validate green CloudWatch metrics baseline across all agents and Lambda functions,DevOps Engineer,16,1.1,18,$200,"$3,600",Observability & Monitoring,Phase 3 completion criterion
+Testing,Terraform Validate Gate Testing,Confirm terraform validate syntax gate passes for all IaC modules in automation bundle,DevOps Engineer,8,1.1,9,$200,"$1,800",Terraform IaC for Automation Bundle,
+Testing,Test Results Report,Document test results and sign-off report for CTO approval,QA Engineer,8,1.1,9,$150,"$1,350",All testing tasks,
+Deployment,Go-Live Planning,"Plan production cutover; define rollback procedures; confirm CTO sign-off on Cognito user pool",Project Manager,8,1.0,8,$175,"$1,400",Test Results Report,Hard deadline: end of April 2026
+Deployment,Production Deployment,"Deploy all Lambda functions, Cognito user pool, DynamoDB tables, and AgentCore Runtime to production",Solutions Engineer,16,1.0,16,$200,"$3,200",Go-Live Planning,
+Deployment,Runbook Development,"Author operational runbooks for quota resets, agent failure recovery, Bedrock throttle handling, and GitHub push failures",Technical Writer,24,1.0,24,$125,"$3,000",Production Deployment,
+Deployment,Knowledge Transfer — CLI & API,"Conduct hands-on CLI and API sessions with Amatra consultants; cover 14 subcommands and 11 API routes",Trainer,24,1.0,24,$150,"$3,600",Production Deployment,
+Deployment,Knowledge Transfer — Agent Operations,"Train Marcus Patel's team on monitoring 5-agent graph; interpreting per-phase token usage; managing quotas",Trainer,16,1.0,16,$150,"$2,400",Observability & Monitoring,
+Deployment,As-Built Documentation,"Deliver complete as-built architecture diagrams, ADRs, and configuration inventory",Technical Writer,24,1.0,24,$125,"$3,000",Production Deployment,
+Deployment,Hypercare Support (4 Weeks),"Provide on-call support for 4 weeks post go-live; triage Bedrock quota issues, agent failures, and GitHub push errors",Support Engineer,80,1.0,80,$150,"$12,000",Production Deployment,80 hours aligns with Medium–Large complexity guideline
+Deployment,Optimization Recommendations,"Document Phase 2 scope candidates: additional artifact types, multi-region HA, advanced Bedrock model routing",Solution Architect,16,1.0,16,$225,"$3,600",Hypercare Support (4 Weeks),
+Deployment,Project Closeout,"Project retrospective with PREDICTif leadership; lessons learned; final invoice reconciliation",Project Manager,8,1.0,8,$175,"$1,400",All deployment tasks,
+Management,Technical Leadership,"Quarterback technical oversight across all phases; architecture governance and escalation path",Solution Architect,"=ROUND(SUM($G$4:$G$57)*0.10,0)",1.0,"=ROUND(SUM($G$4:$G$57)*0.10,0)",$225,"=TEXT(ROUND(SUM($G$4:$G$57)*0.10,0)*225,""$#,##0"")",All phases,10% of total engineering hours
+Management,Project Management,"Project coordination, status reporting, risk management, and stakeholder communications",Project Manager,"=ROUND(SUM($G$4:$G$57)*0.10,0)",1.0,"=ROUND(SUM($G$4:$G$57)*0.10,0)",$175,"=TEXT(ROUND(SUM($G$4:$G$57)*0.10,0)*175,""$#,##0"")",All phases,10% of total engineering hours
+,,,,,TOTAL HOURS,"=SUM($G$4:$G$59)",TOTAL COST,"=TEXT(SUMPRODUCT($G$4:$G$59,$H$4:$H$59),""$#,##0"")",,
+
+# CREDITS
+#WIDTH: 25,15,100
+#ALIGN: left,right,left
+Credit Type,Credit Amount,Credit Comments
+AWS Partner Services Credit,"($10,000)","AWS Partner Network (APN) Advanced Tier credit applied to solution architecture and implementation services for this engagement"
+APN Migration Acceleration Credit,"($5,000)","AWS Migration Acceleration Program (MAP) services credit; applicable given new AWS footprint build-out in us-west-2"
+Volume Implementation Discount,"($5,000)","10% professional services volume discount applied to total engagement; reflects strategic partnership and multi-phase opportunity"
+NET PROFESSIONAL SERVICES COST,"=SUMPRODUCT($G$4:$G$59,$H$4:$H$59)-20000","Total professional services cost minus AWS Partner and volume credits applied in Year 1 only; infrastructure credits tracked separately in infrastructure-costs.csv"

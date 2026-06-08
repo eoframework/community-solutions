@@ -1,0 +1,56 @@
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
+Category,Component,Small,Medium,Large,Notes
+Cloud Services,Monthly Active Users,~100 MAU,~10000 MAU,~100000 MAU,Registered users actively engaging per month
+Cloud Services,Inference Requests,<50K/month,500K-5M/month,>50M/month,Playlist-generation + classification API calls per month
+Cloud Services,Training Data Volume,<50 GB,50-500 GB,>500 GB,Lyric/transcript/audio dataset size for model training/retraining
+Cloud Services,Catalog Entries,<5000 tracks,5K-100K tracks,>100K tracks,Music and podcast items classified and stored
+Cloud Services,Model Complexity,1-2 models,3-5 models,8+ models,Active ML models (classifier + recommender + embedding)
+Cloud Services,SageMaker Endpoint Instances,1 x ml.t3.medium,2 x ml.m5.large,4+ x ml.m5.xlarge,Real-time inference capacity per environment
+Cloud Services,Audio Analysis Storage,<100 GB,100 GB-1 TB,>1 TB,Audio feature vectors and processed audio stored in S3
+Software Licenses,AI Service Tier,Bedrock On-Demand,Bedrock Provisioned,Bedrock + SageMaker JumpStart,LLM/FM invocation model for classification and enrichment
+Support & Maintenance,AWS Support Plan,Developer,Business,Enterprise,AWS-managed support SLA tier
+
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,16,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
+Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
+Cloud Services,AWS Lambda,"Serverless functions for API handlers, classification triggers, and ingestion pipeline",1,Service/Month,5.00,60.00,60.00,72.00,192.00,Scales to ~500K invocations/mo at small tier; Year 3 reflects growth
+Cloud Services,Amazon S3,"Object storage for audio files, lyric/transcript text, feature vectors, and model artifacts",500,GB/Month,0.023,138.00,138.00,165.60,441.60,Catalog + ML artifact storage; priced at $0.023/GB/mo
+Cloud Services,Amazon DynamoDB,"NoSQL tables for user preference vectors, session context, mood taxonomy, and content metadata",1,Service/Month,25.00,300.00,300.00,360.00,960.00,On-demand capacity mode; Year 3 reflects 20% growth
+Cloud Services,Amazon SageMaker Endpoint,ml.t3.medium real-time inference endpoint for recommendation and classification models,1,Instance/Month,40.00,480.00,480.00,576.00,1536.00,Single endpoint instance for small MAU tier
+Cloud Services,Amazon SageMaker Training,"ml.m5.xlarge training jobs for preference-learning model retraining pipeline",20,Hours/Month,0.23,55.20,55.20,66.24,176.64,~20 hrs/mo of training at $0.23/hr; scales with data volume
+Cloud Services,Amazon Bedrock,"Foundation model inference (Amazon Titan / Anthropic Claude) for lyric and transcript emotion classification",1,Service/Month,50.00,600.00,600.00,720.00,1920.00,On-demand token pricing; Year 3 reflects 20% growth
+Cloud Services,Amazon API Gateway,"REST API layer exposing playlist-generation, classification, profile, and feedback endpoints",1,Service/Month,5.00,60.00,60.00,60.00,180.00,~100K API calls/mo at small tier; flat cost at this scale
+Cloud Services,Amazon OpenSearch Service,t3.small.search single-node cluster for semantic and emotion-based content discovery,1,Instance/Month,25.00,300.00,300.00,300.00,900.00,Single-AZ small cluster; sufficient for <5K catalog entries
+Cloud Services,Amazon CloudWatch,"Logs ingestion, custom metrics, dashboards, and alarms for all pipeline and API components",1,Service/Month,30.00,360.00,360.00,360.00,1080.00,~50 GB logs/mo + 10 dashboards + custom metric dimensions
+Cloud Services,Amazon Cognito,User pool for API authentication (JWT tokens) covering mobile app users and admin access,100,MAU/Month,0.05,6.00,6.00,6.00,18.00,First 50K MAU at $0.0055/MAU; rounded to $0.05 blended unit
+Cloud Services,AWS Step Functions,"Orchestration of multi-step content-intelligence pipeline (ingest, classify, enrich, store)",1,Service/Month,5.00,60.00,60.00,60.00,180.00,Standard workflows; low state-transition volume at small scale
+Cloud Services,Amazon ECR,Container registry for Lambda container images and SageMaker custom inference containers,1,Service/Month,10.00,120.00,120.00,120.00,360.00,~10 GB repository storage + data transfer
+Cloud Services,AWS Secrets Manager,"Secure storage of API keys, Firebase credentials, and database connection strings",1,Service/Month,2.00,24.00,24.00,24.00,72.00,~5 secrets at $0.40/secret/mo
+Support & Maintenance,AWS Business Support,"AWS Business support plan — 24x7 access, 1-hr critical response, Trusted Advisor full checks",1,Service/Month,100.00,1200.00,1200.00,1200.00,3600.00,Minimum $100/mo Business tier; covers all services in account
+
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Hardware,Equipment Credit,0,No hardware (fully serverless/cloud-native solution)
+Cloud Services,AWS Activate Credit,-2500,AWS Activate Founders credit applicable to early-stage startup; reduces Year 1 cloud consumption costs
+Cloud Services,AWS MAP Credit,0,Migration Acceleration Program not applicable (greenfield build)
+Software Licenses,Software Credit,0,No third-party software license credits available
+Connectivity,Network Credit,0,No dedicated circuit or connectivity credits applicable
+Support & Maintenance,Program Credit,0,No support plan credits available for this tier
+Facilities,Facilities Credit,0,No facilities costs (fully cloud-hosted solution)
+
+# 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
+Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
+Hardware,0,0,0,0,0,0
+Cloud Services,2563.20,-2500,63.20,2563.20,2889.84,5516.24
+Software Licenses,0,0,0,0,0,0
+Connectivity,0,0,0,0,0,0
+Support & Maintenance,1200,0,1200,1200,1200,3600
+Facilities,0,0,0,0,0,0
+TOTAL,3763.20,-2500,1263.20,3763.20,4089.84,9116.24

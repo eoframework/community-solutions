@@ -1,0 +1,66 @@
+digraph "ANP Streaming AI Recommendation Engine" {
+	graph [bgcolor=white fontcolor="#2D3436" fontname="Sans-Serif" fontsize=16 label="ANP Streaming AI Recommendation Engine" nodesep=0.6 pad=0.75 rankdir=TB ranksep=0.8 splines=ortho]
+	node [fixedsize=true fontcolor="#232F3E" fontname="Sans-Serif" fontsize=12 height=1.4 imagescale=true labelloc=b shape=box style=rounded width=1.4]
+	edge [arrowsize=0.8 color="#555555" fontcolor="#555555" fontsize=10]
+	subgraph "cluster_Client Layer" {
+		graph [bgcolor="#F0F0F0" fontname="Sans-Serif" fontsize=12 label="Client Layer" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"9cd48a2b19db4eebbb2dc624a0306cf0" [label="FlutterFlow
+Mobile App" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/onprem/client/users.png" shape=none]
+	}
+	subgraph "cluster_API Service Layer" {
+		graph [bgcolor="#E8FDE8" fontname="Sans-Serif" fontsize=12 label="API Service Layer" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"471656e421604ee8a633c832cf8b9878" [label="API Gateway" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/network/api-gateway.png" shape=none]
+		"7c20142937734322832335f54d212221" [label="Cognito Auth" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/security/cognito.png" shape=none]
+	}
+	subgraph "cluster_Content Intelligence Pipeline" {
+		graph [bgcolor="#FDF8E8" fontname="Sans-Serif" fontsize=12 label="Content Intelligence Pipeline" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"307d288dff454d999f59fc672670ee53" [label="Transcribe
+(Audio/Transcripts)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/ml/transcribe.png" shape=none]
+		bc0f4540a92d472e8d7c67ed8358799c [label="Comprehend
+(Emotion/Mood NLP)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/ml/comprehend.png" shape=none]
+		b13347b4632844ecb518518097103060 [label="Catalog
+Enrichment Lambda" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/compute/lambda.png" shape=none]
+	}
+	subgraph "cluster_Recommendation Engine" {
+		graph [bgcolor="#E8F4FD" fontname="Sans-Serif" fontsize=12 label="Recommendation Engine" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"3a0ab8bcf7cc48c48fa51e5a29a20da9" [label="Personalize
+(Preference Learning)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/ml/personalize.png" shape=none]
+		"780014edbdb848a6a3fb484740b7977c" [label="Playlist
+Generation Lambda" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/compute/lambda.png" shape=none]
+		"53c72b58487847ed968f13fe0a002653" [label="SageMaker
+Training Job" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/ml/sagemaker-training-job.png" shape=none]
+	}
+	subgraph "cluster_Data Layer" {
+		graph [bgcolor="#F3E8FD" fontname="Sans-Serif" fontsize=12 label="Data Layer" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		c88693a602714167992ec74f4c8df3db [label="S3 Catalog
+& Audio Store" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/storage/simple-storage-service-s3.png" shape=none]
+		"17e59d446aaf4cd1a64841e2d5870b8f" [label="DynamoDB
+(User Profiles)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/database/dynamodb.png" shape=none]
+		"8e1123472d6445a8bfb160482565e6df" [label="ElastiCache
+(Session Cache)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/database/elasticache.png" shape=none]
+	}
+	subgraph "cluster_Orchestration & Monitoring" {
+		graph [bgcolor="#FDE8E8" fontname="Sans-Serif" fontsize=12 label="Orchestration & Monitoring" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		f81d1cd138e2459791a268d66e32074e [label="Step Functions
+Workflows" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/integration/step-functions.png" shape=none]
+		"95710cd0874a4cc8b71e86e2c316288e" [label="SQS
+Event Queue" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/integration/simple-queue-service-sqs.png" shape=none]
+		"10483b6c3911413aa37f1a0cd93c78aa" [label="CloudWatch
+Monitoring" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/management/cloudwatch.png" shape=none]
+	}
+	"9cd48a2b19db4eebbb2dc624a0306cf0" -> "471656e421604ee8a633c832cf8b9878" [label="HTTPS REST" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"471656e421604ee8a633c832cf8b9878" -> "7c20142937734322832335f54d212221" [label=Authenticates color=purple dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dotted]
+	"471656e421604ee8a633c832cf8b9878" -> "780014edbdb848a6a3fb484740b7977c" [label="Playlist Request" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"471656e421604ee8a633c832cf8b9878" -> b13347b4632844ecb518518097103060 [label="Classify Upload" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	c88693a602714167992ec74f4c8df3db -> "307d288dff454d999f59fc672670ee53" [label="Audio/Text" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dashed]
+	"307d288dff454d999f59fc672670ee53" -> bc0f4540a92d472e8d7c67ed8358799c [label=Transcript dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	bc0f4540a92d472e8d7c67ed8358799c -> b13347b4632844ecb518518097103060 [label="Emotion Tags" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	b13347b4632844ecb518518097103060 -> "17e59d446aaf4cd1a64841e2d5870b8f" [label="Enriched Metadata" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"17e59d446aaf4cd1a64841e2d5870b8f" -> "3a0ab8bcf7cc48c48fa51e5a29a20da9" [label="User History" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dashed]
+	"3a0ab8bcf7cc48c48fa51e5a29a20da9" -> "780014edbdb848a6a3fb484740b7977c" [label=Rankings dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"780014edbdb848a6a3fb484740b7977c" -> "8e1123472d6445a8bfb160482565e6df" [label="Cache Result" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	f81d1cd138e2459791a268d66e32074e -> b13347b4632844ecb518518097103060 [label=Triggers dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dotted]
+	"95710cd0874a4cc8b71e86e2c316288e" -> f81d1cd138e2459791a268d66e32074e [label="Queues Jobs" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"53c72b58487847ed968f13fe0a002653" -> "3a0ab8bcf7cc48c48fa51e5a29a20da9" [label=Retrain dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dashed]
+	"10483b6c3911413aa37f1a0cd93c78aa" -> "780014edbdb848a6a3fb484740b7977c" [label=Monitors color=grey dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dotted]
+}

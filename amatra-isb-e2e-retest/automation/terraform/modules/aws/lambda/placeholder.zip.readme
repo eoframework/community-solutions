@@ -1,9 +1,0 @@
-This file is a placeholder marker. The actual placeholder.zip must be created by the CI/CD pipeline
-before running terraform apply. Use the following command:
-
-  cd modules/aws/lambda
-  echo "placeholder" > /tmp/placeholder.py
-  zip placeholder.zip -j /tmp/placeholder.py
-
-The Lambda source_code_hash and filename attributes are set to ignore_changes in the lifecycle block,
-so the CI/CD pipeline can deploy actual function code without Terraform managing it.

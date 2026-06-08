@@ -1,0 +1,104 @@
+# Project Timeline
+#WIDTH: 15,35,12,14,14,28,24,14
+#ALIGN: left,left,center,center,center,left,left,center
+Phase,Task,Duration,Start Date,End Date,Dependencies,Owner,Status
+Phase 1,Project Kickoff Meeting,1 day,2026-03-19,2026-03-19,None,Project Manager,Not Started
+Phase 1,AWS Account Access Provisioning,1 day,2026-03-20,2026-03-20,Project Kickoff Meeting,Solutions Engineer,Not Started
+Phase 1,Requirements Workshop,1 day,2026-03-23,2026-03-23,AWS Account Access Provisioning,Solution Architect,Not Started
+Phase 1,Firebase Catalog API & Mood Schema Review,2 days,2026-03-23,2026-03-24,Requirements Workshop,Solution Architect,Not Started
+Phase 1,Current-State Assessment (Firebase/FlutterFlow),3 days,2026-03-24,2026-03-26,Firebase Catalog API & Mood Schema Review,Solution Architect,Not Started
+Phase 1,AWS Architecture Design & Decision Record,5 days,2026-03-26,2026-04-01,Current-State Assessment (Firebase/FlutterFlow),Solution Architect,Not Started
+Phase 1,Mood Taxonomy & Annotation Guidelines,3 days,2026-03-26,2026-03-30,Requirements Workshop,Solution Architect,Not Started
+Phase 1,Data Schema Package Definition,3 days,2026-04-01,2026-04-03,AWS Architecture Design & Decision Record,Solution Architect,Not Started
+Phase 1,Tiered AWS Cost Model (100 / 10K / 100K MAU),2 days,2026-04-03,2026-04-07,Data Schema Package Definition,Solution Architect,Not Started
+Phase 1,Risk Register,1 day,2026-04-07,2026-04-07,Tiered AWS Cost Model (100 / 10K / 100K MAU),Project Manager,Not Started
+Phase 1,Phase 1 Documentation Package Review & Sign-Off,3 days,2026-04-07,2026-04-09,Risk Register,Project Manager,Not Started
+Phase 2,Lyric & Transcript Ingestion Pipeline Development,5 days,2026-04-09,2026-04-15,Phase 1 Documentation Package Review & Sign-Off,Solutions Engineer,Not Started
+Phase 2,NLP Emotion/Mood/Theme Classifier Training & Deployment,5 days,2026-04-15,2026-04-21,Lyric & Transcript Ingestion Pipeline Development,ML/AI Engineer,Not Started
+Phase 2,Audio Feature Extraction Pipeline Deployment,5 days,2026-04-15,2026-04-21,Lyric & Transcript Ingestion Pipeline Development,ML/AI Engineer,Not Started
+Phase 2,Catalog Enrichment Service Development,5 days,2026-04-21,2026-04-27,NLP Emotion/Mood/Theme Classifier Training & Deployment,Solutions Engineer,Not Started
+Phase 2,Internal Classification Endpoint Testing,3 days,2026-04-27,2026-04-29,Catalog Enrichment Service Development,QA Engineer,Not Started
+Phase 3,User Preference Vector DynamoDB Schema,3 days,2026-04-21,2026-04-23,Phase 1 Documentation Package Review & Sign-Off,Solutions Engineer,Not Started
+Phase 3,Preference-Learning Model Development & Deployment,7 days,2026-04-23,2026-04-30,User Preference Vector DynamoDB Schema,ML/AI Engineer,Not Started
+Phase 3,Mood-to-Content Matching Algorithm Deployment,5 days,2026-04-29,2026-05-05,Preference-Learning Model Development & Deployment,ML/AI Engineer,Not Started
+Phase 3,Playlist Generation Service (Lambda) Development,5 days,2026-05-05,2026-05-11,Mood-to-Content Matching Algorithm Deployment,Solutions Engineer,Not Started
+Phase 3,Automated Model Retraining Pipeline (SageMaker Pipelines),5 days,2026-05-05,2026-05-11,Preference-Learning Model Development & Deployment,ML/AI Engineer,Not Started
+Phase 4,REST API Contract Documentation,3 days,2026-05-06,2026-05-08,Phase 1 Documentation Package Review & Sign-Off,Solution Architect,Not Started
+Phase 4,API Gateway & Cognito Auth Implementation,5 days,2026-05-08,2026-05-14,REST API Contract Documentation,Solutions Engineer,Not Started
+Phase 4,User Profile & Session Endpoint Development,2 days,2026-05-14,2026-05-15,API Gateway & Cognito Auth Implementation,Solutions Engineer,Not Started
+Phase 4,Content Classification Endpoint Development,2 days,2026-05-14,2026-05-15,API Gateway & Cognito Auth Implementation,Solutions Engineer,Not Started
+Phase 4,Playlist Generation Endpoint Development,2 days,2026-05-15,2026-05-18,User Profile & Session Endpoint Development,Solutions Engineer,Not Started
+Phase 4,Feedback Capture Endpoint Development,2 days,2026-05-15,2026-05-18,Playlist Generation Endpoint Development,Solutions Engineer,Not Started
+Phase 4,API Security Hardening (WAF / Throttling / Secrets Manager),3 days,2026-05-18,2026-05-20,Feedback Capture Endpoint Development,Solutions Engineer,Not Started
+Phase 5,End-to-End Pipeline Validation,3 days,2026-05-20,2026-05-22,API Security Hardening (WAF / Throttling / Secrets Manager),QA Engineer,Not Started
+Phase 5,Performance & Load Testing (100 / 10K MAU),2 days,2026-05-22,2026-05-25,End-to-End Pipeline Validation,QA Engineer,Not Started
+Phase 5,Operational Runbooks Development,4 days,2026-05-20,2026-05-25,End-to-End Pipeline Validation,Solutions Engineer,Not Started
+Phase 5,Knowledge Transfer Session 1 (Architecture & Pipelines),1 day,2026-05-25,2026-05-25,Operational Runbooks Development,Solution Architect,Not Started
+Phase 5,Knowledge Transfer Session 2 (API & Security Runbook),1 day,2026-05-26,2026-05-26,Knowledge Transfer Session 1 (Architecture & Pipelines),Solution Architect,Not Started
+Phase 5,Final Deliverable Package Compilation,2 days,2026-05-26,2026-05-27,Knowledge Transfer Session 2 (API & Security Runbook),Project Manager,Not Started
+Phase 5,Project Closeout & AWS Funding Reconciliation,1 day,2026-05-28,2026-05-28,Final Deliverable Package Compilation,Project Manager,Not Started
+
+# Milestones
+#WIDTH: 14,38,14,14,55,22,12,14
+#ALIGN: left,left,center,center,left,left,center,center
+Milestone ID,Milestone Name,Target Date,Phase,Success Criteria,Owner,Status,Actual Date
+MS-001,Project Kickoff Complete,2026-03-19,Phase 1,Kickoff meeting completed; stakeholder alignment confirmed; AWS account access granted to nClouds; delivery cadence agreed,Project Manager,Not Started,
+MS-002,Architecture Approved,2026-04-09,Phase 1,"Phase 1 Documentation Package (architecture, data schemas, mood taxonomy, cost model, risk register) delivered and formally accepted by ANP",Solution Architect,Not Started,
+MS-003,Content Intelligence Live,2026-04-29,Phase 2,"NLP classifier, audio analysis pipeline, and catalog enrichment service deployed and tested in Dev; internal classification endpoint validated",ML/AI Engineer,Not Started,
+MS-004,Recommendation Engine Live,2026-05-11,Phase 3,"Preference-learning model, mood-to-content matcher, playlist generation service, and retraining pipeline deployed and tested in Dev",ML/AI Engineer,Not Started,
+MS-005,API Layer Live,2026-05-20,Phase 4,"All five REST API endpoints deployed, secured with Cognito auth, documented, and validated against FlutterFlow call patterns",Solution Architect,Not Started,
+MS-006,End-to-End Validated,2026-05-25,Phase 5,"Full pipeline validated against FlutterFlow call patterns; performance test confirms ≤2s playlist generation latency at 100 MAU; no critical security findings",QA Engineer,Not Started,
+MS-007,Handover Complete,2026-05-28,Phase 5,"Both knowledge-transfer sessions conducted with confirmed attendance; final deliverable package accepted by Lilly Goyah; project formally closed",Project Manager,Not Started,
+
+# RACI Matrix
+#WIDTH: 42,14,14,14,14,14,14,14
+#ALIGN: left,center,center,center,center,center,center,center
+Task/Deliverable,nClouds PM,nClouds Architect,nClouds Engineer,nClouds QA,ANP CEO,ANP Tech Lead,ANP SME
+Project Kickoff & Stakeholder Alignment,R,C,I,I,C,C,I
+Project Schedule & Status Reporting,A,C,I,I,I,C,I
+Requirements Workshop Facilitation,A,R,C,I,C,C,R
+Current-State Assessment (Firebase/FlutterFlow),C,R,C,I,I,A,C
+AWS Architecture Design & Decision Record,I,A,C,I,I,C,I
+Mood Taxonomy & Data Schema Definition,C,A,R,I,C,C,R
+Tiered AWS Cost Model (100 / 10K / 100K MAU),C,A,R,I,C,I,I
+Risk Register Development,A,C,R,I,I,C,I
+Phase 1 Documentation Package Sign-Off,I,I,I,I,A,R,C
+Lyric & Transcript Ingestion Pipeline,I,C,A,C,I,I,I
+NLP Emotion/Mood/Theme Classifier Training,I,A,R,C,I,I,I
+Audio Feature Extraction Pipeline,I,C,A,C,I,I,I
+Catalog Enrichment Service Development,I,C,A,C,I,I,I
+Internal Classification Endpoint Testing,C,C,R,A,I,C,I
+User Preference Vector DynamoDB Schema,I,A,R,C,I,C,I
+Preference-Learning Model Development,I,A,R,C,I,I,I
+Mood-to-Content Matching Algorithm,I,A,R,C,I,I,I
+Playlist Generation Service Development,I,C,A,C,I,I,I
+Automated Model Retraining Pipeline,I,C,A,C,I,I,I
+REST API Contract Documentation,I,A,R,I,I,C,I
+API Gateway & Cognito Auth Implementation,I,C,A,C,I,C,I
+REST API Endpoint Development,I,C,A,C,I,I,I
+API Security Hardening,I,C,A,C,I,C,I
+Functional & Integration Testing,C,C,C,A,I,C,I
+Performance & Load Testing,C,C,C,A,I,C,I
+End-to-End Validation,C,C,R,A,I,C,I
+Operational Runbooks Development,C,C,A,C,I,C,I
+Knowledge Transfer Sessions,C,A,R,I,C,R,R
+Deliverable Review & Acceptance,I,I,I,I,A,R,C
+AWS Funding Portal Submission & Reconciliation,A,C,I,I,C,I,I
+Project Closeout & Final Invoice,A,I,I,I,C,I,I
+R = Responsible | A = Accountable | C = Consulted | I = Informed,,,,,,,
+
+# Communications Plan
+#WIDTH: 28,15,40,45,22,18
+#ALIGN: left,center,left,left,left,center
+Meeting Type,Frequency,Participants,Purpose,Owner,Day/Time
+Project Kickoff,Once,"All stakeholders; nClouds full team; ANP CEO, Tech Lead, and SMEs","Launch project; align on scope, RACI, and governance; confirm AWS account access and delivery cadence",Project Manager,2026-03-19 (2 hours)
+Weekly Status Call,Weekly,"nClouds Project Manager; ANP Tech Lead; nClouds team leads",Review progress against plan; surface blockers and decisions; update risk register,Project Manager,Mondays 10:00 AM ET
+Requirements Workshop,Once,"Solution Architect; ANP CEO; ANP Tech Lead; ANP SMEs","Deep-dive on mood taxonomy, content classification goals, recommendation requirements, and API contract objectives",Solution Architect,2026-03-23 (3 hours)
+Mid-Point Stakeholder Review,Once,"nClouds PM; Solution Architect; ANP CEO; ANP Tech Lead","Review Phase 1 and Phase 2 completion; confirm design decisions; address scope or timeline risks before Phase 3",Project Manager,2026-04-29 (1 hour)
+Design Review & Sign-Off Workshop,Once,"Solution Architect; ANP Tech Lead; ANP CEO",Review and formally accept Phase 1 Documentation Package including architecture and mood taxonomy,Solution Architect,2026-04-07 (2 hours)
+Phase Gate Review,End of each phase,"Project Manager; ANP Tech Lead; ANP CEO","Review phase completion criteria; confirm deliverable acceptance; approve next phase commencement",Project Manager,"2026-04-09, 2026-04-29, 2026-05-11, 2026-05-20 (1 hour each)"
+UAT Session,Once,"ANP Tech Lead; ANP CEO; nClouds QA Engineer","Validate end-to-end system in Staging against FlutterFlow call patterns; confirm UAT sign-off record",QA Engineer,2026-05-22 (3 hours)
+Knowledge Transfer Session 1,Once,"Solution Architect; ANP Tech Lead; ANP engineering team","Architecture overview; content intelligence pipeline operations; recommendation engine; retraining procedure walkthrough",Solution Architect,2026-05-25 (3 hours)
+Knowledge Transfer Session 2,Once,"Solution Architect; ANP Tech Lead; ANP security responsible","API operations; security runbook; CloudWatch dashboard; incident-response scenarios",Solution Architect,2026-05-26 (3 hours)
+Hypercare Incident Escalation,As required,"nClouds PM; ANP Tech Lead; nClouds Engineer on call",Notify and resolve functional issues directly traceable to engagement deliverables during 2-week hypercare window,Project Manager,Within 4 business hours of detection
+Project Closeout Meeting,Once,"nClouds PM; ANP CEO; ANP Tech Lead","Formal project closure; final deliverable package acceptance; AWS funding reconciliation; lessons learned",Project Manager,2026-05-28 (1 hour)

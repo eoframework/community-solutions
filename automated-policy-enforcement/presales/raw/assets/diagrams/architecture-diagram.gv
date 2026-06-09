@@ -1,0 +1,59 @@
+digraph "Contoso Financial - AWS Cloud Governance Platform" {
+	graph [bgcolor=white fontcolor="#2D3436" fontname="Sans-Serif" fontsize=16 label="Contoso Financial - AWS Cloud Governance Platform" nodesep=0.8 pad=0.75 rankdir=TB ranksep=1.0 splines=ortho]
+	node [fixedsize=true fontcolor="#232F3E" fontname="Sans-Serif" fontsize=12 height=1.4 imagescale=true labelloc=b shape=box style=rounded width=1.4]
+	edge [arrowsize=0.8 color="#555555" fontcolor="#555555" fontsize=10]
+	subgraph "cluster_On-Premises" {
+		graph [bgcolor="#F0F0F0" fontname="Sans-Serif" fontsize=12 label="On-Premises" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		fe83f23030eb4a6fb7c23f7b1db35b3a [label="Platform Team" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/onprem/client/users.png" shape=none]
+		"42d0c3e81efa4296ad6fd08c3e4de943" [label="Enterprise IdP
+(On-Prem Directory)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/onprem/client/users.png" shape=none]
+	}
+	subgraph "cluster_Management Account (ap-southeast-2)" {
+		graph [bgcolor="#E8F4FD" fontname="Sans-Serif" fontsize=12 label="Management Account (ap-southeast-2)" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		b6813e75df534b2cb1b0b826c8dc6fb8 [label="Control Tower" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/management/control-tower.png" shape=none]
+		af47a186a9d24555b8cefe49a4abd66d [label="AWS Organizations" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/management/organizations.png" shape=none]
+		c81c7ce542f8486f8dc056eade41eb7f [label="IAM Identity Center" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/security/single-sign-on.png" shape=none]
+		"0f5c0d1d34bc46f2a9880eb613e0ff1d" [label="Account Factory
+(IaC Pipeline)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/devtools/codepipeline.png" shape=none]
+		"6545c71ee3ae493586c72d068daf9e9d" [label="CloudTrail
+(Org-Wide)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/management/cloudtrail.png" shape=none]
+	}
+	subgraph "cluster_Security Account" {
+		graph [bgcolor="#FDE8E8" fontname="Sans-Serif" fontsize=12 label="Security Account" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"56cd69759c3c46c79a81119da78d71de" [label="Security Hub" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/security/security-hub.png" shape=none]
+		"3f1c1b4350a740f9a095246748e45450" [label=GuardDuty height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/security/guardduty.png" shape=none]
+		"7d728df14fa54f039be24825bf031821" [label="AWS Config
+(Policy-as-Code)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/management/config.png" shape=none]
+		"39a42c879cb04a979879f66e39f5c77c" [label="Access Analyzer" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/security/identity-and-access-management-iam-access-analyzer.png" shape=none]
+		"87d9f4ac428f48d98a6934daa8d73483" [label="Centralised
+Log Archive" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/storage/simple-storage-service-s3.png" shape=none]
+	}
+	subgraph "cluster_Network Account" {
+		graph [bgcolor="#E8FDE8" fontname="Sans-Serif" fontsize=12 label="Network Account" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		d5b35e38445745049febffc6be9755de [label="Transit Gateway" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/network/transit-gateway.png" shape=none]
+		"862e36788fe242759a939d83407b44b5" [label="Network Firewall" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/network/network-firewall.png" shape=none]
+	}
+	subgraph "cluster_Workload Accounts (Primary + DR)" {
+		graph [bgcolor="#FDF8E8" fontname="Sans-Serif" fontsize=12 label="Workload Accounts (Primary + DR)" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"30a48ebac9264b8cb15691c1901a7c62" [label="Production VPC
+(ap-southeast-2)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/network/vpc.png" shape=none]
+		a045ab7922f140e6b37a922869e259ca [label="DR VPC
+(ap-southeast-4)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/network/vpc.png" shape=none]
+	}
+	"42d0c3e81efa4296ad6fd08c3e4de943" -> c81c7ce542f8486f8dc056eade41eb7f [label=Federates color=purple dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dotted]
+	fe83f23030eb4a6fb7c23f7b1db35b3a -> c81c7ce542f8486f8dc056eade41eb7f [label="SSO Login" color=purple dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dotted]
+	c81c7ce542f8486f8dc056eade41eb7f -> "30a48ebac9264b8cb15691c1901a7c62" [label=Authorises color=purple dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dotted]
+	b6813e75df534b2cb1b0b826c8dc6fb8 -> af47a186a9d24555b8cefe49a4abd66d [label=Governs color=blue dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	af47a186a9d24555b8cefe49a4abd66d -> "0f5c0d1d34bc46f2a9880eb613e0ff1d" [label="Vends Accounts" color=blue dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"0f5c0d1d34bc46f2a9880eb613e0ff1d" -> "30a48ebac9264b8cb15691c1901a7c62" [label="Deploys IaC" color=blue dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"0f5c0d1d34bc46f2a9880eb613e0ff1d" -> a045ab7922f140e6b37a922869e259ca [label="Deploys IaC" color=blue dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"3f1c1b4350a740f9a095246748e45450" -> "56cd69759c3c46c79a81119da78d71de" [label=Findings color=grey dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dashed]
+	"7d728df14fa54f039be24825bf031821" -> "56cd69759c3c46c79a81119da78d71de" [label=Compliance color=grey dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dashed]
+	"39a42c879cb04a979879f66e39f5c77c" -> "56cd69759c3c46c79a81119da78d71de" [label=Findings color=grey dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dashed]
+	b6813e75df534b2cb1b0b826c8dc6fb8 -> "56cd69759c3c46c79a81119da78d71de" [label=Controls color=blue dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dotted]
+	"6545c71ee3ae493586c72d068daf9e9d" -> "87d9f4ac428f48d98a6934daa8d73483" [label="Audit Logs" color=grey dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dashed]
+	"30a48ebac9264b8cb15691c1901a7c62" -> "87d9f4ac428f48d98a6934daa8d73483" [label="VPC Flow Logs" color=grey dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dashed]
+	"30a48ebac9264b8cb15691c1901a7c62" -> d5b35e38445745049febffc6be9755de [label="Routes via" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	a045ab7922f140e6b37a922869e259ca -> d5b35e38445745049febffc6be9755de [label="Routes via" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	d5b35e38445745049febffc6be9755de -> "862e36788fe242759a939d83407b44b5" [label=Inspects dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+}

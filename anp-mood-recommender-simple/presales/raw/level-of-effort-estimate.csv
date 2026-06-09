@@ -1,0 +1,69 @@
+# SCOPE ASSUMPTIONS
+#WIDTH: 25,35,30,25,25,30,40
+#ALIGN: left,left,left,left,left,left,left
+Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes
+Users / Accounts in Scope,Single business unit,Small faith-based streaming user base at launch,<500 users,500-5000 users,5000+ users,Initial launch; growth expected post-engagement
+AI Endpoints / Models,1 REST API endpoint,"2 endpoints (mood classifier + recommendation)","1-2 endpoints","3-5 endpoints",6+ endpoints,Mood-classification and playlist recommendation endpoints
+AWS Managed Services,Core AI/ML services only,"Lambda, Bedrock, API Gateway, DynamoDB","2-3 services","4-6 services",7+ services,No self-managed ML infrastructure required
+Environments,Dev and Prod,Dev + Prod (no dedicated QA env),Dev + Prod,Dev + Staging + Prod,Dev + Staging + Prod + DR,Firebase remains for frontend data
+Integration Points,Single source system,Firebase catalog (read-only) + FlutterFlow API calls,1 integration,"2-3 integrations",4+ integrations,No mobile frontend changes required
+Data Volume / Catalog Size,Small catalog,Existing catalog with lyrics and transcripts,<1000 tracks,"1000-10000 tracks",10000+ tracks,Existing tags and text used for mood inference
+Compliance / Security,Standard AWS security baseline,IAM least privilege + API key auth + HTTPS only,Standard baseline,SOC2 alignment,Full compliance audit,No HIPAA or PCI requirements identified
+
+# ESTIMATE SETTINGS
+#WIDTH: 25,30,15,80
+#ALIGN: left,left,center,left
+Phase,Variable Name,Multiplier,Description / Applies To Tasks
+Discovery,discovery_factor,1.0,Baseline for stakeholder interviews and AWS architecture design
+Planning,planning_factor,1.0,Solution design and detailed technical planning for two AI endpoints
+Development,development_factor,1.0,Lambda and Bedrock implementation plus API Gateway and DynamoDB configuration
+Testing,testing_factor,1.0,Functional and integration testing of mood-classification and recommendation endpoints
+Deployment,deployment_factor,1.0,Production deployment plus API documentation and knowledge transfer
+Management,management_factor,1.0,Project management and technical leadership overhead (10% of engineering hours)
+
+# LEVEL OF EFFORT
+#WIDTH: 15,25,50,15,12,14,12,12,15,25,40
+#ALIGN: left,left,left,left,right,center,right,right,right,left,left
+Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
+Discovery,Project Kickoff,Project kickoff meeting with Lilly Goyah and nClouds team to align on goals and timeline,Project Manager,4,1.0,=E4*F4,$175,"=TEXT(G4*H4,""$#,##0"")",,Short engagement with single executive stakeholder
+Discovery,Current State Assessment,"Review existing Firebase catalog structure (titles, artists, lyrics, transcripts) and FlutterFlow API patterns",Solution Architect,8,1.0,=E5*F5,$225,"=TEXT(G5*H5,""$#,##0"")",Project Kickoff,Read-only Firebase access; no migration in scope
+Discovery,Requirements Gathering,Document functional requirements for mood-classification and playlist recommendation endpoints,Solution Architect,8,1.0,=E6*F6,$225,"=TEXT(G6*H6,""$#,##0"")",Current State Assessment,Two endpoints confirmed; input/output schemas to be agreed
+Discovery,AWS Architecture Design,"Design AWS architecture using Lambda, Bedrock, API Gateway, and DynamoDB for both endpoints",Solution Architect,16,1.0,=E7*F7,$225,"=TEXT(G7*H7,""$#,##0"")",Requirements Gathering,Leverage AWS managed services; no self-managed models
+Discovery,Data Assessment,Assess catalog text data quality (lyrics and transcripts) for mood-inference readiness via Bedrock,ML/AI Engineer,8,1.0,=E8*F8,$250,"=TEXT(G8*H8,""$#,##0"")",Current State Assessment,Confirm Bedrock model suitability for faith-based content
+Discovery,Risk Assessment,"Identify project risks covering data quality gaps, Firebase connectivity, and AWS account readiness",Project Manager,4,1.0,=E9*F9,$175,"=TEXT(G9*H9,""$#,##0"")",AWS Architecture Design,Short timeline increases risk; mitigations documented
+Discovery,Discovery Summary Report,Document architecture decision record and confirmed scope for client review and sign-off,Solution Architect,6,1.0,=E10*F10,$225,"=TEXT(G10*H10,""$#,##0"")",Risk Assessment,Deliverable reviewed by client within 3 working days
+Planning,Detailed Architecture Specification,"Produce detailed design specs for both API endpoints including request/response schemas, auth, and error handling",Solution Architect,12,1.0,=E12*F12,$225,"=TEXT(G12*H12,""$#,##0"")",Discovery Summary Report,Input to development and API documentation
+Planning,AWS Environment Setup,"Provision AWS account baseline: IAM roles, API Gateway, Lambda, and DynamoDB tables for Dev and Prod",Cloud Engineer,12,1.0,=E13*F13,$200,"=TEXT(G13*H13,""$#,##0"")",Detailed Architecture Specification,"IaC via CloudFormation or CDK; Dev and Prod environments"
+Planning,Security Baseline Configuration,"Configure IAM least-privilege policies, API key authentication, HTTPS enforcement, and CloudWatch logging",Security Engineer,8,1.0,=E14*F14,$200,"=TEXT(G14*H14,""$#,##0"")",AWS Environment Setup,Standard AWS security baseline per engagement brief
+Planning,Bedrock Model Selection and Prototyping,Evaluate and prototype Amazon Bedrock foundation model for mood/emotion classification on faith-based content,ML/AI Engineer,12,1.0,=E15*F15,$250,"=TEXT(G15*H15,""$#,##0"")",AWS Environment Setup,Select model suitable for lyric and transcript content
+Development,Mood Classification Endpoint,Implement Lambda function invoking Bedrock to classify mood/emotion from lyrics or transcript text,ML/AI Engineer,20,1.0,=E17*F17,$250,"=TEXT(G17*H17,""$#,##0"")",Bedrock Model Selection and Prototyping,POST /classify endpoint returning mood label and confidence score
+Development,Recommendation Endpoint,Implement Lambda function querying DynamoDB to return personalized playlist by mood and listening history,ML/AI Engineer,20,1.0,=E18*F18,$250,"=TEXT(G18*H18,""$#,##0"")",Mood Classification Endpoint,GET /recommend endpoint using DynamoDB for user history lookup
+Development,API Gateway Configuration,"Configure API Gateway routes, request validation, throttling, and API key authorization for both endpoints",Solutions Engineer,12,1.0,=E19*F19,$200,"=TEXT(G19*H19,""$#,##0"")",Mood Classification Endpoint,REST API only; no frontend changes required
+Development,DynamoDB Schema and Data Load,"Design and provision DynamoDB tables for catalog mood tags and user listening history; load seed data from Firebase",Solutions Engineer,10,1.0,=E20*F20,$200,"=TEXT(G20*H20,""$#,##0"")",AWS Environment Setup,Seed from existing Firebase catalog metadata
+Development,Auto-Tagging Pipeline,Implement batch Lambda to auto-tag new catalog uploads with mood/emotion labels via Bedrock,ML/AI Engineer,16,1.0,=E21*F21,$250,"=TEXT(G21*H21,""$#,##0"")",Mood Classification Endpoint,Triggered on new upload events; tags stored in DynamoDB
+Development,Monitoring and Alerting Setup,"Configure CloudWatch dashboards, Lambda error alarms, and API Gateway latency alerts",Cloud Engineer,6,1.0,=E22*F22,$200,"=TEXT(G22*H22,""$#,##0"")",API Gateway Configuration,Operational visibility required for production handover
+Development,Infrastructure as Code,Finalize CloudFormation/CDK templates for repeatable Dev and Prod environment deployments,Cloud Engineer,8,1.0,=E23*F23,$200,"=TEXT(G23*H23,""$#,##0"")",AWS Environment Setup,Enables reproducible environment provisioning
+Testing,Test Plan Development,"Create test plan and test cases for both endpoints covering functional, edge cases, and error handling",QA Engineer,6,1.0,=E25*F25,$150,"=TEXT(G25*H25,""$#,##0"")",Detailed Architecture Specification,
+Testing,Functional Testing - Classification,Execute functional tests against /classify endpoint using sample lyric and transcript data,QA Engineer,8,1.0,=E26*F26,$150,"=TEXT(G26*H26,""$#,##0"")",Mood Classification Endpoint,Validate mood label accuracy and response format
+Testing,Functional Testing - Recommendation,Execute functional tests against /recommend endpoint with varied mood and history inputs,QA Engineer,8,1.0,=E27*F27,$150,"=TEXT(G27*H27,""$#,##0"")",Recommendation Endpoint,Validate playlist relevance and DynamoDB query correctness
+Testing,Integration Testing,Test end-to-end flow from FlutterFlow API call through API Gateway to Lambda to DynamoDB and back,Solutions Engineer,10,1.0,=E28*F28,$200,"=TEXT(G28*H28,""$#,##0"")",API Gateway Configuration,Confirm no frontend changes required and API key flow works
+Testing,Security and Auth Testing,"Validate IAM policies, API key enforcement, HTTPS-only access, and unauthorized request rejection",Security Engineer,6,1.0,=E29*F29,$200,"=TEXT(G29*H29,""$#,##0"")",Security Baseline Configuration,
+Testing,Model Accuracy Validation,Validate Bedrock mood classification accuracy against representative faith-based content samples,ML/AI Engineer,8,1.0,=E30*F30,$250,"=TEXT(G30*H30,""$#,##0"")",Mood Classification Endpoint,Accuracy threshold agreed with client before sign-off
+Testing,Defect Resolution,Investigate and resolve defects identified during functional and integration testing cycles,Solutions Engineer,8,1.0,=E31*F31,$200,"=TEXT(G31*H31,""$#,##0"")",Functional Testing - Classification,Buffer for minor rework across both endpoints
+Deployment,Production Deployment,"Deploy finalized Lambda functions, API Gateway, and DynamoDB to Prod environment via IaC",Solutions Engineer,8,1.0,=E33*F33,$200,"=TEXT(G33*H33,""$#,##0"")",Defect Resolution,Zero-downtime deployment; rollback procedure documented
+Deployment,API Documentation,"Produce developer-facing API reference covering endpoint specs, auth, and request/response examples for app team",Solution Architect,10,1.0,=E34*F34,$225,"=TEXT(G34*H34,""$#,##0"")",Production Deployment,Key deliverable per brief; enables FlutterFlow team to integrate
+Deployment,Runbook Development,"Create operational runbook covering monitoring, alarm response, Lambda scaling, and DynamoDB maintenance",Solutions Engineer,6,1.0,=E35*F35,$200,"=TEXT(G35*H35,""$#,##0"")",Monitoring and Alerting Setup,
+Deployment,Knowledge Transfer Session,Conduct live handover session with ANP technical contact covering architecture and operational procedures,Solution Architect,4,1.0,=E36*F36,$225,"=TEXT(G36*H36,""$#,##0"")",API Documentation,Single session; ANP provides one technical point of contact
+Deployment,Hypercare Support,Provide 2-week post-go-live support for issue resolution and app team integration questions,Support Engineer,20,1.0,=E37*F37,$150,"=TEXT(G37*H37,""$#,##0"")",Production Deployment,Small complexity engagement; 2-week hypercare per guidelines
+Deployment,Project Closeout,"Project retrospective, lessons learned, and final deliverables handover confirmation",Project Manager,4,1.0,=E38*F38,$175,"=TEXT(G38*H38,""$#,##0"")",Hypercare Support,
+Management,Technical Leadership,EO Quarterback technical oversight across all phases of the engagement,Solutions Engineer,"=ROUND(SUM($G$4:$G$38)*0.10,0)",1.0,"=E40*F40",$200,"=TEXT(G40*H40,""$#,##0"")",,10% of engineering hours; anti-circular reference pattern
+Management,Project Management,"Project coordination, status reporting, and stakeholder communication with Lilly Goyah",Project Manager,"=ROUND(SUM($G$4:$G$38)*0.10,0)",1.0,"=E41*F41",$175,"=TEXT(G41*H41,""$#,##0"")",,10% of engineering hours; anti-circular reference pattern
+,,,,,TOTAL HOURS,"=SUM($G$4:$G$41)",TOTAL COST,"=TEXT(SUMPRODUCT($G$4:$G$41,$H$4:$H$41),""$#,##0"")",,
+
+# CREDITS
+#WIDTH: 25,15,100
+#ALIGN: left,right,left
+Credit Type,Credit Amount,Credit Comments
+AWS Partner Services Credit,"($10,000)","AWS Partner Network (APN) credit for solution architecture and implementation services; applicable as nClouds is an AWS Advanced Consulting Partner delivering a qualified AI/ML workload"
+AWS Partner Funding Credit,"($5,000)","AWS Partner Funding (APF) credit applied toward professional services for qualified AI/ML build engagements; subject to AWS funding approval prior to project start"
+NET PROFESSIONAL SERVICES COST,"=TEXT(SUMPRODUCT($G$4:$G$41,$H$4:$H$41)-15000,""$#,##0"")","Total professional services cost after AWS Partner and funding credits applied (Year 1 only)"

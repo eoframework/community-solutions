@@ -1,0 +1,119 @@
+# Project Timeline
+#WIDTH: 15,35,12,14,14,28,24,14
+#ALIGN: left,left,center,center,center,left,left,center
+Phase,Task,Duration,Start Date,End Date,Dependencies,Owner,Status
+Phase 1 – Discovery & Design,Project Kickoff,1 day,2025-09-01,2025-09-01,None,Amatra PM,Not Started
+Phase 1 – Discovery & Design,AWS Account Read-Only Access Provisioning,2 days,2025-09-02,2025-09-03,Project Kickoff,Cloud Engineer,Not Started
+Phase 1 – Discovery & Design,Stakeholder Interviews (Platform Team & CISO),3 days,2025-09-02,2025-09-04,Project Kickoff,Lead Solution Architect,Not Started
+Phase 1 – Discovery & Design,Current State Assessment – AWS Footprint & IAM,5 days,2025-09-03,2025-09-09,AWS Account Read-Only Access Provisioning,Lead Solution Architect,Not Started
+Phase 1 – Discovery & Design,Cloud Readiness & Gap Analysis,5 days,2025-09-08,2025-09-12,Current State Assessment – AWS Footprint & IAM,Senior Security Engineer,Not Started
+Phase 1 – Discovery & Design,ISO 27001 Control Mapping Matrix,5 days,2025-09-08,2025-09-12,Stakeholder Interviews (Platform Team & CISO),Senior Security Engineer,Not Started
+Phase 1 – Discovery & Design,On-Premises IdP Federation Design Workshop,1 day,2025-09-15,2025-09-15,Cloud Readiness & Gap Analysis,Lead Solution Architect,Not Started
+Phase 1 – Discovery & Design,ITSM & SIEM Integration Assessment,3 days,2025-09-15,2025-09-17,Cloud Readiness & Gap Analysis,Senior Solutions Engineer,Not Started
+Phase 1 – Discovery & Design,Current State Assessment Report,1 day,2025-09-15,2025-09-15,Cloud Readiness & Gap Analysis,Lead Solution Architect,Not Started
+Phase 1 – Discovery & Design,Architecture Design Document,10 days,2025-09-16,2025-09-26,ISO 27001 Control Mapping Matrix; ITSM & SIEM Integration Assessment,Lead Solution Architect,Not Started
+Phase 1 – Discovery & Design,DR Topology & Network Design,5 days,2025-09-22,2025-09-26,Architecture Design Document,Lead Solution Architect,Not Started
+Phase 1 – Discovery & Design,Architecture Review Workshop (CISO Sign-Off Gate),1 day,2025-09-29,2025-09-29,Architecture Design Document,Amatra PM,Not Started
+Phase 1 – Discovery & Design,Phase 1 Gate Review & Approval,1 day,2025-10-03,2025-10-03,Architecture Review Workshop (CISO Sign-Off Gate),Amatra PM,Not Started
+Phase 2 – Build & Integrate,Control Tower Deployment (ap-southeast-2),5 days,2025-10-06,2025-10-10,Phase 1 Gate Review & Approval,Cloud Engineer,Not Started
+Phase 2 – Build & Integrate,OU Hierarchy & Foundational Accounts Setup,3 days,2025-10-09,2025-10-13,Control Tower Deployment (ap-southeast-2),Cloud Engineer,Not Started
+Phase 2 – Build & Integrate,IaC Module Library Development (Terraform),10 days,2025-10-13,2025-10-24,OU Hierarchy & Foundational Accounts Setup,Senior Solutions Engineer,Not Started
+Phase 2 – Build & Integrate,Account Vending Machine (AFT) Deployment,5 days,2025-10-20,2025-10-24,IaC Module Library Development (Terraform),Senior Solutions Engineer,Not Started
+Phase 2 – Build & Integrate,ITSM Change-Approval Workflow Integration,5 days,2025-10-20,2025-10-24,Account Vending Machine (AFT) Deployment,Senior Solutions Engineer,Not Started
+Phase 2 – Build & Integrate,SCP Guardrail Implementation,5 days,2025-10-27,2025-10-31,OU Hierarchy & Foundational Accounts Setup,Senior Security Engineer,Not Started
+Phase 2 – Build & Integrate,AWS Config Conformance Packs & Auto-Remediation,5 days,2025-10-27,2025-10-31,SCP Guardrail Implementation,Senior Security Engineer,Not Started
+Phase 2 – Build & Integrate,IAM Identity Center Federation (On-Prem IdP),5 days,2025-11-03,2025-11-07,Account Vending Machine (AFT) Deployment,Senior Security Engineer,Not Started
+Phase 2 – Build & Integrate,Centralised Security Hub & GuardDuty Configuration,5 days,2025-11-03,2025-11-07,AWS Config Conformance Packs & Auto-Remediation,Senior Security Engineer,Not Started
+Phase 2 – Build & Integrate,SIEM Integration (EventBridge + Lambda Pipeline),3 days,2025-11-03,2025-11-05,Centralised Security Hub & GuardDuty Configuration,Senior Solutions Engineer,Not Started
+Phase 2 – Build & Integrate,DR Baseline Deployment (ap-southeast-4),5 days,2025-11-10,2025-11-14,Control Tower Deployment (ap-southeast-2),Cloud Engineer,Not Started
+Phase 2 – Build & Integrate,Network Infrastructure (Transit Gateway & Direct Connect),5 days,2025-11-03,2025-11-07,OU Hierarchy & Foundational Accounts Setup,Cloud Engineer,Not Started
+Phase 2 – Build & Integrate,Production Environment Onboarding (3 Environments),5 days,2025-11-10,2025-11-14,IAM Identity Center Federation (On-Prem IdP); SCP Guardrail Implementation,Senior Solutions Engineer,Not Started
+Phase 2 – Build & Integrate,CI/CD GitOps Pipeline for IaC,3 days,2025-11-10,2025-11-12,IaC Module Library Development (Terraform),Senior Solutions Engineer,Not Started
+Phase 2 – Build & Integrate,Configuration and Operations Guide,3 days,2025-11-13,2025-11-17,Production Environment Onboarding (3 Environments),Technical Writer,Not Started
+Phase 3 – Testing & Validation,Test Plan Development,3 days,2025-11-18,2025-11-20,Configuration and Operations Guide,QA Engineer,Not Started
+Phase 3 – Testing & Validation,Functional & Guardrail Testing,5 days,2025-11-21,2025-11-27,Test Plan Development,QA Engineer,Not Started
+Phase 3 – Testing & Validation,SCP & Config Rule Validation,3 days,2025-11-24,2025-11-26,Functional & Guardrail Testing,Senior Security Engineer,Not Started
+Phase 3 – Testing & Validation,SIEM & Federation Integration Testing,3 days,2025-11-24,2025-11-26,Functional & Guardrail Testing,Senior Solutions Engineer,Not Started
+Phase 3 – Testing & Validation,ISO 27001 Compliance Validation,5 days,2025-11-27,2025-12-03,SCP & Config Rule Validation,Senior Security Engineer,Not Started
+Phase 3 – Testing & Validation,DR Failover Test (RTO/RPO Validation),2 days,2025-11-27,2025-12-01,DR Baseline Deployment (ap-southeast-4),Cloud Engineer,Not Started
+Phase 3 – Testing & Validation,User Acceptance Testing (UAT),5 days,2025-12-01,2025-12-05,ISO 27001 Compliance Validation,QA Engineer,Not Started
+Phase 3 – Testing & Validation,Operational Runbook Suite,5 days,2025-12-01,2025-12-05,Configuration and Operations Guide,Technical Writer,Not Started
+Phase 3 – Testing & Validation,Knowledge Transfer Sessions (4 Sessions),5 days,2025-12-08,2025-12-12,Operational Runbook Suite,Lead Solution Architect,Not Started
+Phase 3 – Testing & Validation,Administrator Training Sessions,2 days,2025-12-11,2025-12-12,Knowledge Transfer Sessions (4 Sessions),Lead Solution Architect,Not Started
+Phase 3 – Testing & Validation,Platform Optimisation Roadmap,2 days,2025-12-11,2025-12-12,User Acceptance Testing (UAT),Lead Solution Architect,Not Started
+Phase 3 – Testing & Validation,ISO 27001 Compliance Evidence Package,2 days,2025-12-08,2025-12-09,ISO 27001 Compliance Validation,Technical Writer,Not Started
+Phase 3 – Testing & Validation,UAT Sign-Off & Go-Live Approval (CISO Gate),1 day,2025-12-10,2025-12-10,User Acceptance Testing (UAT),Amatra PM,Not Started
+Phase 3 – Testing & Validation,Production Go-Live Execution,1 day,2025-12-11,2025-12-11,UAT Sign-Off & Go-Live Approval (CISO Gate),Cloud Engineer,Not Started
+Phase 3 – Testing & Validation,Project Closeout Report,1 day,2025-12-15,2025-12-15,Production Go-Live Execution,Amatra PM,Not Started
+Hypercare (Weeks 17-24),Hypercare Support – Week 17-18,2 weeks,2025-12-22,2026-01-02,Production Go-Live Execution,Cloud Engineer,Not Started
+Hypercare (Weeks 17-24),Hypercare Support – Week 19-20,2 weeks,2026-01-05,2026-01-16,Hypercare Support – Week 17-18,Senior Security Engineer,Not Started
+Hypercare (Weeks 17-24),Hypercare Support – Week 21-22,2 weeks,2026-01-19,2026-01-30,Hypercare Support – Week 19-20,Senior Solutions Engineer,Not Started
+Hypercare (Weeks 17-24),Hypercare Support – Week 23-24,2 weeks,2026-02-02,2026-02-13,Hypercare Support – Week 21-22,Amatra PM,Not Started
+Hypercare (Weeks 17-24),Final Hypercare Handover & BAU Transition,1 day,2026-02-13,2026-02-13,Hypercare Support – Week 23-24,Amatra PM,Not Started
+
+# Milestones
+#WIDTH: 14,38,14,14,55,22,12,14
+#ALIGN: left,left,center,center,left,left,center,center
+Milestone ID,Milestone Name,Target Date,Phase,Success Criteria,Owner,Status,Actual Date
+MS-001,Project Kickoff Complete,2025-09-01,Phase 1 – Discovery & Design,"All stakeholders aligned; RAID log established; AWS account access confirmed; project charter signed",Amatra PM,Not Started,
+MS-002,Discovery & Assessment Sign-Off,2025-09-15,Phase 1 – Discovery & Design,"Current state assessment complete; gap analysis accepted by Priya Nair and CISO; remediation scope confirmed",Lead Solution Architect,Not Started,
+MS-003,Architecture Design Approved (CISO Gate),2025-10-03,Phase 1 – Discovery & Design,"Architecture Design Document signed off by CISO; ISO 27001 control mapping accepted; Phase 2 cleared to begin",Lead Solution Architect,Not Started,
+MS-004,Landing Zone Live,2025-10-24,Phase 2 – Build & Integrate,"Control Tower ACTIVE in ap-southeast-2; OU hierarchy established; log archive and audit accounts provisioned; AFT pipeline operational",Cloud Engineer,Not Started,
+MS-005,Guardrails Enforced,2025-10-31,Phase 2 – Build & Integrate,"SCPs active on all production OUs; no console access enforced; Config conformance packs deployed; ITSM workflow integrated",Senior Security Engineer,Not Started,
+MS-006,Identity Federation Live,2025-11-07,Phase 2 – Build & Integrate,"IAM Identity Center federated with on-premises IdP; shared credentials retired; permission sets assigned; Security Hub forwarding to SIEM validated",Senior Security Engineer,Not Started,
+MS-007,Full Platform Live,2025-11-17,Phase 2 – Build & Integrate,"All 3 production environments onboarded; DR baseline active in ap-southeast-4; SIEM and ITSM integrations validated; CI/CD pipeline operational",Senior Solutions Engineer,Not Started,
+MS-008,UAT Sign-Off,2025-12-10,Phase 3 – Testing & Validation,"CISO and platform team accept all controls; all functional test cases passed; no outstanding CRITICAL defects; ISO 27001 evidence package accepted",QA Engineer,Not Started,
+MS-009,Production Go-Live,2025-12-11,Phase 3 – Testing & Validation,"Governance platform fully operational; compliance evidence package delivered; DR failover validated RTO < 4h and RPO < 1h",Amatra PM,Not Started,
+MS-010,Hypercare End & BAU Handover,2026-02-13,Hypercare (Weeks 17-24),"8-week hypercare support period complete; all P1 and P2 items resolved; platform team self-sufficient; BAU handover signed off by Priya Nair and Rachel Moore",Amatra PM,Not Started,
+
+# RACI Matrix
+#WIDTH: 42,14,14,14,14,14,14,14,14
+#ALIGN: left,center,center,center,center,center,center,center,center
+Task/Deliverable,Amatra PM,Amatra Architect,Amatra Engineer,Amatra QA,Amatra Security,Client PM,Client Tech Lead,Client CISO
+Project Kickoff & Governance Setup,A,C,I,I,I,R,C,I
+Current State Assessment & Account Inventory,C,A,R,I,R,I,C,C
+Cloud Readiness & Gap Analysis,C,A,R,I,R,I,C,C
+ISO 27001 Control Mapping Matrix,I,C,I,R,A,I,C,R
+Architecture Design Document,I,A,C,I,R,I,C,C
+Architecture Design Sign-Off (CISO Gate),C,C,I,I,C,C,C,A
+IaC Module Library Development (Terraform),I,C,A,C,C,I,R,I
+Control Tower Landing Zone Deployment,I,A,R,C,C,I,C,I
+Account Vending Machine (AFT) Deployment,I,C,A,C,I,I,R,I
+ITSM Change-Approval Workflow Integration,C,C,A,C,I,R,R,I
+SCP Guardrail Implementation,I,C,R,I,A,I,C,R
+AWS Config Rules & Auto-Remediation,I,C,R,I,A,I,C,C
+IAM Identity Center Federation,I,C,R,I,A,I,R,C
+Centralised Security Hub & GuardDuty Configuration,I,C,R,I,A,I,C,R
+SIEM Integration (Security Hub to On-Prem SIEM),I,C,A,C,R,I,R,C
+DR Baseline Deployment (ap-southeast-4),I,A,R,C,C,I,C,I
+Network Infrastructure (Transit Gateway & Direct Connect),I,A,R,I,C,I,R,I
+Production Environment Onboarding (3 Environments),C,C,A,C,C,R,R,R
+CI/CD GitOps Pipeline for IaC,I,C,A,C,I,I,R,I
+Test Plan Development,C,C,R,A,C,I,C,I
+Functional & Guardrail Testing,C,C,R,A,R,I,C,C
+ISO 27001 Compliance Validation,I,C,C,A,R,I,C,R
+DR Failover Test (RTO/RPO Validation),I,A,R,C,C,I,C,I
+User Acceptance Testing (UAT),C,C,I,R,C,R,C,A
+UAT Sign-Off Gate,A,C,I,R,C,R,C,A
+Knowledge Transfer & Training Sessions,C,A,R,I,C,R,C,I
+Operational Runbook Suite,C,C,R,I,C,R,A,I
+ISO 27001 Compliance Evidence Package,I,C,C,R,A,I,C,R
+Platform Optimisation Roadmap,C,A,C,I,C,I,C,I
+Project Closeout & BAU Handover,A,C,I,I,I,R,C,C
+R = Responsible | A = Accountable | C = Consulted | I = Informed,,,,,,,,
+
+# Communications Plan
+#WIDTH: 28,15,40,45,22,18
+#ALIGN: left,center,left,left,left,center
+Meeting Type,Frequency,Participants,Purpose,Owner,Day/Time
+Project Kickoff Workshop,Once,All stakeholders — Amatra team and Contoso Financial (James Wu; Priya Nair; Rachel Moore; CISO),Launch project; align on scope; RACI; governance and RAID log; confirm access and Week 1 actions,Amatra PM,2025-09-01 (Half day)
+Weekly Status Call,Weekly,"Cloud CoE Lead (Priya Nair); Amatra PM; Amatra team leads",Review progress against plan; discuss blockers; decisions and risks; update RAID log,Amatra PM,Mondays 10:00 AEST
+Architecture Review Workshop,Once,"Priya Nair; CISO; Lead Solution Architect; Senior Security Engineer",Review and approve Architecture Design Document and ISO 27001 control mapping; gate for Phase 2 commencement,Lead Solution Architect,2025-10-02 (3 hours)
+Phase Gate Review,End of each phase,"Priya Nair; Rachel Moore; CISO; Amatra PM",Review phase completion criteria; accept deliverables; approve next phase commencement,Amatra PM,"2025-10-03; 2025-11-17; 2025-12-12"
+Fortnightly Executive Steering,Fortnightly,"James Wu (CTO); Rachel Moore; Amatra PM",Report milestone progress; escalate risks or scope changes; seek executive decisions,Amatra PM,Fortnights — Fridays 09:00 AEST
+UAT Facilitation Sessions,Daily during Weeks 14-15,"Priya Nair; Platform Engineers; QA Engineer; Amatra facilitation",Execute UAT scenarios; log defects; obtain CISO sign-off on acceptance criteria,QA Engineer,2025-12-01 to 2025-12-10 (2 hours/day)
+Go-Live Readiness Review,Once,"Priya Nair; CISO; Rachel Moore; Amatra PM; Cloud Engineer",Present UAT results and go-live readiness checklist for CISO and PM sign-off,Amatra PM,2025-12-10 (1 hour)
+Knowledge Transfer Sessions (4 sessions),Once per session,"Priya Nair; Platform Engineers; CISO (Sessions 2-4)",Hands-on training on IaC pipeline; guardrail management; Security Hub; IAM Identity Center,Lead Solution Architect,2025-12-08 to 2025-12-12
+Hypercare Weekly Check-In,Weekly during hypercare,"Priya Nair; Rachel Moore; Amatra PM; on-call Engineer",Review open P1/P2 hypercare items; guardrail tuning; regulatory review readiness,Amatra PM,Wednesdays 10:00 AEST
+P1 Incident Escalation,As required,"Priya Nair; CISO; Amatra PM; Cloud Engineer",Notify and resolve Priority 1 incidents (platform outage or compliance-blocking issue) during hypercare,Cloud Engineer,Within 2 business hours of detection
+Project Closeout Meeting,Once,"James Wu; Priya Nair; Rachel Moore; CISO; Amatra PM",Formal project closure; confirm BAU handover; present lessons learned and optimisation roadmap,Amatra PM,2026-02-13 (1 hour)

@@ -1,0 +1,95 @@
+# Project Timeline
+#WIDTH: 15,35,12,14,14,28,24,14
+#ALIGN: left,left,center,center,center,left,left,center
+Phase,Task,Duration,Start Date,End Date,Dependencies,Owner,Status
+Phase 1,Project Kickoff Meeting,1 day,2025-07-07,2025-07-07,None,Project Manager,Not Started
+Phase 1,AWS Account Access Provisioning,1 day,2025-07-07,2025-07-07,Project Kickoff Meeting,Cloud Engineer,Not Started
+Phase 1,Firebase Catalog Structure Review,2 days,2025-07-08,2025-07-09,AWS Account Access Provisioning,Solutions Architect,Not Started
+Phase 1,Firebase Catalog Assessment Report,1 day,2025-07-09,2025-07-09,Firebase Catalog Structure Review,Solutions Architect,Not Started
+Phase 1,API Schema and Requirements Documentation,2 days,2025-07-08,2025-07-09,Project Kickoff Meeting,Solutions Architect,Not Started
+Phase 1,AWS Architecture Design and Decision Record,3 days,2025-07-10,2025-07-14,API Schema and Requirements Documentation,Solutions Architect,Not Started
+Phase 1,Risk Register Documentation,1 day,2025-07-10,2025-07-10,Firebase Catalog Structure Review,Project Manager,Not Started
+Phase 1,Dev AWS Environment Provisioning,3 days,2025-07-10,2025-07-14,AWS Account Access Provisioning,Cloud Engineer,Not Started
+Phase 1,Security Baseline Configuration,2 days,2025-07-14,2025-07-15,Dev AWS Environment Provisioning,Security Engineer,Not Started
+Phase 1,Firebase Catalog Export to S3,1 day,2025-07-14,2025-07-14,Dev AWS Environment Provisioning,Cloud Engineer,Not Started
+Phase 1,Discovery Summary Report Sign-Off,1 day,2025-07-16,2025-07-16,AWS Architecture Design and Decision Record,Project Manager,Not Started
+Phase 2,Bedrock Foundation Model Evaluation and Prototype,3 days,2025-07-17,2025-07-21,Discovery Summary Report Sign-Off,ML/AI Engineer,Not Started
+Phase 2,POST /classify Lambda Function Implementation,3 days,2025-07-21,2025-07-23,Bedrock Foundation Model Evaluation and Prototype,ML/AI Engineer,Not Started
+Phase 2,GET /recommend Lambda Function Implementation,3 days,2025-07-22,2025-07-24,POST /classify Lambda Function Implementation,ML/AI Engineer,Not Started
+Phase 2,Auto-Tagging Batch Lambda Pipeline Implementation,2 days,2025-07-23,2025-07-24,Bedrock Foundation Model Evaluation and Prototype,ML/AI Engineer,Not Started
+Phase 2,DynamoDB Schema Design and Seed Data Load,2 days,2025-07-21,2025-07-22,Firebase Catalog Export to S3,Cloud Engineer,Not Started
+Phase 2,API Gateway Configuration,2 days,2025-07-24,2025-07-25,POST /classify Lambda Function Implementation,Cloud Engineer,Not Started
+Phase 2,CloudWatch Dashboards and Alerting Setup,2 days,2025-07-25,2025-07-28,Dev AWS Environment Provisioning,Cloud Engineer,Not Started
+Phase 2,Infrastructure as Code Templates Finalization,2 days,2025-07-28,2025-07-29,API Gateway Configuration,Cloud Engineer,Not Started
+Phase 2,Detailed Architecture Specification and API Schemas Document,1 day,2025-07-17,2025-07-17,Discovery Summary Report Sign-Off,Solutions Architect,Not Started
+Phase 3,Test Plan and Test Cases Development,2 days,2025-07-30,2025-07-31,Infrastructure as Code Templates Finalization,QA Engineer,Not Started
+Phase 3,Functional Testing Execution,3 days,2025-07-31,2025-08-04,Test Plan and Test Cases Development,QA Engineer,Not Started
+Phase 3,Integration Testing Execution,2 days,2025-08-04,2025-08-05,Functional Testing Execution,QA Engineer,Not Started
+Phase 3,Security Testing Execution,2 days,2025-08-04,2025-08-05,Functional Testing Execution,Security Engineer,Not Started
+Phase 3,Bedrock Mood Classification Accuracy Validation,2 days,2025-08-04,2025-08-05,Functional Testing Execution,ML/AI Engineer,Not Started
+Phase 3,Defect Resolution,2 days,2025-08-05,2025-08-06,Integration Testing Execution,ML/AI Engineer,Not Started
+Phase 3,User Acceptance Testing,2 days,2025-08-06,2025-08-07,Defect Resolution,QA Engineer,Not Started
+Phase 3,Production Deployment via IaC,1 day,2025-08-07,2025-08-07,User Acceptance Testing,Cloud Engineer,Not Started
+Phase 3,API Reference Documentation Delivery,1 day,2025-08-07,2025-08-07,Production Deployment via IaC,Solutions Architect,Not Started
+Phase 3,Operational Runbook Delivery,1 day,2025-08-07,2025-08-07,Production Deployment via IaC,Solutions Architect,Not Started
+Phase 3,Knowledge Transfer Session,1 day,2025-08-11,2025-08-11,API Reference Documentation Delivery,Solutions Architect,Not Started
+Phase 3,Test Results Report Delivery,1 day,2025-08-08,2025-08-08,User Acceptance Testing,QA Engineer,Not Started
+Phase 3,Hypercare Support Period,10 days,2025-08-08,2025-08-19,Production Deployment via IaC,Cloud Engineer,Not Started
+Phase 3,Project Closeout Report,1 day,2025-08-19,2025-08-19,Hypercare Support Period,Project Manager,Not Started
+
+# Milestones
+#WIDTH: 14,38,14,14,55,22,12,14
+#ALIGN: left,left,center,center,left,left,center,center
+Milestone ID,Milestone Name,Target Date,Phase,Success Criteria,Owner,Status,Actual Date
+MS-001,Kickoff Complete,2025-07-07,Phase 1,Project aligned; stakeholders confirmed; AWS account access granted to nClouds team,Project Manager,Not Started,
+MS-002,Architecture Signed Off,2025-07-16,Phase 1,Discovery Summary Report accepted by Lilly Goyah; Dev AWS environment live and security baseline configured,Solutions Architect,Not Started,
+MS-003,Classification Endpoint Live,2025-07-23,Phase 2,POST /classify operational in Dev environment with Bedrock integration returning mood label and confidence score,ML/AI Engineer,Not Started,
+MS-004,Recommendation Endpoint Live,2025-07-29,Phase 2,GET /recommend and auto-tagging pipeline operational in Dev; CloudWatch monitoring active; IaC templates finalized,ML/AI Engineer,Not Started,
+MS-005,Testing Complete,2025-08-07,Phase 3,All functional and integration test cases pass at ≥95% rate; security tests 100% passed; UAT signed off by ANP technical contact,QA Engineer,Not Started,
+MS-006,Go-Live,2025-08-07,Phase 3,Production deployment complete; API accessible from FlutterFlow; CloudWatch alarms active; go-live approved by Lilly Goyah,Project Manager,Not Started,
+MS-007,Hypercare End and Project Close,2025-08-19,Phase 3,2-week hypercare complete; all handover artifacts accepted; BAU transition confirmed; project closeout report delivered,Project Manager,Not Started,
+
+# RACI Matrix
+#WIDTH: 42,18,18,18,18,18,18
+#ALIGN: left,center,center,center,center,center,center
+Task/Deliverable,nClouds PM,nClouds Solutions Architect,nClouds ML/AI Engineer,nClouds Cloud/Security Engineer,Client CEO (Lilly Goyah),Client IT Contact
+Project Kickoff and Governance,A,C,I,I,C,I
+Requirements and API Schema Definition,C,A,C,C,C,R
+AWS Architecture Design and Decision Record,C,A,C,C,I,C
+Firebase Catalog Structure Review and Export,I,C,C,R,I,R
+Dev AWS Environment Provisioning,I,C,I,A,I,R
+Security Baseline Configuration,I,C,I,A,I,C
+Detailed Architecture Specification Delivery,C,A,C,I,I,C
+POST /classify Lambda Function Development,I,C,A,C,I,I
+GET /recommend Lambda Function Development,I,C,A,C,I,I
+Auto-Tagging Batch Lambda Pipeline Development,I,C,A,C,I,I
+API Gateway Configuration,I,C,C,A,I,C
+DynamoDB Schema Design and Seed Data Load,I,C,R,A,I,C
+CloudWatch Dashboards and Alerting,I,C,I,A,I,C
+Infrastructure as Code Templates,I,C,C,A,I,C
+Test Plan Development,C,I,C,A,I,R
+Functional and Integration Testing Execution,C,I,C,A,I,R
+Security Testing and Validation,C,C,I,A,I,C
+Bedrock Mood Classification Accuracy Validation,C,A,R,C,C,C
+Production Deployment,A,C,I,R,I,C
+API Reference Documentation,C,A,R,I,I,C
+Operational Runbook,C,A,C,R,I,C
+Knowledge Transfer Session,A,R,C,C,C,R
+User Acceptance Testing Sign-Off,C,I,C,C,I,A
+AWS Funding Credits Application,A,I,I,I,C,I
+Hypercare Support,A,C,R,R,I,R
+Project Closeout Report,A,C,I,I,C,C
+R = Responsible | A = Accountable | C = Consulted | I = Informed,,,,,,
+
+# Communications Plan
+#WIDTH: 28,15,40,45,22,18
+#ALIGN: left,center,left,left,left,center
+Meeting Type,Frequency,Participants,Purpose,Owner,Day/Time
+Project Kickoff,Once,All stakeholders — Lilly Goyah; ANP IT Contact; Jonas Bull; nClouds delivery team,Launch project; align on scope RACI and governance; confirm AWS account access and Firebase export plan,Project Manager,2025-07-07 09:00 AET
+Weekly Status Call,Weekly,"nClouds PM; nClouds Solutions Architect; ANP IT Contact; Lilly Goyah (optional)","Review progress against plan; surface blockers and decisions; update milestone status",Project Manager,Mondays 10:00 AET
+Phase 1 Architecture Review,Once,"Jonas Bull; nClouds Solutions Architect; ANP IT Contact; Lilly Goyah","Review and approve AWS Architecture Design; sign off Discovery Summary Report before Phase 2 begins",Solutions Architect,2025-07-15 10:00 AET
+Phase 2 Build Demo,Once,"nClouds ML/AI Engineer; nClouds Cloud Engineer; ANP IT Contact","Demonstrate POST /classify and GET /recommend endpoints in Dev; review accuracy results against 90% threshold",ML/AI Engineer,2025-07-29 10:00 AET
+Go-Live Readiness Review,Once,"Project Manager; Solutions Architect; ANP IT Contact; Lilly Goyah","Present UAT results; confirm all go-live readiness criteria met; obtain Lilly Goyah go-live approval sign-off",Project Manager,2025-08-06 10:00 AET
+Knowledge Transfer Session,Once,"Jonas Bull; nClouds Solutions Architect; ANP IT Contact","Architecture walkthrough; CloudWatch monitoring guidance; IaC deployment; Bedrock prompt tuning; runbook navigation",Solutions Architect,2025-08-11 09:00 AET
+Hypercare Incident Escalation,As required,nClouds Cloud Engineer; ANP IT Contact; Jonas Bull (P1 only),Notify and resolve production incidents during 2-week hypercare period per agreed SLA response times,Cloud Engineer,Within 4 hours of P1 detection
+Project Closeout Meeting,Once,"Project Manager; Jonas Bull; ANP IT Contact; Lilly Goyah",Formal project closure; confirm all deliverable acceptances; discuss recommended next steps and managed services options,Project Manager,2025-08-19 10:00 AET

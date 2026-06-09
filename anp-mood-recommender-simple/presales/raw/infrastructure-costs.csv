@@ -1,0 +1,50 @@
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
+Category,Component,Small,Medium,Large,Notes
+Cloud Services,Inference Volume,<100K requests/month,100K-1M requests/month,>1M requests/month,Monthly API calls to mood-classification and recommendation endpoints
+Cloud Services,AI Model Complexity,1-2 foundation models,3-5 models,10+ models,Number of Bedrock foundation models used for classification and recommendations
+Cloud Services,Catalog / Transcript Storage,<10 GB,10-100 GB,>100 GB,S3 storage for song lyrics and podcast transcript text used for inference
+Cloud Services,Listening History Records,<50K records,50K-500K records,>500K records,DynamoDB items tracking per-user recent listening history
+Cloud Services,Concurrent API Users,<100 users,100-1000 users,>1000 users,Simultaneous active app users calling the REST API
+Software Licenses,AI Service Tier,Bedrock on-demand,Bedrock provisioned throughput,Bedrock + fine-tuning,AWS Bedrock tier aligned to volume and latency requirements
+Support & Maintenance,Support Level,Developer (business hours),Business (24x7),Enterprise On-Ramp,AWS support plan tier
+
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,16,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
+Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
+Cloud Services,AWS Lambda,"Serverless compute for mood-classification and recommendation endpoints; ~500K invocations/month",1,Service/Month,0.20,2.40,2.40,2.40,7.20,Pay-per-invocation; priced from platform price sheet
+Cloud Services,Amazon API Gateway,"REST API hosting for /classify and /recommend endpoints; ~500K requests/month",1,Service/Month,35.00,420.00,420.00,420.00,1260.00,HTTP REST API with usage plan and API key auth
+Cloud Services,Amazon Bedrock,"Foundation model inference for mood classification and playlist recommendations; ~200K tokens/month",1,Service/Month,150.00,1800.00,1800.00,1800.00,5400.00,On-demand inference; no provisioned throughput needed at launch scale
+Cloud Services,Amazon DynamoDB,NoSQL table storing per-user listening history and mood-tag catalog index,1,Service/Month,0.25,3.00,3.00,3.00,9.00,Pay-per-request mode; priced from platform price sheet
+Cloud Services,Amazon S3,Object storage for song lyric and podcast transcript text files used in inference pipeline,500,GB/Month,0.023,138.00,138.00,138.00,414.00,Standard storage tier; priced from platform price sheet at $0.023/GB/month
+Cloud Services,Amazon CloudWatch,"Log ingestion and metrics for Lambda functions and API Gateway; ~10 GB logs/month",1,Service/Month,30.00,360.00,360.00,360.00,1080.00,Includes log groups for all Lambda functions and API Gateway access logs
+Cloud Services,AWS Secrets Manager,"Secure storage for API keys and Firebase service-account credentials used by Lambda",1,Service/Month,5.00,60.00,60.00,60.00,180.00,~5 secrets rotated quarterly
+Cloud Services,Amazon Cognito,User pool for JWT-based API authorization; validates tokens from FlutterFlow app,1,Service/Month,10.00,120.00,120.00,120.00,360.00,MAU-based pricing; small user base at launch
+Support & Maintenance,AWS Developer Support,"AWS Developer support plan covering technical guidance and case management during build and steady-state",1,Service/Month,29.00,348.00,348.00,348.00,1044.00,Upgrade to Business support recommended if production SLA tightens
+
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Hardware,Equipment Credit,0,No hardware credits applicable — serverless cloud-only solution
+Cloud Services,AWS MAP Credit,-1500,AWS Migration Acceleration Program credit applied to Year 1 cloud consumption; nClouds is an APN partner eligible to apply MAP funding
+Cloud Services,AWS Activate Credit,0,ANP Streaming is an established business; Activate startup credits not applicable
+Cloud Services,Reserved Instance Savings,0,No EC2 reserved instances — serverless architecture; no RI commitment required
+Software Licenses,Partner Tool Credit,0,No third-party ISV tools requiring partner credits in this engagement
+Connectivity,Network Credit,0,No dedicated connectivity circuits; API traffic routes over public internet
+Support & Maintenance,Program Credit,0,No support contract volume discounts applicable at Developer tier
+Facilities,Facilities Credit,0,No facilities costs — fully serverless AWS deployment
+
+# 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
+Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
+Hardware,0,0,0,0,0,0
+Cloud Services,2903.40,-1500,1403.40,2903.40,2903.40,7210.20
+Software Licenses,0,0,0,0,0,0
+Connectivity,0,0,0,0,0,0
+Support & Maintenance,348.00,0,348.00,348.00,348.00,1044.00
+Facilities,0,0,0,0,0,0
+TOTAL,3251.40,-1500,1751.40,3251.40,3251.40,8254.20

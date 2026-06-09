@@ -1,0 +1,67 @@
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
+Category,Component,Small,Medium,Large,Notes
+Cloud Services,AWS Accounts / OUs,2-5 accounts,10-20 accounts,50+ accounts,Landing zone organisational units under AWS Control Tower
+Cloud Services,Managed Environments,3-6 environments,10-20 environments,30+ environments,Dev / Test / Prod environment sets provisioned via IaC
+Cloud Services,Config Rules (Policy-as-Code),20-40 rules,60-120 rules,200+ rules,AWS Config conformance pack rules enforcing ISO 27001 baseline
+Cloud Services,CloudTrail Log Volume,<50 GB/month,50-200 GB/month,>200 GB/month,Audit trail data ingested into centralised S3 log archive
+Cloud Services,Lambda Automation Functions,5-10 functions,15-30 functions,50+ functions,Remediation and provisioning automation invocations per month
+Cloud Services,Security Hub Findings/Month,<500 findings,500-5000 findings,>5000 findings,Aggregated compliance findings across all accounts
+Software Licenses,IaC Platform Tier,Terraform Cloud Free,Terraform Cloud Plus,Terraform Cloud Business,HashiCorp Terraform Cloud workspace tier
+Connectivity,Directory Federation Links,1 IdP connector,2 IdP connectors,4+ IdP connectors,AWS IAM Identity Center connections to on-premises AD/LDAP
+Support & Maintenance,AWS Support Plan,Developer,Business,Enterprise,AWS support tier aligned to environment criticality
+
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,16,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
+Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
+Cloud Services,AWS Control Tower,Landing zone management – per governed account (ap-southeast-2),12,Account/Month,6.00,864.00,864.00,864.00,2592.00,Governance framework for multi-account provisioning
+Cloud Services,AWS Organizations,Multi-account management – included with Control Tower,1,Service/Month,0.00,0.00,0.00,0.00,0.00,No additional charge; included in Control Tower
+Cloud Services,AWS Config,Configuration recording – per Config rule evaluation (ap-southeast-2),80,Rules/Month,1.00,960.00,960.00,960.00,2880.00,Policy-as-code conformance packs for ISO 27001
+Cloud Services,AWS CloudTrail,Management and data events – per 100K events (ap-southeast-2),500,100K Events/Month,0.10,600.00,600.00,600.00,1800.00,Immutable audit trail across all accounts
+Cloud Services,Amazon S3 (Log Archive),Log archive storage – Standard tier (ap-southeast-2),500,GB/Month,0.025,150.00,150.00,150.00,450.00,Centralised CloudTrail and Config log archive bucket
+Cloud Services,AWS Security Hub,Aggregated findings – per finding ingested (ap-southeast-2),1000,Findings/Month,0.001,12.00,12.00,12.00,36.00,Security posture management and compliance dashboard
+Cloud Services,AWS Lambda,Automation functions – per invocation bundle (ap-southeast-2),1,Service/Month,0.20,2.40,2.40,2.40,7.20,Remediation and provisioning automation (pricing_calculator rate)
+Cloud Services,Amazon DynamoDB,State and workflow data – on-demand capacity (ap-southeast-2),1,Service/Month,0.25,3.00,3.00,3.00,9.00,ITSM workflow state store (pricing_calculator rate)
+Cloud Services,AWS IAM Identity Center,SSO and identity federation – per active user (ap-southeast-2),150,Users/Month,0.018,32.40,32.40,32.40,97.20,Federation with existing on-premises AD (platform team subset)
+Cloud Services,Amazon CloudWatch,Metrics and log monitoring – per GB ingested (ap-southeast-2),100,GB/Month,0.57,684.00,684.00,684.00,2052.00,Platform telemetry dashboards and automated alerts
+Cloud Services,AWS Systems Manager,Patch and config management – per managed instance (ap-southeast-2),30,Instance/Month,2.50,900.00,900.00,900.00,2700.00,No-console-access enforcement via SSM Session Manager
+Cloud Services,AWS Service Catalog,Self-service provisioning portal – per API call batch (ap-southeast-2),1,Service/Month,50.00,600.00,600.00,600.00,1800.00,Approved IaC product catalogue for environment provisioning
+Cloud Services,Amazon EventBridge,Event-driven automation – per million events (ap-southeast-2),2,Million Events/Month,1.00,24.00,24.00,24.00,72.00,Triggers for automated remediation workflows
+Cloud Services,AWS Backup,Centralised backup – per GB backed up (ap-southeast-2),500,GB/Month,0.05,300.00,300.00,300.00,900.00,Data protection for platform state and configuration records
+Cloud Services,DR Region (ap-southeast-4),Config replication and S3 cross-region replication – DR replica set,1,Service/Month,400.00,4800.00,4800.00,4800.00,14400.00,In-country DR replica; all data remains in Australia
+Cloud Services,Data Transfer (Cross-Region),S3 and CloudTrail replication data transfer to ap-southeast-4,100,GB/Month,0.02,24.00,24.00,24.00,72.00,Cross-region egress for DR replication
+Software Licenses,Terraform Cloud Plus,HashiCorp Terraform Cloud Plus – per workspace (IaC automation),10,Workspace/Month,20.00,2400.00,2400.00,2400.00,7200.00,Sentinel policy-as-code and audit log features for ISO 27001
+Software Licenses,Datadog APM,Full-stack observability – per host (platform services),6,Host/Month,23.00,1656.00,1656.00,1656.00,4968.00,SIEM integration feed and platform service observability
+Connectivity,AWS Direct Connect (Primary),Dedicated 1 Gbps hosted connection to ap-southeast-2,1,Port/Month,220.00,2640.00,2640.00,2640.00,7920.00,Secure private connectivity from Contoso DC to AWS
+Connectivity,AWS Direct Connect (DR),Dedicated 1 Gbps hosted connection to ap-southeast-4,1,Port/Month,220.00,2640.00,2640.00,2640.00,7920.00,DR site private connectivity; in-country data residency requirement
+Connectivity,VPN (Backup),AWS Site-to-Site VPN backup connection (ap-southeast-2),1,Connection/Month,36.50,438.00,438.00,438.00,1314.00,Resilient backup path for federation and management traffic
+Support & Maintenance,AWS Business Support,AWS Business Support plan – percentage of monthly usage,1,Service/Month,1200.00,14400.00,14400.00,14400.00,43200.00,Minimum Business Support for production workloads (regulatory requirement)
+Support & Maintenance,Terraform Cloud Support,HashiCorp Terraform Cloud Plus support – included in subscription,1,Service/Month,0.00,0.00,0.00,0.00,0.00,Support included with Terraform Cloud Plus tier
+Facilities,Cloud Hosting,Cloud-only solution – no physical infrastructure facilities required,1,Service/Month,0.00,0.00,0.00,0.00,0.00,No facilities costs; fully hosted on AWS ap-southeast-2 and ap-southeast-4
+
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Hardware,Equipment Credit,0,No hardware credits – cloud-only solution; no physical equipment purchased
+Cloud Services,AWS MAP Credit,-15000,AWS Migration Acceleration Program credit – 20% of Year 1 cloud infrastructure costs; requires MAP enrolment via AWS Partner Network
+Cloud Services,AWS Activate / Consumption Credit,-5000,AWS Solutions Partner program promotional credit applied to ap-southeast-2 services in Year 1
+Cloud Services,Reserved Instance Savings,-8000,1-year Reserved Instance commitment discount (approx. 30% reduction on compute) – reflected in Year 1 unit pricing
+Software Licenses,Terraform Partner Credit,-1200,HashiCorp partner program credit for first-year Terraform Cloud Plus subscription
+Connectivity,Network Credit,0,No connectivity credits available for Direct Connect circuits
+Support & Maintenance,Support Credit,0,No credits available against AWS Business Support plan
+Facilities,Facilities Credit,0,No facilities credits – cloud-only solution
+
+# 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
+Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
+Hardware,0,0,0,0,0,0
+Cloud Services,9955.80,-28000,-18044.20,9955.80,9955.80,1867.40
+Software Licenses,4056.00,-1200,2856.00,4056.00,4056.00,10968.00
+Connectivity,5718.00,0,5718.00,5718.00,5718.00,17154.00
+Support & Maintenance,14400.00,0,14400.00,14400.00,14400.00,43200.00
+Facilities,0,0,0,0,0,0
+TOTAL,34129.80,-29200,4929.80,34129.80,34129.80,73189.40

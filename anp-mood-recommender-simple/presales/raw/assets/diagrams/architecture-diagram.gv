@@ -1,0 +1,56 @@
+digraph "ANP Streaming – AI Mood & Recommendation API" {
+	graph [bgcolor=white fontcolor="#2D3436" fontname="Sans-Serif" fontsize=16 label="ANP Streaming – AI Mood & Recommendation API" nodesep=0.6 pad=0.75 rankdir=TB ranksep=0.8 splines=ortho]
+	node [fixedsize=true fontcolor="#232F3E" fontname="Sans-Serif" fontsize=12 height=1.4 imagescale=true labelloc=b shape=box style=rounded width=1.4]
+	edge [arrowsize=0.8 color="#555555" fontcolor="#555555" fontsize=10]
+	"4299924bc6c44d5d847de02a243f38b3" [label="FlutterFlow
+Mobile App" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/onprem/client/users.png" shape=none]
+	subgraph "cluster_API Layer" {
+		graph [bgcolor="#E8FDE8" fontname="Sans-Serif" fontsize=12 label="API Layer" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"8faaa267e1f74c40908ba3437255a266" [label="Amazon API Gateway
+(REST)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/network/api-gateway.png" shape=none]
+	}
+	subgraph "cluster_Compute Layer" {
+		graph [bgcolor="#FDF8E8" fontname="Sans-Serif" fontsize=12 label="Compute Layer" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"168207e181a44fb0b265da6f4c2b18bd" [label="Mood Classifier
+(Lambda)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/compute/lambda.png" shape=none]
+		"84e6122dac7745f1a65ddecda8b0f147" [label="Playlist Recommender
+(Lambda)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/compute/lambda.png" shape=none]
+	}
+	subgraph "cluster_AI / ML Services" {
+		graph [bgcolor="#E8F4FD" fontname="Sans-Serif" fontsize=12 label="AI / ML Services" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"648118f6a7c345a0bdc9733732192e76" [label="Amazon Comprehend
+(Sentiment / Entities)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/ml/comprehend.png" shape=none]
+		"6d4f0f9240a74f889a172a798c491dea" [label="Amazon Personalize
+(Recommendations)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/ml/personalize.png" shape=none]
+		"3770b00f416c46b69a98257ef00a71de" [label="Amazon Bedrock
+(LLM Classification)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/ml/bedrock.png" shape=none]
+	}
+	subgraph "cluster_Data Layer" {
+		graph [bgcolor="#FDF8E8" fontname="Sans-Serif" fontsize=12 label="Data Layer" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		f3d21f5b70f74a9e95fe12cdaa3d9ba6 [label="Content Catalog
+& Transcripts (S3)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/storage/simple-storage-service-s3.png" shape=none]
+		"9020a6ffebd34a988b38760db1d1f410" [label="Listening History
+(DynamoDB)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/database/dynamodb.png" shape=none]
+	}
+	subgraph "cluster_Security & Observability" {
+		graph [bgcolor="#FDE8E8" fontname="Sans-Serif" fontsize=12 label="Security & Observability" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"3e4d7416cdd34aba990077b4b3372586" [label="IAM Roles
+& Policies" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/security/identity-and-access-management-iam.png" shape=none]
+		"1a7398b02a994a928b32932b60ee0dc5" [label="Secrets Manager" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/security/secrets-manager.png" shape=none]
+		"3f1869befa6f4f159c9b52749c811458" [label="CloudWatch
+Logs & Alerts" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/management/cloudwatch.png" shape=none]
+	}
+	"4299924bc6c44d5d847de02a243f38b3" -> "8faaa267e1f74c40908ba3437255a266" [label=HTTPS dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"8faaa267e1f74c40908ba3437255a266" -> "168207e181a44fb0b265da6f4c2b18bd" [label="/classify" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"8faaa267e1f74c40908ba3437255a266" -> "84e6122dac7745f1a65ddecda8b0f147" [label="/recommend" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"168207e181a44fb0b265da6f4c2b18bd" -> "648118f6a7c345a0bdc9733732192e76" [label=NLP dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"168207e181a44fb0b265da6f4c2b18bd" -> "3770b00f416c46b69a98257ef00a71de" [label="LLM fallback" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"168207e181a44fb0b265da6f4c2b18bd" -> f3d21f5b70f74a9e95fe12cdaa3d9ba6 [label="read lyrics" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"84e6122dac7745f1a65ddecda8b0f147" -> "6d4f0f9240a74f889a172a798c491dea" [label="get recommendations" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"84e6122dac7745f1a65ddecda8b0f147" -> "9020a6ffebd34a988b38760db1d1f410" [label="read history" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"3e4d7416cdd34aba990077b4b3372586" -> "168207e181a44fb0b265da6f4c2b18bd" [color=blue dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dotted]
+	"3e4d7416cdd34aba990077b4b3372586" -> "84e6122dac7745f1a65ddecda8b0f147" [color=blue dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dotted]
+	"1a7398b02a994a928b32932b60ee0dc5" -> "8faaa267e1f74c40908ba3437255a266" [color=grey dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dotted]
+	"168207e181a44fb0b265da6f4c2b18bd" -> "3f1869befa6f4f159c9b52749c811458" [label=logs color=grey dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dashed]
+	"84e6122dac7745f1a65ddecda8b0f147" -> "3f1869befa6f4f159c9b52749c811458" [label=logs color=grey dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dashed]
+}

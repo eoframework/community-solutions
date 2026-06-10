@@ -1,0 +1,107 @@
+# Project Timeline
+#WIDTH: 15,35,12,14,14,28,24,14
+#ALIGN: left,left,center,center,center,left,left,center
+Phase,Task,Duration,Start Date,End Date,Dependencies,Owner,Status
+Phase 1,Project Kickoff & Stakeholder Alignment,1 day,2026-07-01,2026-07-01,None,Project Manager,Not Started
+Phase 1,AWS Account Provisioning & IAM Access,3 days,2026-07-02,2026-07-04,Project Kickoff & Stakeholder Alignment,VP Engineering,Not Started
+Phase 1,Okta User Directory Export,3 days,2026-07-02,2026-07-04,Project Kickoff & Stakeholder Alignment,Security & Compliance Lead,Not Started
+Phase 1,Historical Client Briefs Collection,5 days,2026-07-02,2026-07-08,Project Kickoff & Stakeholder Alignment,Head of Solutions,Not Started
+Phase 1,Discovery & Current State Assessment,10 days,2026-07-06,2026-07-17,AWS Account Provisioning & IAM Access,Lead Solutions Architect,Not Started
+Phase 1,Legacy Template Inventory & Export,5 days,2026-07-06,2026-07-10,Historical Client Briefs Collection,Lead Solutions Architect,Not Started
+Phase 1,Detailed Architecture Design & ADRs,15 days,2026-07-20,2026-08-07,Discovery & Current State Assessment,Lead Solutions Architect,Not Started
+Phase 1,AWS Landing Zone & Environment Setup,10 days,2026-07-20,2026-07-31,AWS Account Provisioning & IAM Access,Senior Solutions Engineer,Not Started
+Phase 1,CI/CD Pipeline Setup (GitHub Actions),5 days,2026-08-03,2026-08-07,AWS Landing Zone & Environment Setup,Cloud/DevOps Engineer,Not Started
+Phase 1,Architecture Design Review & Approval Gate,5 days,2026-08-10,2026-08-14,Detailed Architecture Design & ADRs,Project Manager,Not Started
+Phase 1,Okta-to-Cognito Identity Migration,10 days,2026-08-10,2026-08-21,Architecture Design Review & Approval Gate,Senior Solutions Engineer,Not Started
+Phase 1,Async Job Orchestration (Step Functions + SQS),10 days,2026-08-10,2026-08-21,Architecture Design Review & Approval Gate,Senior Solutions Engineer,Not Started
+Phase 1,Bedrock Integration Layer (Phase 1 Artifacts),15 days,2026-08-17,2026-09-04,Architecture Design Review & Approval Gate,ML/AI Engineer,Not Started
+Phase 1,API Gateway & Lambda REST API Layer,10 days,2026-08-17,2026-08-28,Architecture Design Review & Approval Gate,Senior Solutions Engineer,Not Started
+Phase 1,Security Hardening & SOC 2 Controls Phase 1,10 days,2026-08-24,2026-09-04,Okta-to-Cognito Identity Migration,Security Engineer,Not Started
+Phase 1,Pre-Sales Artifact Pipeline (4 Artifact Types),10 days,2026-09-01,2026-09-11,"Bedrock Integration Layer (Phase 1 Artifacts), API Gateway & Lambda REST API Layer",ML/AI Engineer,Not Started
+Phase 1,Phase 1 Functional & Integration Testing,7 days,2026-09-07,2026-09-15,"Pre-Sales Artifact Pipeline (4 Artifact Types), Security Hardening & SOC 2 Controls Phase 1",QA Engineer,Not Started
+Phase 1,Phase 1 UAT — Pre-Sales Artifacts,7 days,2026-09-14,2026-09-22,Phase 1 Functional & Integration Testing,Head of Solutions,Not Started
+Phase 1,Pre-Sales Consultant Training Materials,5 days,2026-09-14,2026-09-18,Phase 1 Functional & Integration Testing,Technical Writer,Not Started
+Phase 1,Phase 1 Go-Live Readiness Review & CTO Approval,3 days,2026-09-23,2026-09-25,Phase 1 UAT — Pre-Sales Artifacts,Project Manager,Not Started
+Phase 1,Phase 1 Production Deployment (MVP Go-Live),1 day,2026-09-30,2026-09-30,Phase 1 Go-Live Readiness Review & CTO Approval,Senior Solutions Engineer,Not Started
+Phase 2,Delivery Artifact Pipeline Design,5 days,2026-10-01,2026-10-07,Phase 1 Production Deployment (MVP Go-Live),Lead Solutions Architect,Not Started
+Phase 2,Legacy Template Pipeline (Word/Excel/PPT),15 days,2026-10-08,2026-10-26,Delivery Artifact Pipeline Design,Senior Solutions Engineer,Not Started
+Phase 2,Bedrock Integration Layer (Phase 2 Artifacts),15 days,2026-10-08,2026-10-26,Delivery Artifact Pipeline Design,ML/AI Engineer,Not Started
+Phase 2,Delivery Artifact Pipeline (3 Additional Types),10 days,2026-10-27,2026-11-06,"Legacy Template Pipeline (Word/Excel/PPT), Bedrock Integration Layer (Phase 2 Artifacts)",Senior Solutions Engineer,Not Started
+Phase 2,Per-User & Global Usage Limit Controls,7 days,2026-10-27,2026-11-04,Delivery Artifact Pipeline Design,ML/AI Engineer,Not Started
+Phase 2,QA Validation Layer & Pass-Rate Dashboard,10 days,2026-11-02,2026-11-13,Delivery Artifact Pipeline (3 Additional Types),QA Engineer,Not Started
+Phase 2,CloudWatch Monitoring & SLA Dashboards,7 days,2026-11-09,2026-11-17,QA Validation Layer & Pass-Rate Dashboard,Cloud/DevOps Engineer,Not Started
+Phase 2,SOC 2 Type II Controls Evidence Package,10 days,2026-11-09,2026-11-20,Security Hardening & SOC 2 Controls Phase 1,Security Engineer,Not Started
+Phase 2,Phase 2 Functional & Compliance Testing,7 days,2026-11-16,2026-11-24,"QA Validation Layer & Pass-Rate Dashboard, SOC 2 Type II Controls Evidence Package",QA Engineer,Not Started
+Phase 2,Phase 2 UAT — Delivery Artifacts,7 days,2026-11-23,2026-12-01,Phase 2 Functional & Compliance Testing,VP Engineering,Not Started
+Phase 2,Delivery Team & Administrator Training,3 days,2026-11-30,2026-12-02,Phase 2 UAT — Delivery Artifacts,Technical Writer,Not Started
+Phase 2,Phase 2 Go-Live Readiness Review & CTO Approval,3 days,2026-12-07,2026-12-09,Phase 2 UAT — Delivery Artifacts,Project Manager,Not Started
+Phase 2,Phase 2 Production Deployment,1 day,2026-12-15,2026-12-15,Phase 2 Go-Live Readiness Review & CTO Approval,Senior Solutions Engineer,Not Started
+Phase 3,GA Rollout Planning & User Cohort Scheduling,5 days,2026-12-16,2026-12-22,Phase 2 Production Deployment,Project Manager,Not Started
+Phase 3,Bedrock Prompt Optimisation (Production Data),14 days,2026-12-16,2027-01-02,Phase 2 Production Deployment,ML/AI Engineer,Not Started
+Phase 3,Lambda & DynamoDB Performance Optimisation,7 days,2026-12-23,2027-01-02,Bedrock Prompt Optimisation (Production Data),Cloud/DevOps Engineer,Not Started
+Phase 3,All-User Onboarding & GA Rollout (~120 Users),10 days,2027-01-04,2027-01-15,GA Rollout Planning & User Cohort Scheduling,Project Manager,Not Started
+Phase 3,Train-the-Trainer Session (Head of Solutions),1 day,2027-01-11,2027-01-11,All-User Onboarding & GA Rollout (~120 Users),Lead Solutions Architect,Not Started
+Phase 3,Optimisation Recommendations Report,5 days,2027-01-11,2027-01-15,"Lambda & DynamoDB Performance Optimisation, All-User Onboarding & GA Rollout (~120 Users)",Lead Solutions Architect,Not Started
+Phase 3,Operations Runbooks & Configuration Docs,5 days,2027-01-11,2027-01-15,All-User Onboarding & GA Rollout (~120 Users),Technical Writer,Not Started
+Phase 3,SOC 2 Final Evidence Package & Sign-Off,3 days,2027-01-18,2027-01-20,SOC 2 Type II Controls Evidence Package,Security Engineer,Not Started
+Phase 3,Final Project Closeout Report & Retrospective,3 days,2027-01-25,2027-01-27,"SOC 2 Final Evidence Package & Sign-Off, Optimisation Recommendations Report",Project Manager,Not Started
+Phase 3,Engagement Formally Closed,1 day,2027-01-31,2027-01-31,Final Project Closeout Report & Retrospective,Project Manager,Not Started
+
+# Milestones
+#WIDTH: 14,38,14,14,55,22,12,14
+#ALIGN: left,left,center,center,left,left,center,center
+Milestone ID,Milestone Name,Target Date,Phase,Success Criteria,Owner,Status,Actual Date
+MS-001,Kickoff Complete,2026-07-01,Phase 1,"CTO, VP Engineering, and Head of Solutions aligned on scope, success criteria, and governance model; project charter acknowledged",Project Manager,Not Started,
+MS-002,Architecture Approved,2026-08-14,Phase 1,"Detailed architecture design, ADRs, and data models reviewed and approved by CTO and VP Engineering; no open blocking concerns",Lead Solutions Architect,Not Started,
+MS-003,Infrastructure Foundation Live,2026-09-04,Phase 1,"AWS landing zone, Cognito migration, CI/CD pipeline, and async orchestration operational in Staging; all smoke tests passing",Senior Solutions Engineer,Not Started,
+MS-004,Phase 1 MVP Go-Live,2026-09-30,Phase 1,"Pre-sales artifact pipeline (4 types) live in production; pre-sales consultants able to submit briefs and receive generated artifacts; CTO written approval received",Project Manager,Not Started,
+MS-005,Phase 1 Hypercare End,2026-11-25,Phase 1,"8-week Phase 1 hypercare complete; platform stable; zero open P1 defects; usage metrics baselined",Project Manager,Not Started,
+MS-006,Phase 2 Go-Live,2026-12-15,Phase 2,"Full 7-type artifact pipeline live in production; QA validation layer active with ≥90% pass rate; SOC 2 compliance controls evidenced; CTO written approval received",Project Manager,Not Started,
+MS-007,Phase 2 Hypercare End,2027-01-12,Phase 2,"4-week Phase 2 hypercare complete; delivery team using platform in production; no open P1 defects",Project Manager,Not Started,
+MS-008,GA Rollout Complete,2027-01-20,Phase 3,"All ~120 internal users onboarded and authenticated; Bedrock prompts optimised; all training sessions complete and recorded",Project Manager,Not Started,
+MS-009,Project Close,2027-01-31,Phase 3,"SOC 2 evidence package delivered and signed off; operations runbooks transferred; project retrospective complete; engagement formally closed with CTO",Project Manager,Not Started,
+
+# RACI Matrix
+#WIDTH: 42,14,14,12,12,12,16,18,18
+#ALIGN: left,center,center,center,center,center,center,center,center
+Task/Deliverable,Vendor PM,Vendor Arch,Vendor Eng,Vendor QA,Client CTO,Client VP Eng,Head of Solutions,Sec & Compliance
+Project Governance & Reporting,A,C,I,I,C,C,I,I
+Discovery & Current State Assessment,C,A,R,I,C,C,C,C
+Architecture Design & ADRs,I,A,R,I,C,C,I,C
+AWS Landing Zone & Environment Setup,C,C,R,I,I,A,I,C
+CI/CD Pipeline Setup,C,C,R,C,I,A,I,I
+Bedrock Integration Layer,C,A,R,I,I,C,C,I
+Async Job Orchestration (Step Functions + SQS),C,A,R,I,I,C,I,I
+API Gateway & Lambda REST API Layer,C,C,R,I,I,A,I,I
+Okta-to-Cognito Identity Migration,C,C,R,I,I,C,I,A
+Legacy Template Pipeline,C,C,R,C,I,C,A,I
+Security Hardening & SOC 2 Controls,I,C,R,C,I,C,I,A
+QA Validation Layer,C,C,R,A,I,C,C,I
+Pre-Sales Artifact Pipeline,C,C,R,I,I,C,A,I
+Delivery Artifact Pipeline,C,C,R,I,I,A,C,I
+Functional & Integration Testing,C,C,R,A,I,C,C,C
+UAT — Pre-Sales Artifacts,C,I,I,C,I,I,A,I
+UAT — Delivery Artifacts,C,I,I,C,I,A,C,I
+Phase Gate Approvals,C,C,I,I,A,C,C,C
+Production Deployments,A,C,R,C,I,C,I,C
+Training Delivery,A,C,R,I,I,C,C,I
+Hypercare Support,A,C,R,I,I,C,C,I
+SOC 2 Evidence Package & Compliance Sign-Off,C,C,R,C,I,I,I,A
+Optimisation & Project Closeout,A,R,C,I,C,C,I,I
+CloudWatch Monitoring & SLA Dashboards,C,C,R,I,I,A,I,I
+R = Responsible | A = Accountable | C = Consulted | I = Informed,,,,,,,,
+
+# Communications Plan
+#WIDTH: 28,15,40,45,22,18
+#ALIGN: left,center,left,left,left,center
+Meeting Type,Frequency,Participants,Purpose,Owner,Day/Time
+Project Kickoff Workshop,Once,All stakeholders; EO Framework and Amatra teams,"Launch project, align on scope, RACI, and governance; confirm success criteria",Project Manager,2026-07-01
+Weekly Status Call,Weekly,"Cloud CoE Lead; VP Engineering; EO Framework team leads","Review progress against plan, discuss blockers and decisions, update risk register",Project Manager,Mondays 10:00 CT
+Architecture Review Workshop,Once,"VP Engineering; Head of Solutions; CTO; Lead Solutions Architect","Review and approve Detailed Architecture Design, ADRs, and data models",Lead Solutions Architect,2026-08-10 (half-day)
+Phase 1 Design Walkthrough,Once,VP Engineering; Security & Compliance Lead; EO Framework architects,Walk through security design and SOC 2 control mapping for Phase 1 scope,Lead Solutions Architect,2026-08-14 (2 hours)
+Phase Gate Review — Phase 1,Once,"CTO; VP Engineering; Head of Solutions; Project Manager","Review Phase 1 completion criteria, UAT sign-off, and approve Phase 1 production deployment",Project Manager,2026-09-25 (1 hour)
+Hypercare Incident Escalation,As required,VP Engineering; Security & Compliance Lead; Project Manager,Notify and resolve P1 incidents during hypercare periods,Project Manager,Within 2 business hours of detection
+Phase Gate Review — Phase 2,Once,"CTO; VP Engineering; Head of Solutions; Security & Compliance Lead; Project Manager","Review Phase 2 completion, compliance evidence, UAT sign-off, and approve Phase 2 production deployment",Project Manager,2026-12-09 (1 hour)
+GA Readiness Review,Once,"CTO; VP Engineering; Head of Solutions; Project Manager",Present GA rollout plan and confirm all ~120 users can be onboarded safely before 2027-01-31,Project Manager,2027-01-04 (1 hour)
+Monthly Steering Committee,Monthly,"CTO; VP Engineering; Head of Solutions; Project Manager",Review phase milestones and budget burn; escalate risks to executive sponsor,Project Manager,First Monday of each month 14:00 CT
+Project Closeout Meeting,Once,"CTO; VP Engineering; Head of Solutions; Security & Compliance Lead; EO Framework leads",Formal project closure; present final deliverables and SOC 2 evidence; confirm BAU handover,Project Manager,2027-01-31 (1 hour)

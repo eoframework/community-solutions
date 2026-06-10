@@ -1,0 +1,64 @@
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
+Category,Component,Small,Medium,Large,Notes
+Cloud Services,Active Engagements per Quarter,Up to 10,10-30 engagements,30+ engagements,Number of concurrent solution-builder engagements
+Cloud Services,Concurrent Generation Jobs,1-3 jobs,4-12 jobs,12+ jobs,Simultaneous async Bedrock/Lambda generation pipelines
+Cloud Services,Lambda Invocations per Month,<1M,1M-5M,5M+/month,API + orchestration function invocations
+Cloud Services,Bedrock Token Volume,<5M tokens/month,5M-25M tokens/month,25M+ tokens/month,Claude model inference tokens (input + output)
+Cloud Services,DynamoDB Request Units,<5M RCU+WCU/month,5M-20M RCU+WCU/month,20M+/month,Solution and usage state read/write capacity
+Cloud Services,S3 Storage Volume,<50 GB,50-250 GB,250+ GB,Artifact storage across all engagements
+Software Licenses,Platform Users,Up to 25 users,25-75 users,75+ users,Internal pre-sales and delivery consultants
+Connectivity,API Gateway Requests,<5M calls/month,5M-20M calls/month,20M+/month,REST API throughput
+Support & Maintenance,AWS Support Plan,Developer,Business,Enterprise,AWS support tier aligned to SLA requirement
+
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,16,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
+Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
+Cloud Services,AWS Lambda,"Serverless compute for API handlers and async orchestration; ~2M invocations/month at 512 MB avg 3s duration",1,Service/Month,200.00,2400.00,2400.00,2400.00,7200.00,Pricing per calculator (lambda us-east-1 proxy for us-west-2)
+Cloud Services,Amazon API Gateway,"REST API fronting all Lambda functions; ~3M requests/month including WebSocket for async job status",1,Service/Month,105.00,1260.00,1260.00,1260.00,3780.00,HTTP API tier at $1.00/million requests + connection fees
+Cloud Services,Amazon Bedrock,"Claude 3 Sonnet/Haiku inference for artifact generation; ~10M input tokens and 5M output tokens/month",1,Service/Month,825.00,9900.00,9900.00,9900.00,29700.00,Claude 3 Sonnet: $3/M input + $15/M output tokens (AWS public pricing)
+Cloud Services,Amazon DynamoDB,"On-demand capacity for solution state and per-user usage tracking; ~2M reads and 500K writes/month",1,Service/Month,25.00,300.00,300.00,300.00,900.00,Pricing per calculator (dynamodb us-east-1 proxy for us-west-2)
+Cloud Services,Amazon S3,"Artifact storage for PDFs/DOCX/PPTX and input briefs; 100 GB stored + 50K GET and 10K PUT/month",500,GB/Month,0.023,138.00,138.00,138.00,414.00,Pricing per calculator (s3 us-east-1 proxy); $0.023/GB standard tier
+Cloud Services,Amazon Cognito,"User pool for ~50 internal users; admin group governance; Okta identity migration included",1,Service/Month,5.50,66.00,66.00,66.00,198.00,First 50K MAUs free; nominal charge for advanced security features
+Cloud Services,Amazon SQS,"Async job queues for 30-60 min generation pipelines; decouples API from Bedrock invocations",1,Service/Month,8.00,96.00,96.00,96.00,288.00,Standard queue ~500K messages/month; $0.40/million after free tier
+Cloud Services,Amazon CloudWatch,"Metrics, logs, alarms and dashboards for all Lambda/API Gateway/Bedrock usage; 20 GB log ingestion/month",1,Service/Month,85.00,1020.00,1020.00,1020.00,3060.00,$0.50/GB ingestion + $0.03/GB storage + dashboards and alarms
+Cloud Services,AWS WAF,"Web Application Firewall on API Gateway; rate limiting and managed rule groups for SOC 2 compliance",1,Service/Month,35.00,420.00,420.00,420.00,1260.00,$5/WebACL + $1/rule/month + $0.60/M requests
+Cloud Services,AWS Secrets Manager,"Secrets for API keys and DB credentials and third-party integrations; ~10 secrets with rotation",10,Secret/Month,0.40,48.00,48.00,48.00,144.00,$0.40/secret/month after free tier
+Cloud Services,AWS CloudTrail,"Organisation-level audit trail for SOC 2 Type II; all API calls recorded to S3",1,Service/Month,10.00,120.00,120.00,120.00,360.00,Management events free; data events $0.10/100K + S3 storage
+Cloud Services,Amazon Route 53,"DNS hosting for platform domain; health checks for API Gateway endpoints",1,Service/Month,6.00,72.00,72.00,72.00,216.00,$0.50/hosted zone + health checks
+Cloud Services,AWS Certificate Manager,TLS/SSL certificates for API Gateway custom domain with auto-renewal,1,Service/Month,0.00,0.00,0.00,0.00,0.00,Free for ACM-managed certificates on AWS services
+Cloud Services,Data Transfer Out,"Artifact downloads and API responses; ~200 GB/month egress to clients and users",200,GB/Month,0.09,2160.00,2160.00,2160.00,6480.00,$0.09/GB first 10 TB/month (us-west-2)
+Software Licenses,Okta Wind-Down,"Existing Okta subscription during Cognito migration; 3-month overlap transition period",1,Service/Month,250.00,750.00,0.00,0.00,750.00,Year 1 only (transition cost); migrated to Cognito by end of Phase 1
+Software Licenses,GitHub Actions CI-CD,"CI/CD pipeline for platform IaC and Lambda deployments; GitHub Team plan for engineering team",1,Service/Month,44.00,528.00,528.00,528.00,1584.00,GitHub Team ~$4/user/month x 11 engineers
+Software Licenses,Datadog APM,"Application performance monitoring for Lambda cold starts and Bedrock latency; 10 hosts",10,Host/Month,23.00,2760.00,2760.00,2760.00,8280.00,Datadog Pro $23/host/month; observability beyond CloudWatch
+Connectivity,API Gateway Data Transfer,Intra-region data transfer between API Gateway and Lambda included in AWS free tier for intra-AZ,1,Service/Month,0.00,0.00,0.00,0.00,0.00,Intra-region Lambda to API Gateway transfer is free
+Support & Maintenance,AWS Business Support,"Business support plan for 1-hour critical response; required for 99.9% uptime SLA",1,Service/Month,345.00,4140.00,4140.00,4140.00,12420.00,Estimated at 10% of ~$3450/month AWS spend; Business tier
+Facilities,Cloud Facilities,No physical data center — fully serverless cloud-native architecture,1,Service/Month,0.00,0.00,0.00,0.00,0.00,Cloud-only solution; no co-lo or data center costs
+
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Hardware,Equipment Credit,0,No hardware — fully serverless cloud-native solution
+Cloud Services,AWS Activate Credit,0,Amatra is an established company (~$18M ARR); not eligible for Activate startup credits
+Cloud Services,AWS MAP Credit,-5000,AWS Migration Acceleration Program credit applicable for Okta-to-Cognito identity migration workstream
+Cloud Services,AWS Partner Network Credit,-3000,APN partner credit toward Bedrock and Lambda consumption in Year 1
+Cloud Services,Reserved Capacity Savings,0,Serverless Lambda and DynamoDB on-demand — no reserved capacity applicable; Bedrock has no RI model
+Software Licenses,GitHub Partner Credit,0,No GitHub partner program credit available at this time
+Connectivity,Network Credit,0,No connectivity credits — all traffic is intra-AWS or standard internet egress
+Support & Maintenance,AWS Support Discount,0,No support plan discounts — Business Support billed at standard rate
+Facilities,Facilities Credit,0,No facilities costs (cloud-only solution)
+
+# 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
+Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
+Hardware,0,0,0,0,0,0
+Cloud Services,18000,-8000,10000,18000,18000,46000
+Software Licenses,4038,0,4038,3288,3288,10614
+Connectivity,0,0,0,0,0,0
+Support & Maintenance,4140,0,4140,4140,4140,12420
+Facilities,0,0,0,0,0,0
+TOTAL,26178,-8000,18178,25428,25428,69034

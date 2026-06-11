@@ -1,0 +1,63 @@
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
+Category,Component,Small,Medium,Large,Notes
+Cloud Services,Bedrock Inference Volume,<10M tokens/month,10-100M tokens/month,>100M tokens/month,Claude model inference requests per month for artifact generation
+Cloud Services,Lambda Invocations,<5M req/month,5-50M req/month,>50M req/month,Serverless function executions across API and orchestration handlers
+Cloud Services,API Gateway Calls,<5M calls/month,5-50M calls/month,>50M calls/month,REST API request volume served through API Gateway
+Cloud Services,DynamoDB Storage,<50 GB,50-200 GB,>200 GB,Solution metadata and per-user usage state stored in DynamoDB tables
+Cloud Services,S3 Artifact Storage,<500 GB,500 GB - 2 TB,>2 TB,Generated artifacts and source templates stored in S3 buckets
+Cloud Services,Active Users (MAU),<100 MAU,100-500 MAU,>500 MAU,Monthly active Cognito users including pre-sales and delivery consultants
+Software Licenses,Monitoring Hosts,1-2 hosts,3-5 hosts,6+ hosts,APM and infrastructure monitoring hosts (Datadog)
+Support & Maintenance,AWS Support Level,Developer,Business,Enterprise,AWS Support plan tier for platform operations
+
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,16,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
+Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
+Cloud Services,Amazon Bedrock,"Claude 3 Sonnet model inference for artifact generation (90M tokens/month)",90,M Tokens/Month,50.00,54000.00,54000.00,54000.00,162000.00,Primary cost driver; blended input/output token pricing for Claude 3 Sonnet
+Cloud Services,AWS Lambda,"Serverless compute for API handlers and orchestration (50M req/month)",50,M Req/Month,0.20,120.00,120.00,120.00,360.00,Lambda functions for REST API and Step Functions activity workers
+Cloud Services,Amazon API Gateway,"REST API for intelligent solution builder platform (50M calls/month)",50,M Calls/Month,3.50,2100.00,2100.00,2100.00,6300.00,API Gateway REST API fronting Lambda handlers
+Cloud Services,Amazon DynamoDB,"NoSQL state store for solution metadata and usage tracking (200 GB)",200,GB/Month,0.25,600.00,600.00,600.00,1800.00,On-demand capacity mode for solution records and per-user usage limits
+Cloud Services,Amazon S3,"Artifact and template object storage (2 TB standard tier)",2000,GB/Month,0.023,552.00,552.00,552.00,1656.00,Stores generated artifacts briefings and Word/Excel/PowerPoint templates
+Cloud Services,AWS Step Functions,"Async long-running artifact generation job orchestration",1,Service/Month,50.00,600.00,600.00,600.00,1800.00,Standard workflows for 30-60 min generation jobs surviving without timeouts
+Cloud Services,Amazon SQS,"Job queue for async artifact generation pipeline",1,Service/Month,10.00,120.00,120.00,120.00,360.00,Decouples API submission from downstream Bedrock invocation pipeline
+Cloud Services,Amazon Cognito,"User authentication with admin governance groups (500 MAU)",500,MAU/Month,0.0055,33.00,33.00,33.00,99.00,Migrated from Okta; supports per-user and global monthly usage limits
+Cloud Services,Amazon CloudWatch,"Logs metrics alarms and dashboards for platform observability",1,Service/Month,150.00,1800.00,1800.00,1800.00,5400.00,Centralized logging for Lambda Step Functions and API Gateway
+Cloud Services,Amazon CloudFront,"CDN for static web assets and API acceleration (500 GB/month)",500,GB/Month,0.009,54.00,54.00,54.00,162.00,Serves pre-sales platform front-end assets from S3 origin
+Cloud Services,AWS WAF,"Web Application Firewall protecting API Gateway endpoint",1,Service/Month,30.00,360.00,360.00,360.00,1080.00,Rate limiting and OWASP rule sets for SOC 2 compliance
+Cloud Services,AWS Secrets Manager,"Secrets rotation for Bedrock and third-party integration credentials (10 secrets)",10,Secret/Month,0.40,48.00,48.00,48.00,144.00,Manages API keys for Bedrock Datadog and other integrations
+Cloud Services,AWS CloudTrail,"API audit logging for SOC 2 Type II compliance",1,Service/Month,20.00,240.00,240.00,240.00,720.00,Full API activity logging for governance and compliance audit trail
+Cloud Services,S3 Data Transfer Out,"Outbound data transfer for artifact downloads (500 GB/month)",500,GB/Month,0.09,540.00,540.00,540.00,1620.00,Egress charges for artifact delivery to pre-sales consultants
+Cloud Services,Amazon SES,"Transactional email notifications for job completion alerts",1,Service/Month,10.00,120.00,120.00,120.00,360.00,Sends artifact-ready notifications to pre-sales and delivery teams
+Cloud Services,Amazon ECR,"Container registry for Lambda deployment packages",1,Service/Month,5.00,60.00,60.00,60.00,180.00,Stores Lambda container images for deployment pipeline
+Software Licenses,Datadog Pro,"APM and infrastructure monitoring for Lambda and API Gateway (5 hosts)",5,Host/Month,23.00,1380.00,1380.00,1380.00,4140.00,Application performance monitoring and distributed tracing
+Software Licenses,GitHub Actions,"CI/CD pipeline for platform codebase (Team plan)",1,Service/Month,21.00,252.00,252.00,252.00,756.00,Automated build test and deployment pipelines for platform updates
+Connectivity,AWS PrivateLink,"VPC interface endpoints for private connectivity to AWS services (2 endpoints)",2,Endpoint/Month,7.20,172.80,172.80,172.80,518.40,Private network access to S3 DynamoDB and Bedrock from VPC
+Support & Maintenance,AWS Business Support,"AWS Business Support plan covering 24x7 access to cloud support engineers",1,Service/Month,510.00,6120.00,6120.00,6120.00,18360.00,~10% of monthly AWS charges; includes TAM access and infrastructure event management
+Hardware,No Hardware Required,"Fully serverless AWS-native platform - no physical hardware required",0,N/A,0.00,0.00,0.00,0.00,0.00,Cloud-only solution eliminates all hardware CapEx
+Facilities,No Facilities Required,"AWS-hosted cloud-only solution - no data center or co-location required",0,N/A,0.00,0.00,0.00,0.00,0.00,No rack space power or cooling costs for cloud-native deployment
+
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Cloud Services,AWS Activate Credit,-5000,AWS Startup program credit applied against Year 1 cloud consumption (Bedrock Lambda S3 DynamoDB)
+Cloud Services,AWS MAP Credit,0,No migration workloads in scope - greenfield platform build only
+Software Licenses,Partner Tool Credit,0,No partner program credits available for Datadog or GitHub in current engagement
+Connectivity,Network Credit,0,No connectivity credits available for PrivateLink endpoints
+Support & Maintenance,Support Credit,0,No support plan credits available
+Hardware,Equipment Credit,0,No hardware credits - fully serverless cloud-native solution
+Facilities,Facilities Credit,0,No facilities credits - cloud-only solution with no physical infrastructure
+
+# 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
+Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
+Hardware,0,0,0,0,0,0
+Cloud Services,61347,-5000,56347,61347,61347,179041
+Software Licenses,1632,0,1632,1632,1632,4896
+Connectivity,172.80,0,172.80,172.80,172.80,518.40
+Support & Maintenance,6120,0,6120,6120,6120,18360
+Facilities,0,0,0,0,0,0
+TOTAL,69271.80,-5000,64271.80,69271.80,69271.80,202815.40

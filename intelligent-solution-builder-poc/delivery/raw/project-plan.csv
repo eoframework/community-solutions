@@ -1,0 +1,151 @@
+# Project Timeline
+#WIDTH: 15,35,12,14,14,28,24,14
+#ALIGN: left,left,center,center,center,left,left,center
+Phase,Task,Duration,Start Date,End Date,Dependencies,Owner,Status
+Phase 1 — Discovery & Assessment,Project Kickoff,1 day,2026-01-05,2026-01-05,None,Project Manager,Not Started
+Phase 1 — Discovery & Assessment,AWS Account Provisioning & Access Setup,2 days,2026-01-06,2026-01-07,Project Kickoff,Senior Cloud Engineer,Not Started
+Phase 1 — Discovery & Assessment,Current State Assessment — Legacy EC2 Monolith,4 days,2026-01-08,2026-01-13,AWS Account Provisioning & Access Setup,Solution Architect,Not Started
+Phase 1 — Discovery & Assessment,Stakeholder Interviews — Pre-Sales & Delivery Teams,3 days,2026-01-08,2026-01-12,Project Kickoff,Project Manager,Not Started
+Phase 1 — Discovery & Assessment,Functional Requirements Gathering (7+ Artifact Types),5 days,2026-01-13,2026-01-19,Stakeholder Interviews — Pre-Sales & Delivery Teams,Solution Architect,Not Started
+Phase 1 — Discovery & Assessment,Amazon Bedrock Feasibility Assessment,3 days,2026-01-13,2026-01-15,AWS Account Provisioning & Access Setup,ML/AI Engineer,Not Started
+Phase 1 — Discovery & Assessment,Okta Identity Inventory & Cognito Migration Strategy,4 days,2026-01-14,2026-01-19,AWS Account Provisioning & Access Setup,Security Engineer,Not Started
+Phase 1 — Discovery & Assessment,SOC 2 & GDPR Requirements Assessment,3 days,2026-01-16,2026-01-20,Stakeholder Interviews — Pre-Sales & Delivery Teams,Security Engineer,Not Started
+Phase 1 — Discovery & Assessment,Discovery & Assessment Report (Phase 1 Go/No-Go),3 days,2026-01-21,2026-01-23,Functional Requirements Gathering (7+ Artifact Types),Solution Architect,Not Started
+Phase 1 — Discovery & Assessment,Phase 1 Go/No-Go Review with CTO,1 day,2026-01-27,2026-01-27,Discovery & Assessment Report (Phase 1 Go/No-Go),Project Manager,Not Started
+Phase 2 — Architecture Design & Planning,End-to-End Serverless Architecture Design,5 days,2026-02-02,2026-02-06,Phase 1 Go/No-Go Review with CTO,Solution Architect,Not Started
+Phase 2 — Architecture Design & Planning,Cognito User Pool & Identity Federation Design,3 days,2026-02-05,2026-02-09,End-to-End Serverless Architecture Design,Security Engineer,Not Started
+Phase 2 — Architecture Design & Planning,Bedrock Prompt Template Design (7+ Artifact Types),5 days,2026-02-09,2026-02-13,End-to-End Serverless Architecture Design,ML/AI Engineer,Not Started
+Phase 2 — Architecture Design & Planning,Terraform Module Structure & IaC Design,4 days,2026-02-09,2026-02-12,End-to-End Serverless Architecture Design,Senior Cloud Engineer,Not Started
+Phase 2 — Architecture Design & Planning,Security & Compliance Design (SOC 2 Controls),4 days,2026-02-10,2026-02-13,Cognito User Pool & Identity Federation Design,Security Engineer,Not Started
+Phase 2 — Architecture Design & Planning,CI/CD Pipeline Design (GitHub Actions),3 days,2026-02-12,2026-02-16,Terraform Module Structure & IaC Design,DevOps Engineer,Not Started
+Phase 2 — Architecture Design & Planning,CloudWatch Observability Design,2 days,2026-02-16,2026-02-17,End-to-End Serverless Architecture Design,DevOps Engineer,Not Started
+Phase 2 — Architecture Design & Planning,Architecture Decision Records (ADRs),3 days,2026-02-17,2026-02-19,Bedrock Prompt Template Design (7+ Artifact Types),Solution Architect,Not Started
+Phase 2 — Architecture Design & Planning,Detailed Architecture Design Document,4 days,2026-02-19,2026-02-24,Architecture Decision Records (ADRs),Solution Architect,Not Started
+Phase 2 — Architecture Design & Planning,Design Review & Approval with CTO and Security Lead,2 days,2026-02-25,2026-02-26,Detailed Architecture Design Document,Project Manager,Not Started
+Phase 3 — Development & Build,AWS Foundation Provisioning via Terraform (Dev),5 days,2026-03-02,2026-03-06,Design Review & Approval with CTO and Security Lead,Senior Cloud Engineer,Not Started
+Phase 3 — Development & Build,Cognito User Pool Provisioning & Okta Migration,7 days,2026-03-05,2026-03-13,AWS Foundation Provisioning via Terraform (Dev),Security Engineer,Not Started
+Phase 3 — Development & Build,REST API Build — API Gateway & Lambda,8 days,2026-03-09,2026-03-18,AWS Foundation Provisioning via Terraform (Dev),Senior Cloud Engineer,Not Started
+Phase 3 — Development & Build,Async Job Orchestration — Step Functions & SQS,7 days,2026-03-16,2026-03-24,REST API Build — API Gateway & Lambda,Senior Cloud Engineer,Not Started
+Phase 3 — Development & Build,Bedrock Integration & Prompt Engineering (7+ Types),10 days,2026-03-19,2026-04-01,Async Job Orchestration — Step Functions & SQS,ML/AI Engineer,Not Started
+Phase 3 — Development & Build,Artifact Template Automation Pipeline,8 days,2026-04-02,2026-04-13,Bedrock Integration & Prompt Engineering (7+ Types),Senior Cloud Engineer,Not Started
+Phase 3 — Development & Build,Admin Console & Usage-Limit Governance API,5 days,2026-04-07,2026-04-13,Cognito User Pool Provisioning & Okta Migration,Senior Cloud Engineer,Not Started
+Phase 3 — Development & Build,CI/CD Pipeline Build — GitHub Actions,5 days,2026-04-14,2026-04-20,Terraform Module Structure & IaC Design,DevOps Engineer,Not Started
+Phase 3 — Development & Build,CloudWatch Observability Stack Deployment,4 days,2026-04-20,2026-04-23,CI/CD Pipeline Build — GitHub Actions,DevOps Engineer,Not Started
+Phase 3 — Development & Build,Security Hardening & SOC 2 Controls Implementation,7 days,2026-04-20,2026-04-28,Admin Console & Usage-Limit Governance API,Security Engineer,Not Started
+Phase 3 — Development & Build,Legacy EC2 Monolith Decommission Planning,3 days,2026-04-27,2026-04-29,Security Hardening & SOC 2 Controls Implementation,Senior Cloud Engineer,Not Started
+Phase 3 — Development & Build,Configuration Documentation,5 days,2026-05-04,2026-05-08,CloudWatch Observability Stack Deployment,Technical Writer,Not Started
+Phase 4 — Testing & Validation,Test Plan Development,4 days,2026-05-11,2026-05-14,Configuration Documentation,QA Engineer,Not Started
+Phase 4 — Testing & Validation,Functional & Integration Testing,8 days,2026-05-15,2026-05-26,Test Plan Development,QA Engineer,Not Started
+Phase 4 — Testing & Validation,Async Job Performance & Load Testing,4 days,2026-05-22,2026-05-27,Functional & Integration Testing,QA Engineer,Not Started
+Phase 4 — Testing & Validation,Security & Compliance Testing,5 days,2026-05-27,2026-06-02,Functional & Integration Testing,Security Engineer,Not Started
+Phase 4 — Testing & Validation,Artifact Quality Validation & Bedrock Prompt Tuning,5 days,2026-05-28,2026-06-03,Async Job Performance & Load Testing,ML/AI Engineer,Not Started
+Phase 4 — Testing & Validation,Cognito & Authentication Testing,3 days,2026-06-01,2026-06-03,Security & Compliance Testing,Security Engineer,Not Started
+Phase 4 — Testing & Validation,Disaster Recovery & Resilience Testing,3 days,2026-06-04,2026-06-08,Security & Compliance Testing,Senior Cloud Engineer,Not Started
+Phase 4 — Testing & Validation,UAT Coordination & Execution,7 days,2026-06-09,2026-06-17,Artifact Quality Validation & Bedrock Prompt Tuning,QA Engineer,Not Started
+Phase 4 — Testing & Validation,SOC 2 Evidence Package Assembly,4 days,2026-06-15,2026-06-18,Security & Compliance Testing,Security Engineer,Not Started
+Phase 4 — Testing & Validation,Go-Live Readiness Sign-Off,2 days,2026-06-22,2026-06-23,UAT Coordination & Execution,Project Manager,Not Started
+Phase 5 — Deployment Hypercare & Close,Go-Live Planning & Rollback Procedure Documentation,3 days,2026-06-24,2026-06-26,Go-Live Readiness Sign-Off,Project Manager,Not Started
+Phase 5 — Deployment Hypercare & Close,Staging Environment Full-Stack Validation,4 days,2026-06-29,2026-07-02,Go-Live Planning & Rollback Procedure Documentation,Senior Cloud Engineer,Not Started
+Phase 5 — Deployment Hypercare & Close,Production Deployment Phase 1 — Pre-Sales MVP,2 days,2026-09-28,2026-09-30,Staging Environment Full-Stack Validation,Senior Cloud Engineer,Not Started
+Phase 5 — Deployment Hypercare & Close,Okta-to-Cognito DNS/SSO Final Cutover,2 days,2026-09-30,2026-10-01,Production Deployment Phase 1 — Pre-Sales MVP,Security Engineer,Not Started
+Phase 5 — Deployment Hypercare & Close,Admin & Pre-Sales Consultant Training Sessions,3 days,2026-10-05,2026-10-07,Okta-to-Cognito DNS/SSO Final Cutover,Technical Writer,Not Started
+Phase 5 — Deployment Hypercare & Close,Legacy EC2 Monolith Decommission,2 days,2026-10-12,2026-10-13,Admin & Pre-Sales Consultant Training Sessions,Senior Cloud Engineer,Not Started
+Phase 5 — Deployment Hypercare & Close,Production Deployment Phase 2 — Delivery & Terraform,2 days,2026-12-11,2026-12-15,Legacy EC2 Monolith Decommission,Senior Cloud Engineer,Not Started
+Phase 5 — Deployment Hypercare & Close,Delivery Team Enablement Session,1 day,2026-12-16,2026-12-16,Production Deployment Phase 2 — Delivery & Terraform,Technical Writer,Not Started
+Phase 5 — Deployment Hypercare & Close,Operational Runbooks Development,5 days,2026-12-14,2026-12-18,Production Deployment Phase 2 — Delivery & Terraform,Technical Writer,Not Started
+Phase 5 — Deployment Hypercare & Close,As-Built Architecture Documentation & API Reference,5 days,2026-12-16,2026-12-22,Production Deployment Phase 2 — Delivery & Terraform,Technical Writer,Not Started
+Phase 5 — Deployment Hypercare & Close,Hypercare Support — Platform Monitoring & Issue Resolution,8 weeks,2026-10-01,2026-11-25,Production Deployment Phase 1 — Pre-Sales MVP,Project Manager,Not Started
+Phase 5 — Deployment Hypercare & Close,Final SOC 2 Evidence Package Delivery,3 days,2027-01-05,2027-01-07,As-Built Architecture Documentation & API Reference,Security Engineer,Not Started
+Phase 5 — Deployment Hypercare & Close,General Availability — All ~120 Users Onboarded,2 days,2027-01-12,2027-01-13,Final SOC 2 Evidence Package Delivery,Project Manager,Not Started
+Phase 5 — Deployment Hypercare & Close,Hypercare Report & Optimisation Roadmap,3 days,2027-01-14,2027-01-16,General Availability — All ~120 Users Onboarded,Project Manager,Not Started
+Phase 5 — Deployment Hypercare & Close,Project Closeout — Retrospective & Final Report to CTO,2 days,2027-01-19,2027-01-20,Hypercare Report & Optimisation Roadmap,Project Manager,Not Started
+
+# Milestones
+#WIDTH: 14,38,14,14,55,22,12,14
+#ALIGN: left,left,center,center,left,left,center,center
+Milestone ID,Milestone Name,Target Date,Phase,Success Criteria,Owner,Status,Actual Date
+MS-001,Project Kickoff Complete,2026-01-05,Phase 1 — Discovery & Assessment,All stakeholders aligned on scope and governance; project charter acknowledged by CTO and VP Engineering,Project Manager,Not Started,
+MS-002,Discovery & Assessment Complete,2026-01-27,Phase 1 — Discovery & Assessment,"Assessment Report delivered; Phase 1 go/no-go approved by CTO; Okta inventory complete, Bedrock feasibility confirmed",Solution Architect,Not Started,
+MS-003,Architecture Approved,2026-02-26,Phase 2 — Architecture Design & Planning,"Detailed Architecture Design Document and ADRs approved by CTO and Security & Compliance Lead; Terraform module structure signed off by VP Engineering",Solution Architect,Not Started,
+MS-004,Dev Platform Built,2026-05-08,Phase 3 — Development & Build,"All platform components deployed and integrated in Dev environment; CI/CD pipeline operational; Configuration Documentation delivered",Senior Cloud Engineer,Not Started,
+MS-005,Testing Complete,2026-06-23,Phase 4 — Testing & Validation,"All functional, integration, performance, security, and UAT phases passed; SOC 2 evidence package assembled; Go-Live Sign-Off received from CTO and Head of Solutions",QA Engineer,Not Started,
+MS-006,Phase 1 Pre-Sales MVP Go-Live,2026-09-30,Phase 5 — Deployment Hypercare & Close,"Pre-Sales MVP live in Production by 30 Sep 2026; Okta-to-Cognito cutover complete; ≥95% of users successfully logged in within 48 hours",Senior Cloud Engineer,Not Started,
+MS-007,Legacy EC2 Monolith Decommissioned,2026-10-13,Phase 5 — Deployment Hypercare & Close,EC2 monolith retired with zero data loss; all data archived; decommission certificate issued to VP Engineering,Senior Cloud Engineer,Not Started,
+MS-008,Phase 2 Delivery & Terraform Go-Live,2026-12-15,Phase 5 — Deployment Hypercare & Close,"Delivery artifact automation and Terraform generation live in Production by 15 Dec 2026; delivery team enablement sessions complete",Senior Cloud Engineer,Not Started,
+MS-009,General Availability,2027-01-13,Phase 5 — Deployment Hypercare & Close,"All ~120 internal users onboarded; admin usage controls active; CloudWatch dashboards and alarms operational; ≥90% QA first-pass rate confirmed",Project Manager,Not Started,
+MS-010,Hypercare Complete & Project Closed,2027-01-20,Phase 5 — Deployment Hypercare & Close,"8-week hypercare concluded; Optimisation Roadmap delivered; as-built documentation and SOC 2 evidence package accepted by CTO; handover to steady-state operations confirmed",Project Manager,Not Started,
+
+# RACI Matrix
+#WIDTH: 42,14,14,14,14,14,14,14,14
+#ALIGN: left,center,center,center,center,center,center,center,center
+Task/Deliverable,Vendor PM,Vendor Architect,Vendor Dev,Vendor Security,Vendor QA,Client CTO,Client VP Eng,Client Sec Lead
+Project Governance & Status Reporting,R,C,I,I,I,I,C,I
+Project Kickoff & Charter,A,R,C,I,I,C,C,I
+Discovery & Requirements Gathering,A,R,C,C,I,C,C,C
+Current State Assessment — Legacy Monolith,C,R,C,C,I,I,C,I
+Amazon Bedrock Feasibility Assessment,I,A,R,I,C,I,C,I
+Okta Identity Inventory & Migration Strategy,C,C,R,A,I,I,C,R
+SOC 2 & GDPR Requirements Assessment,C,C,I,A,I,I,I,R
+Discovery & Assessment Report,A,R,C,C,I,C,C,C
+End-to-End Serverless Architecture Design,C,A,C,C,I,I,C,I
+Cognito User Pool & Identity Federation Design,C,R,C,A,I,I,C,C
+Bedrock Prompt Template Design,I,A,R,I,C,I,I,I
+Terraform Module Structure & IaC Design,I,C,A,I,I,I,C,I
+Security & Compliance Design,C,C,I,A,I,I,I,C
+CI/CD Pipeline Design,I,C,A,I,I,I,C,I
+Detailed Architecture Design Document,C,A,C,C,I,I,C,I
+Architecture Decision Records,I,A,R,C,I,I,C,I
+Design Review & Approval,A,C,I,C,I,C,R,C
+AWS Foundation Provisioning via Terraform,I,C,A,C,I,I,C,I
+Cognito User Pool Provisioning & Okta Migration,I,C,R,A,C,I,C,R
+REST API Build — API Gateway & Lambda,I,C,A,I,C,I,C,I
+Async Job Orchestration — Step Functions & SQS,I,A,R,I,C,I,C,I
+Bedrock Integration & Prompt Engineering,I,A,R,I,C,I,I,I
+Artifact Template Automation Pipeline,I,C,A,I,C,I,C,I
+Admin Console & Usage-Limit Governance API,I,C,A,C,I,I,C,I
+CI/CD Pipeline Build — GitHub Actions,I,C,A,I,I,I,C,I
+CloudWatch Observability Stack Deployment,I,C,A,I,I,I,C,I
+Security Hardening & SOC 2 Controls Implementation,C,C,R,A,C,I,I,R
+Legacy EC2 Monolith Decommission Planning,C,C,R,I,I,I,A,I
+Configuration Documentation,C,C,C,I,I,I,A,I
+Test Plan Development,C,C,C,I,A,I,C,I
+Functional & Integration Testing,C,C,C,I,A,I,C,I
+Security & Compliance Testing,I,I,C,R,A,I,I,R
+Artifact Quality Validation & Bedrock Prompt Tuning,I,R,C,I,A,C,I,I
+Async Job Performance & Load Testing,C,C,C,I,A,I,C,I
+Disaster Recovery & Resilience Testing,I,C,R,C,A,I,I,I
+UAT Coordination & Execution,A,C,C,I,C,C,R,I
+SOC 2 Evidence Package Assembly,C,I,I,R,A,I,I,R
+Go-Live Readiness Sign-Off,A,C,C,C,C,C,R,C
+Staging Environment Full-Stack Validation,C,C,R,C,A,I,C,I
+Production Deployment Phase 1 — Pre-Sales MVP,C,C,R,C,A,A,R,C
+Okta-to-Cognito DNS/SSO Final Cutover,I,C,R,A,C,I,C,R
+Legacy EC2 Monolith Decommission Execution,C,C,R,C,I,I,A,I
+Production Deployment Phase 2 — Delivery & Terraform,C,C,R,C,A,I,A,C
+Admin & Consultant Training Delivery,A,C,C,I,I,I,C,I
+Hypercare & Incident Response,A,C,R,C,I,I,C,I
+Operational Runbooks,C,R,C,C,I,I,A,I
+As-Built Architecture Documentation & API Reference,C,A,C,C,I,I,C,I
+Final SOC 2 Evidence Package Delivery,C,I,I,R,A,I,I,A
+Optimisation Roadmap,A,R,C,I,I,C,C,I
+Project Closeout & BAU Transition,A,C,C,I,I,C,C,I
+R = Responsible | A = Accountable | C = Consulted | I = Informed,,,,,,,,
+
+# Communications Plan
+#WIDTH: 28,15,40,45,22,18
+#ALIGN: left,center,left,left,left,center
+Meeting Type,Frequency,Participants,Purpose,Owner,Day/Time
+Project Kickoff,Once,All stakeholders — CTO; VP Engineering; Head of Solutions; Security & Compliance Lead; all vendor team leads,Launch engagement and align on scope; RACI; governance; communication cadence; and Phase 1 priorities,Project Manager,2026-01-05 (full day)
+Weekly Status Call,Weekly,"VP Engineering; Head of Solutions; Vendor PM; Solution Architect; ML/AI Engineer","Review progress against plan; surface blockers and decisions; update risk register; confirm next week's priorities",Project Manager,Mondays 10:00am CT
+Phase 1 Go/No-Go Review,Once,CTO; VP Engineering; Security & Compliance Lead; Vendor PM; Solution Architect,Review Discovery & Assessment Report findings and approve Phase 2 start,Project Manager,2026-01-27 (2 hours)
+Architecture Design Review,Once,CTO; Security & Compliance Lead; VP Engineering; Solution Architect; Security Engineer,Review and approve Detailed Architecture Design Document and ADRs before development begins,Solution Architect,2026-02-25 (3 hours)
+Phase Gate Review,End of each phase,CTO; VP Engineering; Head of Solutions; Vendor PM,Review phase completion criteria and deliverable acceptance; approve start of next phase,Project Manager,"Weeks 4, 8, 20, 26"
+Bi-Weekly Technical Sync,Bi-weekly,"VP Engineering; Senior Cloud Engineer; DevOps Engineer; Solution Architect",Review infrastructure build progress; resolve technical blockers; validate environment configuration,Solution Architect,Wednesdays 2:00pm CT
+Security & Compliance Review,Monthly,"Security & Compliance Lead; Security Engineer; Vendor PM",Review SOC 2 control implementation status; assess compliance gaps; update evidence log,Security Engineer,Last Thursday of month 11:00am CT
+UAT Kickoff & Coordination,Once,Head of Solutions; UAT participants (5–10 pre-sales consultants); QA Engineer,Brief UAT participants on scope; distribute test scenarios; confirm scheduling and feedback process,QA Engineer,2026-06-09 (2 hours)
+Go-Live Readiness Review,Once,CTO; VP Engineering; Head of Solutions; Security & Compliance Lead; Vendor PM,Present UAT results; SOC 2 evidence status; and go-live readiness checklist for formal production approval,Project Manager,2026-06-22 (2 hours)
+Phase 1 Go-Live Communications,Once,All ~120 Amatra internal users,Notify users of Phase 1 Pre-Sales MVP go-live; provide login instructions and support contacts,Project Manager,2026-09-30
+Phase 2 Delivery Team Enablement,Once,Head of Solutions; Delivery Consulting Team Lead; Vendor PM; Technical Writer,Confirm Phase 2 artifact type readiness; walkthrough delivery team training materials and handover process,Project Manager,2026-12-16 (2 hours)
+Hypercare Incident Escalation,As required,VP Engineering; Security & Compliance Lead; Vendor PM; Senior Cloud Engineer,Notify and coordinate resolution of Severity 1 and 2 incidents during hypercare period,Project Manager,Within 1 business hour of detection
+Monthly Hypercare Health Check,Monthly during hypercare,VP Engineering; Head of Solutions; Vendor PM; ML/AI Engineer,Review platform health metrics; Bedrock prompt tuning results; open issues; adoption statistics,Project Manager,First Monday of month 10:00am CT
+Project Closeout & Retrospective,Once,CTO; VP Engineering; Head of Solutions; Security & Compliance Lead; all vendor team leads,Formal project closure; lessons learned; final report acceptance; BAU handover confirmation,Project Manager,2027-01-19 (3 hours)

@@ -1,0 +1,66 @@
+digraph "Amatra Intelligent Solution Builder" {
+	graph [bgcolor=white fontcolor="#2D3436" fontname="Sans-Serif" fontsize=16 label="Amatra Intelligent Solution Builder" nodesep=0.6 pad=0.75 rankdir=TB ranksep=0.8 splines=ortho]
+	node [fixedsize=true fontcolor="#232F3E" fontname="Sans-Serif" fontsize=12 height=1.4 imagescale=true labelloc=b shape=box style=rounded width=1.4]
+	edge [arrowsize=0.8 color="#555555" fontcolor="#555555" fontsize=10]
+	"2c57fffc522040c3a8b442341ac33433" [label="Pre-Sales / Delivery
+Consultants" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/onprem/client/users.png" shape=none]
+	subgraph "cluster_Identity & Access" {
+		graph [bgcolor="#F3E8FD" fontname="Sans-Serif" fontsize=12 label="Identity & Access" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		c1099bc92a8a47b89e00d243ef21b7ef [label="Amazon Cognito
+(User Auth + Admin Groups)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/security/cognito.png" shape=none]
+	}
+	subgraph "cluster_API Layer" {
+		graph [bgcolor="#E8FDE8" fontname="Sans-Serif" fontsize=12 label="API Layer" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		b1198999768e4f379c89e162125bcfc1 [label="API Gateway
+(REST API)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/network/api-gateway.png" shape=none]
+	}
+	subgraph cluster_Orchestration {
+		graph [bgcolor="#FDF8E8" fontname="Sans-Serif" fontsize=12 label=Orchestration labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"461dc9dc59c344169e61230dd158e79e" [label="Orchestrator
+Lambda" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/compute/lambda.png" shape=none]
+		e3f6e3e363244f538365b11f26bf79b8 [label="Step Functions
+(Async Jobs)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/integration/step-functions.png" shape=none]
+		"78a6e084d3e54e33bf1bb65a0e5f15ff" [label="SQS
+(Job Queue)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/integration/simple-queue-service-sqs.png" shape=none]
+	}
+	subgraph "cluster_AI Generation" {
+		graph [bgcolor="#E8F4FD" fontname="Sans-Serif" fontsize=12 label="AI Generation" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"24e24c33fd934860baa1d9015cf4ad99" [label="Amazon Bedrock
+(Claude Models)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/ml/bedrock.png" shape=none]
+		c868e2a42e6f437780d9a49e21503b95 [label="Generator
+Lambda" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/compute/lambda.png" shape=none]
+	}
+	subgraph "cluster_Data Layer" {
+		graph [bgcolor="#FDF8E8" fontname="Sans-Serif" fontsize=12 label="Data Layer" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"9a76dd0549014a95abec464b266df48d" [label="DynamoDB
+(Solution & Usage State)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/database/dynamodb.png" shape=none]
+		"9832af4f3d7a4497a007909222a17113" [label="Amazon S3
+(Artifact Storage)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/storage/simple-storage-service-s3.png" shape=none]
+	}
+	subgraph "cluster_Security & Compliance" {
+		graph [bgcolor="#FDE8E8" fontname="Sans-Serif" fontsize=12 label="Security & Compliance" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"4d72dae4293a47e4b8a59f4960b2a8ef" [label="AWS KMS
+(Encryption)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/security/key-management-service.png" shape=none]
+		"4f972c8908394b1b8b4cd80ffe9b83cc" [label="Secrets Manager" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/security/secrets-manager.png" shape=none]
+		"18ba035e17e04987922f03e41414ad89" [label="CloudTrail
+(Audit Logs)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/management/cloudtrail.png" shape=none]
+	}
+	subgraph cluster_Observability {
+		graph [bgcolor="#F0F0F0" fontname="Sans-Serif" fontsize=12 label=Observability labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"72372355a19d40e9bf50dbaf9f74d320" [label="CloudWatch
+(Monitoring & Alerts)" height=2.3 image="/usr/local/lib/python3.11/site-packages/resources/aws/management/cloudwatch.png" shape=none]
+	}
+	"2c57fffc522040c3a8b442341ac33433" -> c1099bc92a8a47b89e00d243ef21b7ef [label=HTTPS dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	c1099bc92a8a47b89e00d243ef21b7ef -> b1198999768e4f379c89e162125bcfc1 [label=Authenticated dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	b1198999768e4f379c89e162125bcfc1 -> "461dc9dc59c344169e61230dd158e79e" [label=Request dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"461dc9dc59c344169e61230dd158e79e" -> "78a6e084d3e54e33bf1bb65a0e5f15ff" [label=Enqueue dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dashed]
+	"78a6e084d3e54e33bf1bb65a0e5f15ff" -> e3f6e3e363244f538365b11f26bf79b8 [label=Trigger dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dashed]
+	e3f6e3e363244f538365b11f26bf79b8 -> c868e2a42e6f437780d9a49e21503b95 [label=Invoke dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	c868e2a42e6f437780d9a49e21503b95 -> "24e24c33fd934860baa1d9015cf4ad99" [label=Generate dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	c868e2a42e6f437780d9a49e21503b95 -> "9a76dd0549014a95abec464b266df48d" [label="Read/Write" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dashed]
+	c868e2a42e6f437780d9a49e21503b95 -> "9832af4f3d7a4497a007909222a17113" [label="Store Artifacts" dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dashed]
+	"461dc9dc59c344169e61230dd158e79e" -> "9a76dd0549014a95abec464b266df48d" [label=State dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dashed]
+	"4d72dae4293a47e4b8a59f4960b2a8ef" -> "9832af4f3d7a4497a007909222a17113" [label=Encrypts color=grey dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dotted]
+	"18ba035e17e04987922f03e41414ad89" -> "72372355a19d40e9bf50dbaf9f74d320" [label=Logs color=grey dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dashed]
+	c868e2a42e6f437780d9a49e21503b95 -> "72372355a19d40e9bf50dbaf9f74d320" [label=Metrics color=grey dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13 style=dashed]
+}

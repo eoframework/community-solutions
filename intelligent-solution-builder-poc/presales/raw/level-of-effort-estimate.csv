@@ -1,0 +1,98 @@
+# SCOPE ASSUMPTIONS
+#WIDTH: 25,35,30,25,25,30,40
+#ALIGN: left,left,left,left,left,left,left
+Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes
+Users / Stakeholders,Single business unit (~50 users),~120 employees; pre-sales + delivery + sales teams as primary users,Up to 50 users,51–200 users,200+ users,All internal Amatra staff; primary day-to-day users are pre-sales consultants
+Regions / Geographies,Single AWS region,us-west-2 (United States data residency required),1 region,2 regions,3+ regions,SOC 2 and GDPR require all customer data resident in United States
+Artifact Types,3–4 standard artifact templates,7+ artifact types (briefing; SoW; infra costs; LOE; detailed design; impl guide; Terraform),1–3 types,4–6 types,7+ types,Existing Word/Excel/PowerPoint templates must be ingested and automated
+Integration Points,1 identity provider,"Okta to Amazon Cognito migration; Google Workspace (existing); legacy EC2 monolith retirement",1 integration,2–3 integrations,4+ integrations,Legacy monolith to be retired; Okta identities migrated to Cognito
+Environments,Dev + Prod,Dev / Staging / Prod (3 environments) with CI/CD pipeline,Dev + Prod,Dev + Staging + Prod,Dev + Staging + Prod + DR,Full IaC (Terraform) required for all environments
+AI/ML Models,Single LLM integration,"Amazon Bedrock (Claude models) for multi-artifact generation; async jobs 30–60 min",1 model,2–3 models,4+ models / complex pipelines,Async long-running generation jobs must survive without dropping; per-user usage limits enforced
+Compliance Frameworks,None specified,SOC 2 Type II + GDPR-aligned data handling,None,SOC 2 Type II,SOC 2 Type II + GDPR + additional frameworks,Security & Compliance Lead sign-off required; admin governance controls mandatory
+SLA / Availability Target,99.5% availability,99.9% platform availability; <2 business day artifact turnaround,99.5%,99.9%,99.99%,Hard deadline: platform live before 2027-01-31 flagship client renewal
+
+# ESTIMATE SETTINGS
+#WIDTH: 25,30,15,80
+#ALIGN: left,left,center,left
+Phase,Variable Name,Multiplier,Description / Applies To Tasks
+Discovery,discovery_factor,1.2,"Elevated due to Okta migration complexity, legacy monolith retirement, and multi-stakeholder alignment (CTO, VP Eng, Head of Solutions, Security Lead)"
+Planning,planning_factor,1.3,"Increased for serverless architecture complexity: Bedrock async orchestration, multi-env IaC, SOC 2 controls design, and Cognito identity federation"
+Development,development_factor,1.4,"Large-complexity multiplier for 7+ artifact pipeline automation, Lambda + API Gateway + DynamoDB + S3 + Bedrock integration, CI/CD, and Terraform modules"
+Testing,testing_factor,1.2,"Covers functional, integration, performance (async 30–60 min jobs), security validation, and SOC 2 compliance testing"
+Deployment,deployment_factor,1.1,"Phased rollout across 3 environments; includes Okta-to-Cognito identity migration cutover and legacy monolith decommission coordination"
+Training,training_factor,1.0,"Standard knowledge transfer to pre-sales consultants, delivery team, and admins; includes runbook and SOP documentation"
+Management,management_factor,1.0,Project management overhead (10% of engineering tasks); status reporting to CTO and VP Engineering
+
+# LEVEL OF EFFORT
+#WIDTH: 15,25,50,15,12,14,12,12,15,25,40
+#ALIGN: left,left,left,left,right,center,right,right,right,left,left
+Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
+Discovery,Project Kickoff,"Kickoff meeting with CTO, VP Engineering, Head of Solutions, and Security Lead; align on scope and success criteria",Project Manager,8,1.2,10,$175,"=TEXT($G4*$H4,""$#,##0"")",,
+Discovery,Current State Assessment,"Document legacy EC2 monolith capabilities, existing Google Workspace workflow, and manual artifact production process",Solutions Engineer,24,1.2,29,$200,"=TEXT($G5*$H5,""$#,##0"")",,Kickoff complete
+Discovery,Stakeholder Interviews,"Conduct structured interviews with CTO, VP Engineering, Head of Solutions, Security Lead, Delivery Consulting, and Sales teams",Solution Architect,32,1.2,38,$225,"=TEXT($G6*$H6,""$#,##0"")",,Current State Assessment
+Discovery,Requirements Gathering,"Document functional requirements for 7+ artifact types, usage-limit enforcement, admin governance, and async job handling",Solution Architect,40,1.2,48,$225,"=TEXT($G7*$H7,""$#,##0"")",,Stakeholder Interviews
+Discovery,AI/ML Feasibility Assessment,"Assess Bedrock Claude model selection, prompt engineering strategy, artifact quality benchmarks, and async job architecture options",ML/AI Engineer,32,1.2,38,$275,"=TEXT($G8*$H8,""$#,##0"")",,Requirements Gathering
+Discovery,Okta Identity Assessment,"Inventory Okta users, groups, and SSO integrations; define Cognito migration strategy and admin group structure",Security Engineer,24,1.2,29,$225,"=TEXT($G9*$H9,""$#,##0"")",,Current State Assessment
+Discovery,Compliance & Security Assessment,"Assess SOC 2 Type II and GDPR requirements; document data residency, access control, and audit logging needs",Security Engineer,32,1.2,38,$225,"=TEXT($G10*$H10,""$#,##0"")",,Requirements Gathering
+Discovery,Gap Analysis,"Identify gaps between manual process and automated platform; prioritise Phase 1 pre-sales MVP vs Phase 2 delivery and Terraform scope",Solution Architect,16,1.2,19,$225,"=TEXT($G11*$H11,""$#,##0"")",,Requirements Gathering
+Discovery,Cloud Readiness Assessment,"Review existing AWS footprint, IAM posture, and service-limit quotas for Bedrock, Lambda, DynamoDB, S3, API Gateway, and Cognito in us-west-2",Cloud Engineer,16,1.2,19,$200,"=TEXT($G12*$H12,""$#,##0"")",,
+Discovery,Assessment Report,Document findings and recommendations; present to CTO and VP Engineering for Phase 1 go/no-go sign-off,Technical Writer,16,1.2,19,$125,"=TEXT($G13*$H13,""$#,##0"")",,All Discovery tasks
+Planning,Detailed Architecture Design,"Design end-to-end serverless architecture: API Gateway to Lambda orchestration to Bedrock to S3 artifact storage; async job patterns for 30–60 min generation",Solution Architect,48,1.3,62,$225,"=TEXT($G15*$H15,""$#,##0"")",,Assessment Report
+Planning,AWS Infrastructure Design,"Design DynamoDB table schemas (solution state and usage tracking), S3 bucket structure, Lambda function topology, and API Gateway REST API",Cloud Engineer,40,1.3,52,$200,"=TEXT($G16*$H16,""$#,##0"")",,Detailed Architecture Design
+Planning,Cognito Identity Architecture,"Design Cognito User Pool, identity federation from Okta, admins group structure, per-user usage limit enforcement, and OIDC/OAuth 2.0 flows",Security Engineer,32,1.3,42,$225,"=TEXT($G17*$H17,""$#,##0"")",,Okta Identity Assessment
+Planning,AI/ML Solution Design,"Design Bedrock prompt templates for each artifact type, context window management, model selection (Claude 3 Sonnet/Opus), and output validation",ML/AI Engineer,48,1.3,62,$275,"=TEXT($G18*$H18,""$#,##0"")",,AI/ML Feasibility Assessment
+Planning,Security & Compliance Design,"Design SOC 2 controls: encryption at rest and in transit, CloudTrail audit logging, IAM least-privilege, VPC endpoints, and GDPR data-handling policies",Security Engineer,40,1.3,52,$225,"=TEXT($G19*$H19,""$#,##0"")",,Compliance & Security Assessment
+Planning,IaC Terraform Module Design,"Design Terraform module structure for all AWS services across dev, staging, and prod environments; define state backend with S3 and DynamoDB lock",DevOps Engineer,32,1.3,42,$200,"=TEXT($G20*$H20,""$#,##0"")",,AWS Infrastructure Design
+Planning,CI/CD Pipeline Design,"Design GitHub Actions / CodePipeline CI/CD pipeline for Lambda deployments, Terraform plan/apply gates, and artifact template versioning",DevOps Engineer,24,1.3,31,$200,"=TEXT($G21*$H21,""$#,##0"")",,IaC Terraform Module Design
+Planning,Artifact Template Architecture,"Analyse existing Word/Excel/PowerPoint templates; design automated template ingestion pipeline and output rendering strategy",Solutions Engineer,32,1.3,42,$200,"=TEXT($G22*$H22,""$#,##0"")",,Requirements Gathering
+Planning,Monitoring & Observability Design,"Design CloudWatch dashboards, Lambda error alarms, Bedrock token-usage metrics, and end-to-end job-tracing strategy",DevOps Engineer,16,1.3,21,$200,"=TEXT($G23*$H23,""$#,##0"")",,AWS Infrastructure Design
+Planning,Design Documentation,Produce architecture decision records and detailed design document for CTO and Security Lead review,Technical Writer,24,1.3,31,$125,"=TEXT($G24*$H24,""$#,##0"")",,All Planning tasks
+Development,Cognito Setup & Okta Migration,"Provision Cognito User Pool; execute Okta user and group migration; configure admin governance group; validate SSO flows",Security Engineer,48,1.4,67,$225,"=TEXT($G26*$H26,""$#,##0"")",,Cognito Identity Architecture
+Development,AWS Foundation Provisioning,"Deploy Terraform modules: S3 buckets, DynamoDB tables, IAM roles and policies, VPC endpoints, CloudTrail, and KMS keys across dev/staging/prod",Cloud Engineer,56,1.4,78,$200,"=TEXT($G27*$H27,""$#,##0"")",,IaC Terraform Module Design
+Development,API Gateway & Lambda Core,"Build REST API via API Gateway; implement Lambda functions for job submission, status polling, and artifact retrieval; wire Cognito authoriser",Solutions Engineer,64,1.4,90,$200,"=TEXT($G28*$H28,""$#,##0"")",,AWS Foundation Provisioning
+Development,Async Job Orchestration,"Implement async generation pipeline using SQS and Step Functions for 30–60 min Bedrock jobs; dead-letter queue handling; idempotency and retry logic",Solutions Engineer,56,1.4,78,$200,"=TEXT($G29*$H29,""$#,##0"")",,API Gateway & Lambda Core
+Development,Bedrock Integration & Prompt Engineering,"Integrate Lambda with Bedrock Claude; develop and tune prompt templates for all 7+ artifact types; implement context management and output parsing",ML/AI Engineer,80,1.4,112,$275,"=TEXT($G30*$H30,""$#,##0"")",,AI/ML Solution Design; Async Job Orchestration
+Development,Artifact Template Automation,"Build template ingestion pipeline; implement Word/Excel/PowerPoint population from Bedrock output; validate formatting and cross-references",Solutions Engineer,72,1.4,101,$200,"=TEXT($G31*$H31,""$#,##0"")",,Bedrock Integration & Prompt Engineering; Artifact Template Architecture
+Development,DynamoDB Data Layer,"Implement solution-state and usage-tracking DynamoDB access patterns; enforce per-user and global monthly usage limits; admin override API",Solutions Engineer,40,1.4,56,$200,"=TEXT($G32*$H32,""$#,##0"")",,API Gateway & Lambda Core
+Development,Usage Limit & Admin Governance,"Build admin console endpoints: view/set per-user limits, global limits, audit log viewer; integrate with Cognito admins group authorisation",Solutions Engineer,32,1.4,45,$200,"=TEXT($G33*$H33,""$#,##0"")",,DynamoDB Data Layer; Cognito Setup
+Development,CI/CD Pipeline Build,"Implement GitHub Actions / CodePipeline workflows for Lambda deployments and Terraform plan/apply; branch protection and automated test gates",DevOps Engineer,48,1.4,67,$200,"=TEXT($G34*$H34,""$#,##0"")",,CI/CD Pipeline Design
+Development,Monitoring & Observability Build,"Deploy CloudWatch dashboards, Lambda alarms, Bedrock token-usage metrics, X-Ray tracing, and automated alerting to ops team",DevOps Engineer,32,1.4,45,$200,"=TEXT($G35*$H35,""$#,##0"")",,AWS Foundation Provisioning
+Development,Security Hardening,"Implement SOC 2 controls: secrets in Secrets Manager, WAF on API Gateway, S3 bucket policies, encryption validation, and GDPR data-retention policies",Security Engineer,40,1.4,56,$225,"=TEXT($G36*$H36,""$#,##0"")",,Security & Compliance Design
+Development,Legacy Monolith Decommission Planning,"Document legacy EC2 decommission runbook; plan data export, DNS cutover, and stakeholder communications",Solutions Engineer,16,1.4,22,$200,"=TEXT($G37*$H37,""$#,##0"")",,AWS Foundation Provisioning
+Development,Configuration Documentation,"Document all Lambda configurations, API schemas, DynamoDB schemas, Bedrock model parameters, and environment variable inventory",Technical Writer,32,1.4,45,$125,"=TEXT($G38*$H38,""$#,##0"")",,All Development tasks
+Testing,Test Plan Development,"Create comprehensive test plan covering functional, integration, async job, performance, security, and compliance test cases",QA Engineer,16,1.2,19,$150,"=TEXT($G40*$H40,""$#,##0"")",,All Development tasks complete
+Testing,Functional Testing,"Execute functional test cases for each artifact type (7+); validate Bedrock output quality and template population accuracy",QA Engineer,40,1.2,48,$150,"=TEXT($G41*$H41,""$#,##0"")",,Test Plan Development
+Testing,Integration Testing,"Test API Gateway to Lambda to Bedrock to S3 end-to-end; validate Cognito auth flows; test DynamoDB usage-limit enforcement",Solutions Engineer,32,1.2,38,$200,"=TEXT($G42*$H42,""$#,##0"")",,Functional Testing
+Testing,Async Job Performance Testing,"Load-test async generation pipeline; validate 30–60 min job completion; test concurrent job handling and queue depth",Solutions Engineer,24,1.2,29,$200,"=TEXT($G43*$H43,""$#,##0"")",,Integration Testing
+Testing,Security & Compliance Testing,"Execute OWASP API security tests; validate WAF rules; verify encryption; confirm CloudTrail audit completeness; collect SOC 2 evidence",Security Engineer,32,1.2,38,$225,"=TEXT($G44*$H44,""$#,##0"")",,Security Hardening complete
+Testing,Cognito & Auth Testing,"Test Okta-migrated user login flows, admin group permissions, per-user limit enforcement, and token refresh/expiry",Security Engineer,16,1.2,19,$225,"=TEXT($G45*$H45,""$#,##0"")",,Cognito Setup complete
+Testing,Artifact Quality Validation,"Validate generated artifacts against internal QA rubric; target 90%+ first-review pass rate; iterative prompt tuning based on results",ML/AI Engineer,32,1.2,38,$275,"=TEXT($G46*$H46,""$#,##0"")",,Functional Testing
+Testing,UAT Coordination,"Coordinate UAT with Head of Solutions (pre-sales consultants as primary users) and Delivery Consulting team; manage feedback and defect triage",Project Manager,24,1.2,29,$175,"=TEXT($G47*$H47,""$#,##0"")",,Functional Testing complete
+Testing,Defect Resolution,"Address and resolve defects identified during functional, integration, performance, and UAT phases",Solutions Engineer,40,1.2,48,$200,"=TEXT($G48*$H48,""$#,##0"")",,All testing phases
+Testing,Test Results Report,"Document test results; capture SOC 2 evidence artefacts; obtain CTO and Security Lead sign-off for go-live",QA Engineer,8,1.2,10,$150,"=TEXT($G49*$H49,""$#,##0"")",,All testing complete
+Deployment,Go-Live Planning,"Plan phased rollout: Phase 1 pre-sales MVP by 2026-09-30 and Phase 2 delivery and Terraform by 2026-12-15; define rollback procedures",Project Manager,16,1.1,18,$175,"=TEXT($G51*$H51,""$#,##0"")",,Test Results Report signed off
+Deployment,Staging Environment Validation,Validate full solution stack in staging environment prior to production promotion; smoke-test all artifact types,Solutions Engineer,16,1.1,18,$200,"=TEXT($G52*$H52,""$#,##0"")",,Go-Live Planning
+Deployment,Production Deployment Phase 1,"Deploy pre-sales generation MVP to production (Bedrock, Lambda, API Gateway, Cognito, S3, DynamoDB); cutover from manual process",Cloud Engineer,24,1.1,26,$200,"=TEXT($G53*$H53,""$#,##0"")",,Staging Environment Validation
+Deployment,Okta Decommission & Cognito Cutover,"Execute final Okta-to-Cognito DNS/SSO cutover; communicate to all 120 users; monitor login success rate for 48 hours post-cutover",Security Engineer,16,1.1,18,$225,"=TEXT($G54*$H54,""$#,##0"")",,Production Deployment Phase 1
+Deployment,Legacy EC2 Decommission,"Decommission legacy internal monolith EC2 instance; archive data; update DNS and internal documentation",Cloud Engineer,8,1.1,9,$200,"=TEXT($G55*$H55,""$#,##0"")",,Okta Decommission & Cognito Cutover
+Deployment,Production Deployment Phase 2,"Deploy delivery automation and Terraform generation modules; validate GA readiness for Q1 2027",Cloud Engineer,16,1.1,18,$200,"=TEXT($G56*$H56,""$#,##0"")",,Phase 1 stable in production
+Deployment,Admin Training,"Train Amatra admins on Cognito user management, usage limit configuration, and audit log review",Trainer,16,1.1,18,$150,"=TEXT($G57*$H57,""$#,##0"")",,Production Deployment Phase 1
+Deployment,Pre-Sales Consultant Training,"Conduct hands-on training sessions for pre-sales consultants: brief submission, artifact review, and regeneration workflows",Trainer,24,1.1,26,$150,"=TEXT($G58*$H58,""$#,##0"")",,Admin Training
+Deployment,Delivery Team Enablement,"Enable Delivery Consulting team on Phase 2 outputs: generated implementation guides and Terraform automation artifacts",Trainer,16,1.1,18,$150,"=TEXT($G59*$H59,""$#,##0"")",,Production Deployment Phase 2
+Deployment,Runbook Development,"Create operational runbooks: Bedrock quota management, Lambda cold-start mitigation, DynamoDB scaling, incident response, and DR procedures",Technical Writer,32,1.1,35,$125,"=TEXT($G60*$H60,""$#,##0"")",,All Deployment tasks
+Deployment,As-Built Documentation Delivery,"Deliver final as-built architecture documentation, API reference, data dictionary, and SOC 2 evidence package",Technical Writer,24,1.1,26,$125,"=TEXT($G61*$H61,""$#,##0"")",,Runbook Development
+Deployment,Hypercare Support,"8-week post-go-live hypercare: monitor platform health, resolve production issues, tune Bedrock prompts, and support pre-sales consultant adoption",Support Engineer,80,1.1,88,$150,"=TEXT($G62*$H62,""$#,##0"")",,Production Deployment Phase 1
+Deployment,Optimization Recommendations,"Document post-hypercare optimization roadmap: cost optimisation, model upgrades, additional artifact types, and GA feature enhancements",Solution Architect,16,1.1,18,$225,"=TEXT($G63*$H63,""$#,##0"")",,Hypercare Support
+Deployment,Project Closeout,"Project retrospective, lessons learned, final project report to CTO and VP Engineering; handover to steady-state operations team",Project Manager,8,1.1,9,$175,"=TEXT($G64*$H64,""$#,##0"")",,All phases complete
+Management,Technical Leadership,"Quarterback technical oversight across all phases: architecture governance, Bedrock/AI quality review, escalation management",Solution Architect,"=ROUND(SUM($G4:$G64)*0.10,0)",1.0,"=ROUND(SUM($G4:$G64)*0.10,0)",$225,"=TEXT($G66*$H66,""$#,##0"")",,All phases
+Management,Project Management,"Project coordination, status reporting to CTO and VP Engineering, risk management, change control, and stakeholder communications",Project Manager,"=ROUND(SUM($G4:$G64)*0.10,0)",1.0,"=ROUND(SUM($G4:$G64)*0.10,0)",$175,"=TEXT($G67*$H67,""$#,##0"")",,All phases
+,,,,,TOTAL HOURS,"=SUM($G4:$G67)",TOTAL COST,"=TEXT(SUMPRODUCT($G4:$G67,$H4:$H67),""$#,##0"")",,
+
+# CREDITS
+#WIDTH: 25,15,100
+#ALIGN: left,right,left
+Credit Type,Credit Amount,Credit Comments
+AWS Partner Services Credit,"($15,000)","AWS Partner Network (APN) Advanced Tier credit applied to professional services for solution architecture and implementation of AWS-native services (Bedrock, Lambda, API Gateway, DynamoDB, S3, Cognito)"
+AWS Bedrock Early Adopter Incentive,"($5,000)","AWS Bedrock partner implementation incentive for generative AI solutions; eligible as APN partner deploying Bedrock in a production customer workload"
+Implementation Volume Discount,"($10,000)","Volume discount on professional services for engagements exceeding $300K; applied as approximately 3% reduction on total professional services cost"
+NET PROFESSIONAL SERVICES COST,"=SUMPRODUCT($G4:$G67,$H4:$H67)-30000","Total professional services cost minus AWS Partner and volume discount credits (Year 1 only); infrastructure credits are excluded and reported in infrastructure-costs.csv"

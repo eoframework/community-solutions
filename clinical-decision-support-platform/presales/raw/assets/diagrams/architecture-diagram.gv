@@ -1,0 +1,59 @@
+digraph "MedCore Clinical Decision Support" {
+	graph [bgcolor=white fontcolor="#2D3436" fontname=Helvetica fontsize=16 label="MedCore Clinical Decision Support" nodesep=0.5 pad=0.5 rankdir=TB ranksep=0.9 splines=curved]
+	node [fixedsize=true fontcolor="#232F3E" fontname="Sans-Serif" fontsize=12 height=1.4 imagescale=true labelloc=b shape=box style=rounded width=1.4]
+	edge [arrowsize=0.8 color="#555555" fontcolor="#555555" fontsize=10]
+	subgraph "cluster_External Sources" {
+		graph [bgcolor="#F0F0F0" fontname="Sans-Serif" fontsize=12 label="External Sources" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"8f27cad0e0a7464da49d9a621cffd3d7" [label="Epic EHR (FHIR R4)" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/onprem/client/users.png" shape=none]
+		"1646c5c770f74a4d8dc193545d277db4" [label="Bedside Monitors (HL7)" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/onprem/client/users.png" shape=none]
+	}
+	subgraph "cluster_Ingestion and Streaming" {
+		graph [bgcolor="#E8FDE8" fontname="Sans-Serif" fontsize=12 label="Ingestion and Streaming" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"5d6486be030d4a689aeb8ccf6e7fb400" [label="API Gateway" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/network/api-gateway.png" shape=none]
+		"745f81b7803645268b1e14f68f350256" [label="Kinesis Data Streams" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/analytics/kinesis-data-streams.png" shape=none]
+		"3f7f5180a35645a289640e3d5c8d84ce" [label="Kinesis Firehose" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/analytics/kinesis-data-firehose.png" shape=none]
+	}
+	subgraph "cluster_AI/ML Platform" {
+		graph [bgcolor="#FDF8E8" fontname="Sans-Serif" fontsize=12 label="AI/ML Platform" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"0ff8f5ff02ab4a70903b200e0fc12473" [label="SageMaker Inference" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/ml/sagemaker.png" shape=none]
+		"76614262c7324401a317ec1a257154cb" [label="Bedrock LLM" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/ml/bedrock.png" shape=none]
+		baebde9979544e3db6c9fa16ec0192b8 [label="Augmented AI" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/ml/augmented-ai.png" shape=none]
+	}
+	subgraph cluster_Orchestration {
+		graph [bgcolor="#E8F4FD" fontname="Sans-Serif" fontsize=12 label=Orchestration labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		"8c69ac61a55d4d9fb94c83a3725c1248" [label="Step Functions" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/integration/step-functions.png" shape=none]
+		"162c241515cc4fe2b9476805902b3767" [label="Lambda Alert Router" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/compute/lambda.png" shape=none]
+		ec55aab9616e4a17930b8c3753874b30 [label=EventBridge height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/integration/eventbridge.png" shape=none]
+	}
+	subgraph "cluster_Data and Storage" {
+		graph [bgcolor="#F3E8FD" fontname="Sans-Serif" fontsize=12 label="Data and Storage" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		efce070a318344f4a35ce6bff7dd6728 [label="S3 PHI Data Lake" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/storage/simple-storage-service-s3.png" shape=none]
+		"937a302755724f88b0e4d6b30888f0eb" [label="DynamoDB Risk Scores" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/database/dynamodb.png" shape=none]
+		"300f4d5b584048de8eaebc91c1be30f9" [label="Aurora Outcomes DB" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/database/rds.png" shape=none]
+	}
+	subgraph "cluster_Security and Compliance" {
+		graph [bgcolor="#FDE8E8" fontname="Sans-Serif" fontsize=12 label="Security and Compliance" labeljust=l pencolor="#AEB6BE" rankdir=LR shape=box style=rounded]
+		ad06e3dc96a54fc4ad082c339353ada4 [label="Cognito SSO/SAML" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/security/cognito.png" shape=none]
+		b98d4e6377f74d76a61c408d09c38cc5 [label="KMS Encryption" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/security/key-management-service.png" shape=none]
+		c78a25e0f3d643609ea5604dd5c4f1b6 [label="CloudTrail Audit" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/management/cloudtrail.png" shape=none]
+		f8393566888946159236e86c196208da [label="CloudWatch Monitor" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/aws/management/cloudwatch.png" shape=none]
+	}
+	c1bc681fb58c473d8d705a58cc7c4246 [label="Clinical Staff" height=1.9 image="/usr/local/lib/python3.11/site-packages/resources/onprem/client/users.png" shape=none]
+	"8f27cad0e0a7464da49d9a621cffd3d7" -> "5d6486be030d4a689aeb8ccf6e7fb400" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"5d6486be030d4a689aeb8ccf6e7fb400" -> "745f81b7803645268b1e14f68f350256" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"1646c5c770f74a4d8dc193545d277db4" -> "745f81b7803645268b1e14f68f350256" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"745f81b7803645268b1e14f68f350256" -> "3f7f5180a35645a289640e3d5c8d84ce" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"3f7f5180a35645a289640e3d5c8d84ce" -> efce070a318344f4a35ce6bff7dd6728 [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"745f81b7803645268b1e14f68f350256" -> "8c69ac61a55d4d9fb94c83a3725c1248" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"8c69ac61a55d4d9fb94c83a3725c1248" -> "0ff8f5ff02ab4a70903b200e0fc12473" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"0ff8f5ff02ab4a70903b200e0fc12473" -> "937a302755724f88b0e4d6b30888f0eb" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"0ff8f5ff02ab4a70903b200e0fc12473" -> baebde9979544e3db6c9fa16ec0192b8 [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"937a302755724f88b0e4d6b30888f0eb" -> "162c241515cc4fe2b9476805902b3767" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"162c241515cc4fe2b9476805902b3767" -> "76614262c7324401a317ec1a257154cb" [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"76614262c7324401a317ec1a257154cb" -> ec55aab9616e4a17930b8c3753874b30 [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	ec55aab9616e4a17930b8c3753874b30 -> c1bc681fb58c473d8d705a58cc7c4246 [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	ad06e3dc96a54fc4ad082c339353ada4 -> c1bc681fb58c473d8d705a58cc7c4246 [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	b98d4e6377f74d76a61c408d09c38cc5 -> efce070a318344f4a35ce6bff7dd6728 [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	c78a25e0f3d643609ea5604dd5c4f1b6 -> f8393566888946159236e86c196208da [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+	"300f4d5b584048de8eaebc91c1be30f9" -> f8393566888946159236e86c196208da [dir=forward fontcolor="#2D3436" fontname="Sans-Serif" fontsize=13]
+}

@@ -1,0 +1,75 @@
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
+Category,Component,Small,Medium,Large,Notes
+Cloud Services,Inference Requests,<1M/month,1M-10M/month,>10M/month,Real-time patient risk score updates per month
+Cloud Services,SageMaker Endpoints,1-2 endpoints,3-5 endpoints,6+ endpoints,Deployed real-time ML inference endpoints
+Cloud Services,Training Data Volume,<100 GB,100 GB - 1 TB,>1 TB,Labelled clinical dataset for model training
+Cloud Services,Kinesis Shards,2-5 shards,10-20 shards,40+ shards,Aggregate throughput for HL7/FHIR data ingestion
+Cloud Services,HealthLake Storage,<500 GB,500 GB - 2 TB,>2 TB,PHI-compliant FHIR datastore capacity
+Cloud Services,Bedrock Token Consumption,<5M tokens/month,5M-20M/month,>20M tokens/month,LLM tokens for clinical narrative generation
+Software Licenses,Facility Count,1-3 hospitals,4-10 hospitals,11-18 hospitals,Number of hospital sites receiving CDS alerts
+Support & Maintenance,Support Level,Business hours,24x5,24x7 premium,AWS support SLA and response coverage
+Connectivity,EHR Integration Bandwidth,100 Mbps,500 Mbps,1+ Gbps,HL7 FHIR R4 and HL7 v2.3 feed throughput
+Cloud Services,Concurrent Active Patients,<500,500-2500,>2500,Simultaneously monitored inpatient records
+
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,16,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
+Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
+Cloud Services,SageMaker Inference Endpoints,"ml.m5.xlarge real-time endpoints x4 (sepsis + readmission + rapid-response + ensemble)",4,Instance/Month,420,=D11*F11*12,=G11,=G11*1.1,=G11+H11+I11,Real-time risk scoring; Year 3 adds model complexity uplift
+Cloud Services,SageMaker Training Jobs,"On-demand ml.p3.2xlarge training; ~8 hrs/week model retraining and improvement",1,Service/Month,680,=D12*F12*12,=G12,=G12,=G12+H12+I12,Weekly retraining and batch evaluation jobs
+Cloud Services,Kinesis Data Streams,"10 shards ingesting HL7 FHIR R4 events and HL7 v2.3 vitals streams from 18 hospitals",10,Shard/Month,15,=D13*F13*12,=G13,=G13*1.1,=G13+H13+I13,Event-driven real-time data ingestion pipeline
+Cloud Services,Amazon MSK (Kafka),"3-broker msk.m5.large cluster for internal event bus between ingestion and inference",3,Broker/Month,215,=D14*F14*12,=G14,=G14,=G14+H14+I14,Decoupled messaging between pipeline stages
+Cloud Services,Amazon HealthLake,"FHIR R4-compliant PHI datastore; 1 TB active storage + 500 GB import volume/month",1,Service/Month,1800,=D15*F15*12,=G15,=G15*1.1,=G15+H15+I15,HIPAA-eligible FHIR store with search and audit
+Cloud Services,Amazon Bedrock (Claude),"LLM inference for clinical narrative generation; ~8M tokens/month across all facilities",1,Service/Month,1400,=D16*F16*12,=G16,=G16*1.15,=G16+H16+I16,Plain-language alert summaries for bedside staff; token growth in Year 3
+Cloud Services,Amazon RDS (Aurora PostgreSQL),"db.r6g.large Multi-AZ cluster; operational data store for risk scores and alert history",2,Instance/Month,340,=D17*F17*12,=G17,=G17,=G17+H17+I17,Persistent risk score and audit trail storage
+Cloud Services,Amazon Redshift,"ra3.xlplus node; longitudinal outcomes warehouse for model performance monitoring",1,Node/Month,650,=D18*F18*12,=G18,=G18,=G18+H18+I18,Analytics and model drift monitoring
+Cloud Services,Amazon ElastiCache (Redis),"cache.r7g.large cluster; real-time patient context cache for sub-3s inference latency",2,Node/Month,215,=D19*F19*12,=G19,=G19,=G19+H19+I19,Low-latency patient feature store for inference
+Cloud Services,Application Load Balancer,"2 ALBs: clinical dashboard API tier and internal ML inference routing",2,ALB/Month,22,=D20*F20*12,=G20,=G20,=G20+H20+I20,HTTPS termination and routing
+Cloud Services,AWS Lambda,"Serverless alert dispatch and EHR write-back functions; ~12M invocations/month",1,Service/Month,180,=D21*F21*12,=G21,=G21,=G21+H21+I21,Epic FHIR write-back and SNS notification dispatch
+Cloud Services,Amazon S3,"Raw data lake: HL7 event archive + model artefacts + audit exports; 5 TB",5000,GB/Month,0.023,=D22*F22*12,=G22,=G22,=G22+H22+I22,Versioned storage with Object Lock for HIPAA retention
+Cloud Services,Amazon EBS,"gp3 volumes attached to ECS/EC2 application tier nodes; 2 TB aggregate",2000,GB/Month,0.08,=D23*F23*12,=G23,=G23,=G23+H23+I23,Block storage for containerised application workloads
+Cloud Services,Amazon ECS (Fargate),"Clinical dashboard and API services; ~8 vCPU / 16 GB running continuously",1,Service/Month,520,=D24*F24*12,=G24,=G24,=G24+H24+I24,Containerised app tier; scales with facility rollout
+Cloud Services,Amazon Cognito,"SAML 2.0 federation with MedCore Azure AD; ~4200 MAU clinical staff",1,Service/Month,90,=D25*F25*12,=G25,=G25,=G25+H25+I25,SSO identity federation for all clinical roles
+Cloud Services,VPC NAT Gateway,"2 AZ NAT Gateways for private subnet egress; HA across us-east-1 AZs",2,Gateway/Month,80,=D26*F26*12,=G26,=G26,=G26+H26+I26,Outbound internet for managed service APIs
+Cloud Services,Data Transfer Out,"~2 TB/month outbound to Epic system and clinical staff browsers",2000,GB/Month,0.09,=D27*F27*12,=G27,=G27*1.1,=G27+H27+I27,Egress charges; grows with facility count in Year 3
+Cloud Services,Amazon CloudWatch,"Log ingestion 100 GB/month + dashboards + alarms for all pipeline components",1,Service/Month,350,=D28*F28*12,=G28,=G28,=G28+H28+I28,Observability for pipeline latency and model drift
+Cloud Services,AWS CloudTrail,"HIPAA audit log of all PHI access events; organisation-level trail",1,Service/Month,60,=D29*F29*12,=G29,=G29,=G29+H29+I29,Mandatory PHI access audit for HIPAA compliance
+Cloud Services,AWS WAF,"Web ACL protecting ALBs and API Gateway; OWASP + healthcare rule set",1,Service/Month,75,=D30*F30*12,=G30,=G30,=G30+H30+I30,Layer 7 protection for clinical API endpoints
+Cloud Services,AWS KMS,"CMKs for PHI encryption at rest across HealthLake, RDS, S3, and EBS",1,Service/Month,80,=D31*F31*12,=G31,=G31,=G31+H31+I31,HIPAA-required encryption key management
+Cloud Services,AWS Secrets Manager,"Secrets rotation for RDS credentials, Epic API tokens, and integration keys",1,Service/Month,25,=D32*F32*12,=G32,=G32,=G32+H32+I32,Centralised secrets store
+Cloud Services,Amazon GuardDuty,"Threat detection across all accounts in Clinical Applications OU",1,Service/Month,90,=D33*F33*12,=G33,=G33,=G33+H33+I33,Continuous cloud threat monitoring for HIPAA
+Cloud Services,AWS Config,"Configuration compliance rules for HIPAA and SOC 2 posture checks",1,Service/Month,55,=D34*F34*12,=G34,=G34,=G34+H34+I34,Continuous compliance evidence for SOC 2 Type II
+Cloud Services,Amazon SNS,"Alert notification delivery to Epic and clinical staff mobile devices",1,Service/Month,30,=D35*F35*12,=G35,=G35,=G35+H35+I35,Push notifications for risk score alerts
+Connectivity,AWS Direct Connect,"1 Gbps hosted connection from MedCore Nashville DC to AWS us-east-1; HA pair",1,Port/Month,750,=D36*F36*12,=G36,=G36,=G36+H36+I36,Dedicated private link for Epic and HL7 feed ingestion
+Connectivity,VPN Backup,"Site-to-site VPN as secondary path for Direct Connect failover",1,Connection/Month,36,=D37*F37*12,=G37,=G37,=G37+H37+I37,Redundant connectivity for 99.95% availability SLA
+Support & Maintenance,AWS Business Support,"AWS Business Support tier; 24/7 access and <1 hour critical response time",1,Service/Month,1800,=D38*F38*12,=G38,=G38,=G38+H38+I38,Estimated at 10% of monthly infrastructure; critical for clinical SLA
+Software Licenses,Datadog APM & Logs,"Infrastructure APM + log management for 20 hosts across ECS and SageMaker",20,Host/Month,31,=D39*F39*12,=G39,=G39,=G39+H39+I39,Enhanced observability and real-time pipeline alerting
+Software Licenses,Snyk (Container Security),"Container image scanning for ECS workloads; Business tier",1,Service/Month,300,=D40*F40*12,=G40,=G40,=G40+H40+I40,Shift-left security scanning for HIPAA posture
+Facilities,Data Center (Cloud-Only),"No physical data center required; all workloads run in AWS us-east-1 and us-west-2",0,N/A,0,0,0,0,0,Cloud-native solution; no facilities cost
+
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Hardware,Equipment Credit,0,No hardware credits; fully cloud-native solution
+Cloud Services,AWS MAP Credit,-15000,AWS Migration Acceleration Program credit applied to Year 1 infrastructure consumption
+Cloud Services,Reserved Instance Savings,-18000,"1-year Reserved Instance commitment on SageMaker, RDS, ElastiCache, and MSK (est. 30% discount)"
+Cloud Services,AWS HealthLake Launch Credit,-5000,AWS healthcare sector program credit for HealthLake and Bedrock usage in Year 1
+Software Licenses,Datadog Partner Credit,-2400,Datadog AWS ISV partner program; 4 months free on 20-host APM subscription
+Connectivity,Network Credit,0,No connectivity credits available
+Support & Maintenance,Program Credit,0,No support credits available for Business Support tier
+Facilities,Facilities Credit,0,No facilities costs; cloud-only solution
+
+# 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
+Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
+Hardware,0,0,0,0,0,0
+Cloud Services,233280,-38000,195280,233280,260498,689058
+Software Licenses,7920,-2400,5520,7920,7920,21360
+Connectivity,9432,0,9432,9432,9432,28296
+Support & Maintenance,21600,0,21600,21600,21600,64800
+Facilities,0,0,0,0,0,0
+TOTAL,272232,-40400,231832,272232,299450,803514

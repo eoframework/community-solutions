@@ -1,0 +1,137 @@
+# Project Timeline
+#WIDTH: 20,40,12,14,14,40,28,14
+#ALIGN: left,left,center,center,center,left,left,center
+Phase,Task,Duration,Start Date,End Date,Dependencies,Owner,Status
+Phase 1 — Discovery & Architecture,Project Kickoff and RACI Alignment,1 day,2026-05-04,2026-05-04,None,Amatra PM,Not Started
+Phase 1 — Discovery & Architecture,Clinical Workflow Discovery Sessions,3 days,2026-05-05,2026-05-07,Project Kickoff and RACI Alignment,Amatra Architect,Not Started
+Phase 1 — Discovery & Architecture,Epic FHIR R4 and Mirth Connect Topology Assessment,3 days,2026-05-05,2026-05-07,Project Kickoff and RACI Alignment,Amatra Engineer,Not Started
+Phase 1 — Discovery & Architecture,AWS Organization and Landing Zone Documentation,2 days,2026-05-07,2026-05-08,Epic FHIR R4 and Mirth Connect Topology Assessment,Amatra Architect,Not Started
+Phase 1 — Discovery & Architecture,HIPAA BAA and PHI Data-Handling Requirements Workshop,2 days,2026-05-11,2026-05-12,Project Kickoff and RACI Alignment,Amatra Architect,Not Started
+Phase 1 — Discovery & Architecture,ML Feature Requirements Workshop — Sepsis Model,2 days,2026-05-11,2026-05-12,Clinical Workflow Discovery Sessions,Amatra Engineer,Not Started
+Phase 1 — Discovery & Architecture,Azure AD Federation Requirements Capture,1 day,2026-05-12,2026-05-12,HIPAA BAA and PHI Data-Handling Requirements Workshop,Amatra Engineer,Not Started
+Phase 1 — Discovery & Architecture,Current State Assessment Report,5 days,2026-05-12,2026-05-18,Clinical Workflow Discovery Sessions,Amatra Architect,Not Started
+Phase 1 — Discovery & Architecture,Epic FHIR R4 and Mirth Connect Integration Specification,5 days,2026-05-19,2026-05-25,Epic FHIR R4 and Mirth Connect Topology Assessment,Amatra Architect,Not Started
+Phase 1 — Discovery & Architecture,HIPAA PHI Data-Handling Requirements Document,3 days,2026-05-19,2026-05-21,HIPAA BAA and PHI Data-Handling Requirements Workshop,Amatra Architect,Not Started
+Phase 1 — Discovery & Architecture,HLD and LLD Architecture Documents,5 days,2026-05-26,2026-06-01,Current State Assessment Report,Amatra Architect,Not Started
+Phase 1 — Discovery & Architecture,Security Architecture Document,5 days,2026-05-26,2026-06-01,HIPAA PHI Data-Handling Requirements Document,Amatra Architect,Not Started
+Phase 1 — Discovery & Architecture,Data Flow Diagrams and FHIR Resource Mapping Specification,4 days,2026-05-26,2026-05-29,Epic FHIR R4 and Mirth Connect Integration Specification,Amatra Engineer,Not Started
+Phase 1 — Discovery & Architecture,Approved Architecture Assessment Report,3 days,2026-06-01,2026-06-03,HLD and LLD Architecture Documents,Amatra Architect,Not Started
+Phase 2 — Environment Build & Data Pipeline,IaC Modules — All 4 Environments Provisioned,10 days,2026-06-08,2026-06-19,Approved Architecture Assessment Report,Amatra Engineer,Not Started
+Phase 2 — Environment Build & Data Pipeline,Transit Gateway and PrivateLink Connectivity Configuration,5 days,2026-06-22,2026-06-26,IaC Modules — All 4 Environments Provisioned,Amatra Engineer,Not Started
+Phase 2 — Environment Build & Data Pipeline,Azure AD SAML 2.0 Federation with Amazon Cognito,5 days,2026-06-22,2026-06-26,IaC Modules — All 4 Environments Provisioned,Amatra Engineer,Not Started
+Phase 2 — Environment Build & Data Pipeline,KMS CMK Key Policies and PHI Encryption Implementation,5 days,2026-06-22,2026-06-26,IaC Modules — All 4 Environments Provisioned,Amatra Engineer,Not Started
+Phase 2 — Environment Build & Data Pipeline,HIPAA Audit Logging Implementation,3 days,2026-06-29,2026-07-01,KMS CMK Key Policies and PHI Encryption Implementation,Amatra Engineer,Not Started
+Phase 2 — Environment Build & Data Pipeline,CI/CD Pipelines with Blue/Green Deployment,5 days,2026-06-29,2026-07-03,IaC Modules — All 4 Environments Provisioned,Amatra Engineer,Not Started
+Phase 2 — Environment Build & Data Pipeline,Amazon HealthLake FHIR Data Store Provisioning,5 days,2026-06-29,2026-07-03,IaC Modules — All 4 Environments Provisioned,Amatra Engineer,Not Started
+Phase 2 — Environment Build & Data Pipeline,Kinesis Data Streams Ingestion Pipeline Build,10 days,2026-07-06,2026-07-17,Transit Gateway and PrivateLink Connectivity Configuration,Amatra Engineer,Not Started
+Phase 2 — Environment Build & Data Pipeline,Epic FHIR R4 Connector Development,10 days,2026-07-06,2026-07-17,Azure AD SAML 2.0 Federation with Amazon Cognito,Amatra Engineer,Not Started
+Phase 2 — Environment Build & Data Pipeline,HL7 v2.3 Mirth Connect Adapter Development,10 days,2026-07-06,2026-07-17,Transit Gateway and PrivateLink Connectivity Configuration,Amatra Engineer,Not Started
+Phase 2 — Environment Build & Data Pipeline,SageMaker Feature Store Pipelines Build,7 days,2026-07-20,2026-07-28,Kinesis Data Streams Ingestion Pipeline Build,Amatra Engineer,Not Started
+Phase 2 — Environment Build & Data Pipeline,Data Ingestion Pipeline End-to-End Validation,3 days,2026-07-29,2026-07-31,SageMaker Feature Store Pipelines Build,Amatra Engineer,Not Started
+Phase 3 — ML Model Development & Integration,Sepsis Risk Prediction Model Development and Training,20 days,2026-06-22,2026-07-17,Approved Architecture Assessment Report,Amatra Engineer,Not Started
+Phase 3 — ML Model Development & Integration,SHAP Explainability Pipeline Development,10 days,2026-07-20,2026-07-31,Sepsis Risk Prediction Model Development and Training,Amatra Engineer,Not Started
+Phase 3 — ML Model Development & Integration,Amazon Bedrock Clinical Narrative Integration,10 days,2026-08-03,2026-08-14,SHAP Explainability Pipeline Development,Amatra Engineer,Not Started
+Phase 3 — ML Model Development & Integration,Alert Routing Service Build,7 days,2026-08-03,2026-08-11,Amazon Bedrock Clinical Narrative Integration,Amatra Engineer,Not Started
+Phase 3 — ML Model Development & Integration,30-Day Readmission Prediction Model Development,20 days,2026-08-17,2026-09-11,Sepsis Risk Prediction Model Development and Training,Amatra Engineer,Not Started
+Phase 3 — ML Model Development & Integration,Rapid-Response Early Deterioration Model Development,20 days,2026-08-17,2026-09-11,Sepsis Risk Prediction Model Development and Training,Amatra Engineer,Not Started
+Phase 3 — ML Model Development & Integration,Clinical Staff Dashboard Development,20 days,2026-08-17,2026-09-11,Alert Routing Service Build,Amatra Engineer,Not Started
+Phase 3 — ML Model Development & Integration,QuickSight Outcomes and Model Monitoring Dashboards,10 days,2026-09-14,2026-09-25,30-Day Readmission Prediction Model Development,Amatra Engineer,Not Started
+Phase 4 — Testing & Validation,Test Plan Development and Approval,5 days,2026-09-07,2026-09-11,Data Ingestion Pipeline End-to-End Validation,Amatra QA,Not Started
+Phase 4 — Testing & Validation,Functional Testing — Data Ingestion and Feature Store,5 days,2026-09-14,2026-09-18,Test Plan Development and Approval,Amatra QA,Not Started
+Phase 4 — Testing & Validation,Functional Testing — ML Inference Endpoints,5 days,2026-09-14,2026-09-18,Test Plan Development and Approval,Amatra QA,Not Started
+Phase 4 — Testing & Validation,Integration Testing — Epic FHIR R4 End-to-End,5 days,2026-09-21,2026-09-25,Functional Testing — Data Ingestion and Feature Store,Amatra QA,Not Started
+Phase 4 — Testing & Validation,Integration Testing — HL7 v2.3 Mirth Connect Adapter,5 days,2026-09-21,2026-09-25,Functional Testing — Data Ingestion and Feature Store,Amatra QA,Not Started
+Phase 4 — Testing & Validation,End-to-End Latency Load Test,3 days,2026-09-28,2026-09-30,Integration Testing — Epic FHIR R4 End-to-End,Amatra QA,Not Started
+Phase 4 — Testing & Validation,Multi-Region Failover Test,3 days,2026-09-28,2026-09-30,Integration Testing — Epic FHIR R4 End-to-End,Amatra QA,Not Started
+Phase 4 — Testing & Validation,Sepsis Model Accuracy Validation,3 days,2026-10-01,2026-10-05,End-to-End Latency Load Test,Amatra QA,Not Started
+Phase 4 — Testing & Validation,HIPAA Security Controls Validation,3 days,2026-10-01,2026-10-05,Multi-Region Failover Test,Amatra QA,Not Started
+Phase 4 — Testing & Validation,External Penetration Testing Coordination,5 days,2026-10-01,2026-10-07,HIPAA Security Controls Validation,Amatra Engineer,Not Started
+Phase 4 — Testing & Validation,Pilot Facility UAT Execution,5 days,2026-10-08,2026-10-14,Sepsis Model Accuracy Validation,Amatra QA,Not Started
+Phase 4 — Testing & Validation,Defect Triage and Critical Issue Resolution,3 days,2026-10-15,2026-10-19,Pilot Facility UAT Execution,Amatra Engineer,Not Started
+Phase 4 — Testing & Validation,Go-Live Readiness Review and CMO/CIO Sign-Off,2 days,2026-10-20,2026-10-21,Defect Triage and Critical Issue Resolution,Amatra PM,Not Started
+Phase 5 — Production Rollout & Hypercare,Phase 1 Production Go-Live — Sepsis Model and Pipeline,1 day,2026-10-31,2026-10-31,Go-Live Readiness Review and CMO/CIO Sign-Off,Amatra Engineer,Not Started
+Phase 5 — Production Rollout & Hypercare,Phase 1 Post-Go-Live 48-Hour Shadow Validation,2 days,2026-11-01,2026-11-02,Phase 1 Production Go-Live — Sepsis Model and Pipeline,Amatra Engineer,Not Started
+Phase 5 — Production Rollout & Hypercare,Phase 2 Production Deployment — Readmission and Rapid-Response,1 day,2027-02-28,2027-02-28,30-Day Readmission Prediction Model Development,Amatra Engineer,Not Started
+Phase 5 — Production Rollout & Hypercare,Per-Facility Cohort Rollout Execution — All 18 Hospitals,60 days,2027-03-01,2027-05-23,Phase 2 Production Deployment — Readmission and Rapid-Response,Amatra Engineer,Not Started
+Phase 5 — Production Rollout & Hypercare,Clinical Train-the-Trainer Enablement Program Delivery,30 days,2027-03-01,2027-04-09,Phase 2 Production Deployment — Readmission and Rapid-Response,Amatra Engineer,Not Started
+Phase 5 — Production Rollout & Hypercare,Architecture and Operations Knowledge Transfer Sessions,10 days,2027-05-26,2027-06-06,Per-Facility Cohort Rollout Execution — All 18 Hospitals,Amatra Architect,Not Started
+Phase 5 — Production Rollout & Hypercare,Final As-Built Documentation and IaC Repository Handover,10 days,2027-05-26,2027-06-06,Architecture and Operations Knowledge Transfer Sessions,Amatra Architect,Not Started
+Phase 5 — Production Rollout & Hypercare,Operational Runbooks Delivery,7 days,2027-05-26,2027-06-03,Architecture and Operations Knowledge Transfer Sessions,Amatra Architect,Not Started
+Phase 5 — Production Rollout & Hypercare,Enterprise General Availability — All 18 Hospitals,1 day,2027-06-30,2027-06-30,Per-Facility Cohort Rollout Execution — All 18 Hospitals,Amatra PM,Not Started
+Phase 5 — Production Rollout & Hypercare,8-Week Hypercare Support Period,56 days,2027-07-01,2027-08-25,Enterprise General Availability — All 18 Hospitals,Amatra Engineer,Not Started
+Phase 5 — Production Rollout & Hypercare,Project Closure Outcomes Report,5 days,2027-08-18,2027-08-22,8-Week Hypercare Support Period,Amatra PM,Not Started
+
+# Milestones
+#WIDTH: 14,44,14,30,50,26,14,14
+#ALIGN: left,left,center,left,left,left,center,center
+Milestone ID,Milestone Name,Target Date,Phase,Success Criteria,Owner,Status,Actual Date
+MS-001,Project Kickoff Complete,2026-05-04,Phase 1 — Discovery & Architecture,All stakeholders aligned; project charter and RACI accepted by CIO and CMO,Amatra PM,Not Started,
+MS-002,Discovery and Assessment Complete,2026-06-03,Phase 1 — Discovery & Architecture,Assessment Report approved by CMO and CIO; Architecture go/no-go confirmed,Amatra Architect,Not Started,
+MS-003,Architecture Approved,2026-06-05,Phase 1 — Discovery & Architecture,"HLD, LLD, Security Architecture, and FHIR mapping documents signed off by CIO and CISO",Amatra Architect,Not Started,
+MS-004,Infrastructure Ready,2026-06-19,Phase 2 — Environment Build & Data Pipeline,All 4 environments provisioned via IaC; connectivity to Mirth Connect validated,Amatra Engineer,Not Started,
+MS-005,Data Pipeline Live,2026-07-31,Phase 2 — Environment Build & Data Pipeline,"Real-time FHIR and HL7 ingestion flowing end-to-end to HealthLake and Feature Store; synthetic PHI validated",Amatra Engineer,Not Started,
+MS-006,Phase 1 Go-Live — Sepsis Model,2026-10-31,Phase 5 — Production Rollout & Hypercare,"Sepsis model live in production at pilot facility; AUROC ≥ 0.85 confirmed; CMO/CIO sign-off obtained",Amatra Engineer,Not Started,
+MS-007,Phase 2 Deployment — Readmission and Rapid-Response,2027-02-28,Phase 5 — Production Rollout & Hypercare,"Readmission and rapid-response models in production; clinical dashboard live with RBAC; Bedrock narratives enabled",Amatra Engineer,Not Started,
+MS-008,Test Sign-Off,2026-10-21,Phase 4 — Testing & Validation,"Test Results Report approved; CISO and CMO/CIO go-live clearance granted; all Critical/High defects resolved",Amatra QA,Not Started,
+MS-009,Enterprise General Availability,2027-06-30,Phase 5 — Production Rollout & Hypercare,"Full 18-hospital rollout complete; all facilities clinically active; per-facility UAT sign-offs obtained",Amatra PM,Not Started,
+MS-010,Hypercare Period End and Project Closure,2027-08-25,Phase 5 — Production Rollout & Hypercare,"8-week hypercare concluded; outcomes report delivered to CMO and CIO; BAU transition confirmed",Amatra PM,Not Started,
+
+# RACI Matrix
+#WIDTH: 46,14,16,14,12,13,13,12
+#ALIGN: left,center,center,center,center,center,center,center
+Task/Deliverable,Amatra PM,Amatra Architect,Amatra Engineer,Amatra QA,Client CIO,Client CMO,Client CISO
+Project Governance and Status Reporting,A,C,I,I,R,C,I
+Clinical Requirements and Feature Definition,C,R,C,I,I,A,I
+AWS Architecture Design,C,A,R,I,C,I,C
+Security and HIPAA Compliance Design,C,R,C,I,C,I,A
+Infrastructure Provisioning — IaC All 4 Environments,I,C,A,I,R,I,C
+Epic FHIR R4 Connector Development,I,C,A,C,R,I,I
+HL7 v2.3 Mirth Connect Adapter Development,I,C,A,C,R,I,I
+Kinesis Data Pipeline Build and Validation,I,C,A,C,I,I,C
+Amazon HealthLake FHIR Store Configuration,I,C,A,I,R,I,C
+Azure AD and Cognito SSO Integration,I,C,A,C,I,I,R
+PHI Audit Logging and KMS Encryption Implementation,I,C,R,C,C,I,A
+CI/CD and DevOps Pipeline Build,I,C,A,C,R,I,I
+Sepsis Risk Model Development and Training,I,A,R,C,I,C,I
+Sepsis Model Clinical Accuracy Validation,C,C,R,C,I,A,I
+SHAP Explainability Pipeline Development,I,A,R,C,I,C,I
+Amazon Bedrock Clinical Narrative Integration,I,A,R,C,I,C,I
+Readmission Prediction Model Development,I,A,R,C,I,C,I
+Rapid-Response Deterioration Model Development,I,A,R,C,I,C,I
+Clinical Staff Dashboard Development,I,C,A,C,R,C,I
+Alert Routing and Notification System Build,I,C,A,C,R,I,I
+Test Plan Development and Approval,C,C,R,A,C,I,C
+Functional and Integration Testing Execution,C,C,R,A,C,I,C
+Performance and Load Testing,C,C,R,A,I,I,C
+HIPAA Security Controls Validation,C,C,R,C,C,I,A
+External Penetration Testing Coordination,C,C,R,C,I,I,A
+SOC 2 Type II Evidence Collection,I,C,R,C,I,I,A
+User Acceptance Testing — Pilot Facility,C,I,C,R,C,A,I
+Go-Live Readiness Sign-Off,A,C,C,C,R,R,R
+Phase 1 Production Go-Live Execution,A,C,R,C,R,C,I
+Phased Facility Rollout — All 18 Hospitals,A,C,R,C,R,C,I
+Per-Facility UAT Sign-Off,C,I,C,R,C,A,I
+Clinical Train-the-Trainer Enablement Delivery,R,A,R,I,C,C,I
+Architecture and Operations Knowledge Transfer,R,A,R,I,C,I,I
+Operational Runbooks Delivery,A,R,R,C,I,I,I
+Final As-Built Documentation and IaC Handover,A,R,R,C,I,I,I
+Hypercare Incident Response and Resolution,A,C,R,I,R,C,I
+Project Closure and Outcomes Report,A,C,I,I,R,R,I
+R = Responsible | A = Accountable | C = Consulted | I = Informed,,,,,,,
+
+# Communications Plan
+#WIDTH: 32,18,46,52,26,24
+#ALIGN: left,center,left,left,left,center
+Meeting Type,Frequency,Participants,Purpose,Owner,Day/Time
+Project Kickoff Meeting,Once,All stakeholders — Amatra delivery team and MedCore CIO/CMO/CISO/Clinical Informatics Lead/EHR Integration Lead,"Align on scope, RACI, governance model, and project charter; confirm access dependencies and BAA timeline",Amatra PM,2026-05-04 — Full Day
+Weekly Status Call,Weekly,"Amatra PM; MedCore CIO; Clinical Informatics Lead; EHR Integration Lead","Review progress against plan; surface blockers; confirm decisions and action owners",Amatra PM,Mondays 10:00 AM ET
+Clinical Discovery Workshop,Once per discovery session (Weeks 1–4),"Amatra Architect; MedCore CMO; Clinical Informatics Lead; Nursing staff and hospitalists","Capture clinical workflow requirements, risk threshold targets, and alert design preferences",Amatra Architect,Tuesdays 1:00 PM ET
+Architecture and Security Review,Once (Week 7),"Amatra Architect; MedCore CIO; CISO; EHR Integration Lead","Review and approve HLD, LLD, Security Architecture, and FHIR mapping documents",Amatra Architect,2026-06-01 (3 hours)
+Phase Gate Review,End of each phase,"Amatra PM; MedCore CIO; CMO; CISO",Review phase completion criteria and formally approve next phase commencement,Amatra PM,"2026-06-05, 2026-10-21, 2027-02-28, 2027-06-30"
+Bi-Weekly Technical Stand-Up,Bi-weekly,"Amatra Engineers and Architects; MedCore IT/Cloud Engineering and EHR Integration Lead",Deep-dive on technical progress; resolve integration blockers; review environment access status,Amatra Architect,Wednesdays 2:00 PM ET
+Model Performance Review,Monthly during Phase 3,"Amatra ML Engineers; MedCore Clinical Informatics Lead; CMO representative",Review model training progress; validate feature definitions; confirm accuracy benchmarks against AUROC targets,Amatra Engineer,First Friday of each month 10:00 AM ET
+UAT Kick-Off and Facilitation,Once per facility cohort (Week 24 for pilot),"Amatra PM; MedCore Clinical Informatics Lead; Nursing and physician UAT participants; Amatra QA","Facilitate structured clinical workflow walk-throughs; capture UAT scoring rubric results and sign-off",Amatra PM,2026-10-08 (Pilot Facility — Full Day)
+Go-Live Readiness Briefing,Once before each go-live,"Amatra PM and Tech Lead; MedCore CIO; CMO; CISO",Present UAT results and go-live readiness checklist for formal CMO and CIO approval,Amatra PM,"2026-10-20 (Phase 1), 2027-02-25 (Phase 2), 2027-06-27 (GA)"
+Critical Incident Escalation,As required during hypercare,"Amatra Senior Support Engineer; Amatra Lead Architect; MedCore CIO; CISO",Notify and coordinate resolution of Priority 1 incidents during 8-week post-GA hypercare period,Amatra Engineer,Within 1 hour of incident detection
+Knowledge Transfer Sessions,4 half-day sessions (Weeks 40–44),"Amatra Architect and Engineers; MedCore IT team; Data Engineering team","Deliver technical track KT: IaC walkthrough, SageMaker operations, Kinesis/MSK troubleshooting, incident response",Amatra Architect,Tuesdays and Thursdays — Weeks 40–44
+Project Closeout Meeting,Once (August 2027),"All stakeholders — Amatra delivery team; MedCore CIO; CMO; CISO; Clinical Informatics Lead",Formal project closure; present KPI baseline vs. actual outcomes report; confirm BAU transition and handover,Amatra PM,2027-08-22 (2 hours)

@@ -1,0 +1,96 @@
+# SCOPE ASSUMPTIONS
+#WIDTH: 25,35,30,25,25,30,40
+#ALIGN: left,left,left,left,left,left,left
+Category,Baseline Assumption,Current Scope,Small (1x),Medium (2x),Large (3x),Notes
+AWS Accounts,Single AWS account (dev only),Multi-account OU hierarchy (Security / Infra / Workloads / Sandbox / Suspended),1-3 accounts,4-10 accounts,10+ accounts,Greenfield; Account Factory for Terraform (AFT) used for automated account vending
+Regions / Geographies,Single AWS region,us-east-1 (primary) + us-east-2 (DR/secondary),1 region,2 regions,3+ regions,All services and guardrails deployed and governed in both regions
+Environments,Single environment (prod),Development / Non-Production / Production (3 environments),1 environment,2 environments,3+ environments,Separate OU paths for prod and non-prod workloads
+OU Complexity,Flat OU structure,"7-OU hierarchy (Root / Security / Infrastructure / Workloads-Prod / Workloads-NonProd / Sandbox / Suspended)",2-3 OUs,4-6 OUs,7+ OUs,Designed for future BU / acquisition expansion without redesign
+Networking Complexity,Basic VPC per account,"Hub-and-spoke via Transit Gateway; VPC IPAM; Network Firewall; centralised egress; VPN on-premises link",VPC only,TGW single-region,TGW multi-region + Firewall + IPAM,On-premises connectivity method (VPN vs Direct Connect) to be confirmed in discovery
+Security & Compliance Frameworks,No formal compliance framework,"AWS FSBP mandatory; NIST 800-53 / SOC 2 / HIPAA to be confirmed with client security team",1 framework,2 frameworks,3+ frameworks,Additional frameworks confirmed during Phase 1 discovery
+IaC Coverage,Manual console configuration,">=95% IaC coverage (Terraform + AFT); CI/CD pipeline tooling TBD",Partial IaC,Terraform modules,Full IaC + AFT pipeline + CI/CD,Zero manual console changes in production at go-live
+Integrations / Source Systems,No external integrations,"Centralised monitoring (CloudWatch / Security Hub / GuardDuty); SNS alerting; third-party SIEM TBD",1-2 integrations,3-5 integrations,5+ integrations,Third-party SIEM / ticketing integration to be scoped post-discovery
+
+# ESTIMATE SETTINGS
+#WIDTH: 25,30,15,80
+#ALIGN: left,left,center,left
+Phase,Variable Name,Multiplier,Description / Applies To Tasks
+Discovery,discovery_factor,1.0,Stakeholder interviews; current-state review; requirements documentation; compliance framework confirmation
+Planning,planning_factor,1.2,"Detailed OU / network / security architecture; Terraform module design; IaC standards definition; architecture documentation"
+Development,development_factor,1.3,"Control Tower deployment; OU structure; SCPs / RCPs; IAM Identity Center; networking build (TGW / IPAM / Firewall); AFT pipeline; security automation (Weeks 1-12)"
+Testing,testing_factor,1.0,"End-to-end landing zone validation; SCP enforcement tests; account vending tests; network flow tests; security posture validation"
+Deployment,deployment_factor,1.0,"Production go-live; runbook delivery; administrator and security team training; hypercare support (4 weeks post go-live)"
+Management,management_factor,1.0,Project management and technical leadership overhead — calculated as 10% of total engineering task hours
+
+# LEVEL OF EFFORT
+#WIDTH: 15,25,50,15,12,14,12,12,15,25,40
+#ALIGN: left,left,left,left,right,center,right,right,right,left,left
+Phase,Work Package,Task Description,Resource Type,Base Hours,Effort Multiplier,Actual Hours,Rate,Cost Estimate,Dependencies,Notes
+Discovery,Project Kickoff,Project kickoff meeting and stakeholder alignment; confirm RACI and engagement leads,Project Manager,8,1.0,8,$175,"$1,400",,Stakeholder identification required at kick-off
+Discovery,Current State Assessment,Confirm greenfield status; document existing on-premises context and connectivity requirements,Solution Architect,16,1.0,16,$250,"$4,000",,AWS-certified architect rate applied
+Discovery,Requirements Gathering,"Conduct stakeholder interviews; document OU design requirements; confirm compliance frameworks (NIST / SOC 2 / HIPAA)",Solution Architect,24,1.0,24,$250,"$6,000",,Compliance framework confirmation gates SCP design
+Discovery,Cloud Readiness Assessment,"Assess team cloud maturity; identify skills gaps; confirm IaC tooling preferences (Terraform / CDK)",Solutions Engineer,16,1.0,16,$200,"$3,200",,Drives training scope in Deployment phase
+Discovery,Network Discovery,"Confirm on-premises connectivity topology; validate IP address space and IPAM supernet (10.0.0.0/8)",Network Engineer,16,1.0,16,$200,"$3,200",,VPN vs Direct Connect decision required
+Discovery,Security & Compliance Scoping,"Document security requirements; confirm compliance frameworks; map mandatory tags; define data classification policy",Security Engineer,16,1.0,16,$225,"$3,600",,Security-certified specialist rate applied
+Discovery,Risk Assessment,"Identify project risks (scope / compliance / connectivity) and define mitigation strategies",Project Manager,8,1.0,8,$175,"$1,400",,
+Discovery,Discovery Report,"Document findings; produce architecture recommendation memo and phased project plan",Solution Architect,16,1.0,16,$250,"$4,000",,Gates Planning phase
+Planning,Detailed OU & Account Architecture,"Design 7-OU hierarchy; map Security / Infra / Workloads / Sandbox / Suspended OUs; define account naming convention",Solution Architect,24,1.2,28.8,$250,"$7,200",Discovery Report,Drives AFT customisations
+Planning,Control Tower Design,"Design Control Tower configuration; select managed guardrails; define landing zone manifest for both regions",Solution Architect,24,1.2,28.8,$250,"$7,200",Detailed OU & Account Architecture,
+Planning,Network Architecture Design,"Design hub-and-spoke Transit Gateway topology; define VPC IPAM plan; design Network Firewall policy; plan centralised egress",Network Engineer,32,1.2,38.4,$200,"$7,680",Network Discovery,RFC 1918 /20 per spoke VPC
+Planning,Security Architecture Design,"Design SCP / RCP policy set; data perimeter controls; Security Hub standard selection; GuardDuty configuration",Security Engineer,32,1.2,38.4,$225,"$8,640",Security & Compliance Scoping,
+Planning,IaC Module Design,"Design Terraform module structure for AFT; define repo layout; design CI/CD pipeline approach",Solutions Engineer,32,1.2,38.4,$200,"$7,680",Control Tower Design,IaC coverage target >=95%
+Planning,IAM Identity Center Design,"Design SSO permission sets; define identity source (existing IdP or native); map group-to-account assignments",Security Engineer,16,1.2,19.2,$225,"$4,320",Detailed OU & Account Architecture,IdP source to be confirmed with client
+Planning,Monitoring & Alerting Architecture,"Design centralised CloudWatch structure; define Security Hub aggregation; design SNS alert routing",Solutions Engineer,16,1.2,19.2,$200,"$3,840",Security Architecture Design,Third-party SIEM integration TBD
+Planning,Architecture Documentation,"Produce as-designed architecture diagrams and detailed design document",Technical Writer,24,1.2,28.8,$125,"$3,600",All planning tasks,Delivered as pre-build baseline
+Development,Control Tower Deployment,"Deploy AWS Control Tower in us-east-1; enrol us-east-2 as governed region; configure landing zone manifest",Cloud Engineer,32,1.3,41.6,$200,"$8,320",Control Tower Design,Weeks 1-4
+Development,OU Structure Implementation,"Implement 7-OU hierarchy in AWS Organizations; configure OU policies and tagging baseline",Cloud Engineer,16,1.3,20.8,$200,"$4,160",Control Tower Deployment,
+Development,SCP & RCP Implementation,"Deploy all SCPs (root deny; region restriction; CloudTrail/Config lock; MFA); deploy RCP data perimeter controls",Security Engineer,24,1.3,31.2,$225,"$7,020",Security Architecture Design,Critical path — gates workload account creation
+Development,IAM Identity Center Setup,"Configure IAM Identity Center; set up permission sets; integrate identity source; validate SSO login flow",Security Engineer,24,1.3,31.2,$225,"$7,020",IAM Identity Center Design,
+Development,Log Archive & Audit Accounts,"Provision Log Archive and Audit/Security Tooling accounts; configure centralised CloudTrail org trail (both regions)",Cloud Engineer,24,1.3,31.2,$200,"$6,240",OU Structure Implementation,
+Development,AWS Config Deployment,"Enable AWS Config in both regions across all accounts; configure recording and delivery to Log Archive",Cloud Engineer,16,1.3,20.8,$200,"$4,160",Log Archive & Audit Accounts,
+Development,AFT Pipeline Setup,"Deploy Account Factory for Terraform (AFT); configure AFT pipeline; create initial account request templates",Solutions Engineer,32,1.3,41.6,$200,"$8,320",IaC Module Design,Enables <30 min account vending SLA
+Development,Sandbox Account Vending Test,"Vend first sandbox account via AFT; validate guardrail enrolment; confirm SCP inheritance",Solutions Engineer,16,1.3,20.8,$200,"$4,160",AFT Pipeline Setup,Validates end-to-end vending pipeline
+Development,Transit Gateway Deployment,"Deploy Transit Gateway in us-east-1 and us-east-2; configure inter-region peering; define route tables",Network Engineer,32,1.3,41.6,$200,"$8,320",Network Architecture Design,Weeks 5-8
+Development,VPC IPAM Configuration,"Configure VPC IPAM; allocate 10.0.0.0/8 supernet; define regional pools and /20 delegation per spoke",Network Engineer,16,1.3,20.8,$200,"$4,160",Transit Gateway Deployment,
+Development,Network Firewall Deployment,"Deploy AWS Network Firewall in Network Hub account (us-east-1 + us-east-2); configure north-south and east-west inspection policies",Network Engineer,32,1.3,41.6,$200,"$8,320",Transit Gateway Deployment,
+Development,Hub VPC Build,"Build Network Hub VPCs in both regions; configure centralised NAT Gateway egress; attach to Transit Gateway",Cloud Engineer,24,1.3,31.2,$200,"$6,240",Transit Gateway Deployment,
+Development,Spoke VPC Templates,"Create Terraform modules for spoke VPCs (/20); deploy sample Dev and Prod spoke VPCs; validate TGW routing",Solutions Engineer,24,1.3,31.2,$200,"$6,240",Hub VPC Build,
+Development,On-Premises VPN Connectivity,"Configure Site-to-Site VPN between Network Hub account and on-premises gateway (both regions); validate routing",Network Engineer,24,1.3,31.2,$200,"$6,240",Hub VPC Build,Direct Connect upgrade path documented for future
+Development,Security Hub Deployment,"Enable Security Hub in all accounts and both regions; configure FSBP standard; aggregate findings to Audit account",Security Engineer,16,1.3,20.8,$225,"$4,680",Log Archive & Audit Accounts,Weeks 9-12
+Development,GuardDuty Deployment,"Enable GuardDuty org-wide in both regions; configure delegated administrator in Audit account",Security Engineer,16,1.3,20.8,$225,"$4,680",Security Hub Deployment,
+Development,AWS Config Rules & Conformance Packs,"Deploy Config rules aligned to FSBP; configure conformance pack for chosen compliance framework",Cloud Engineer,24,1.3,31.2,$200,"$6,240",AWS Config Deployment,Additional frameworks (NIST/SOC2/HIPAA) added post-confirmation
+Development,CloudTrail Lake Configuration,"Configure CloudTrail Lake in Audit account; enable event data stores; create sample queries for security investigations",Cloud Engineer,16,1.3,20.8,$200,"$4,160",Log Archive & Audit Accounts,
+Development,Tagging Enforcement & Budgets,"Implement tag policies via Organizations; configure AWS Cost Explorer; set per-account Budgets alerts at 80% and 100%",Solutions Engineer,16,1.3,20.8,$200,"$4,160",OU Structure Implementation,Tags: Environment / Owner / CostCenter / Project / DataClassification
+Development,Centralised Monitoring Setup,"Configure centralised CloudWatch dashboards in Shared Services account; configure SNS alert routing; document alerting runbook",Solutions Engineer,16,1.3,20.8,$200,"$4,160",Monitoring & Alerting Architecture,Third-party SIEM integration out of scope (TBD post go-live)
+Development,AFT Customisation & Account Templates,"Build AFT account customisations for Prod / NonProd / Sandbox OUs; test full account vending pipeline end-to-end",Solutions Engineer,24,1.3,31.2,$200,"$6,240",AFT Pipeline Setup,Validates <30 min vending SLA
+Development,CI/CD Pipeline Finalization,"Finalise IaC CI/CD pipeline (tooling TBD with client); configure branch protection and deployment gates",Solutions Engineer,24,1.3,31.2,$200,"$6,240",IaC Module Design,Tooling confirmation required from client
+Testing,Test Plan Development,"Create comprehensive landing zone test plan covering SCP enforcement; account vending; network flows; security findings",QA Engineer,16,1.0,16,$150,"$2,400",All development tasks,
+Testing,SCP & Guardrail Testing,"Attempt policy-violating actions to validate SCP deny statements (root usage; region restriction; CloudTrail disable)",Security Engineer,24,1.0,24,$225,"$5,400",SCP & RCP Implementation,
+Testing,Account Vending Validation,"Vend 2 workload accounts (1 prod / 1 non-prod) via AFT; validate guardrail enrolment; confirm < 30 min SLA",Solutions Engineer,16,1.0,16,$200,"$3,200",AFT Customisation & Account Templates,Satisfies hard deadline: 2 workload accounts by Month 3
+Testing,Network Flow Testing,"Validate spoke-to-spoke traffic through firewall; validate centralised egress; test VPN connectivity and routing",Network Engineer,16,1.0,16,$200,"$3,200",All networking development tasks,
+Testing,Security Posture Validation,"Review Security Hub findings; confirm zero critical FSBP findings in production; validate GuardDuty threat detection",Security Engineer,16,1.0,16,$225,"$3,600",Security Hub Deployment,
+Testing,Disaster Recovery Smoke Test,"Validate Control Tower governance in us-east-2; test failover routing via TGW inter-region peering",Cloud Engineer,8,1.0,8,$200,"$1,600",All development tasks,
+Testing,UAT Coordination,"Coordinate client UAT sessions; facilitate sign-off against agreed success metrics",Project Manager,16,1.0,16,$175,"$2,800",Test Plan Development,Client stakeholder availability required
+Testing,Defect Resolution,"Triage and resolve issues identified during testing and UAT",Solutions Engineer,24,1.0,24,$200,"$4,800",All testing tasks,10-20% contingency buffer included
+Testing,Test Results Report,"Document test results; record success metrics achieved; obtain formal client sign-off",QA Engineer,8,1.0,8,$150,"$1,200",All testing tasks,
+Deployment,Go-Live Planning,"Finalise go-live checklist; confirm rollback procedures; schedule production cutover call",Project Manager,8,1.0,8,$175,"$1,400",UAT sign-off,
+Deployment,Production Go-Live,"Execute final production validation; confirm all accounts enrolled in Control Tower at go-live",Solutions Engineer,16,1.0,16,$200,"$3,200",Go-Live Planning,Success metric: 100% accounts enrolled
+Deployment,Runbook Development,"Create operational runbooks for: account vending; SCP updates; Security Hub triage; network changes; incident response",Technical Writer,32,1.0,32,$125,"$4,000",All development tasks,
+Deployment,As-Built Documentation,"Produce final as-built architecture document; update design docs to reflect production configuration",Technical Writer,24,1.0,24,$125,"$3,000",Production Go-Live,
+Deployment,Administrator Training,"Train cloud/infrastructure team on Control Tower; IAM Identity Center; AFT account vending; Config and Security Hub operations",Trainer,24,1.0,24,$150,"$3,600",Runbook Development,
+Deployment,Knowledge Transfer Sessions,"Conduct knowledge transfer for security team on SCP management; Security Hub; GuardDuty; CloudTrail Lake queries",Trainer,16,1.0,16,$150,"$2,400",Administrator Training,
+Deployment,Hypercare Support,"Provide 4-week post go-live hypercare support; triage issues; assist with first workload onboarding",Support Engineer,40,1.0,40,$150,"$6,000",Production Go-Live,4-week hypercare = Medium/Large baseline
+Deployment,Optimization Recommendations,"Document cost optimization and architecture improvement opportunities (Savings Plans; TGW routing; Direct Connect evaluation)",Solution Architect,16,1.0,16,$250,"$4,000",Hypercare Support,AWS-certified architect rate applied
+Deployment,Project Closeout,"Project retrospective; lessons learned; deliver final project report",Project Manager,8,1.0,8,$175,"$1,400",All deployment tasks,
+Management,Technical Leadership,"Quarterback technical oversight across all phases (Discovery through Project Closeout)",EO Quarterback,"=ROUND(SUM($G$3:$G$62)*0.10,0)",1.0,"=ROUND(SUM($G$3:$G$62)*0.10,0)",$225,"=TEXT(ROUND(SUM($G$3:$G$62)*0.10,0)*225,""$#,##0"")",,10% of all engineering task hours
+Management,Project Management,"Project coordination, status reporting, stakeholder communication, and risk management",EO Project Manager,"=ROUND(SUM($G$3:$G$62)*0.10,0)",1.0,"=ROUND(SUM($G$3:$G$62)*0.10,0)",$175,"=TEXT(ROUND(SUM($G$3:$G$62)*0.10,0)*175,""$#,##0"")",,10% of all engineering task hours
+,,,,,TOTAL HOURS,"=SUM($G$3:$G$64)",TOTAL COST,"=TEXT(SUMPRODUCT($G$3:$G$64,$H$3:$H$64),""$#,##0"")",,
+
+# CREDITS
+#WIDTH: 25,15,100
+#ALIGN: left,right,left
+Credit Type,Credit Amount,Credit Comments
+AWS Partner Services Credit,"($10,000)","AWS Partner Network (APN) Advanced Tier credit applied to professional services for solution architecture, Control Tower design, and implementation on this greenfield engagement"
+APN Migration Acceleration Credit,"($5,000)","AWS Migration Acceleration Program (MAP) Assess/Mobilize credit applicable to greenfield landing zone deployments; subject to APN MAP eligibility confirmation with AWS account team"
+Implementation Volume Discount,"($3,000)","Volume discount on professional services for strategic greenfield engagement; applicable when total billable hours exceed 600"
+NET PROFESSIONAL SERVICES COST,"=SUMPRODUCT($G$3:$G$64,$H$3:$H$64)-18000","Total professional services cost minus AWS Partner and MAP credits (Year 1 only); infrastructure run-rate costs are itemised separately in infrastructure-costs.csv"

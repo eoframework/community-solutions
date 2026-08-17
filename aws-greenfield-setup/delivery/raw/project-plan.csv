@@ -1,0 +1,117 @@
+# Project Timeline
+#WIDTH: 15,35,12,14,14,28,24,14
+#ALIGN: left,left,center,center,center,left,left,center
+Phase,Task,Duration,Start Date,End Date,Dependencies,Owner,Status
+Phase 1 — Foundation & Governance,Project Kickoff,1 day,2025-03-03,2025-03-03,None,Project Manager,Not Started
+Phase 1 — Foundation & Governance,Management Account Access Provisioning,1 day,2025-03-04,2025-03-04,Project Kickoff,Cloud Engineer,Not Started
+Phase 1 — Foundation & Governance,Stakeholder RACI Confirmation,2 days,2025-03-03,2025-03-04,Project Kickoff,Project Manager,Not Started
+Phase 1 — Foundation & Governance,Discovery Interviews and Requirements Gathering,5 days,2025-03-04,2025-03-07,Management Account Access Provisioning,Solution Architect,Not Started
+Phase 1 — Foundation & Governance,Compliance Framework Confirmation,5 days,2025-03-04,2025-03-07,Discovery Interviews and Requirements Gathering,Solution Architect,Not Started
+Phase 1 — Foundation & Governance,Discovery Report,5 days,2025-03-10,2025-03-14,Compliance Framework Confirmation,Solution Architect,Not Started
+Phase 1 — Foundation & Governance,Phase 1 Architecture Design Document,5 days,2025-03-17,2025-03-21,Discovery Report,Solution Architect,Not Started
+Phase 1 — Foundation & Governance,AWS Control Tower Deployment,3 days,2025-03-17,2025-03-19,Phase 1 Architecture Design Document,Cloud Engineer,Not Started
+Phase 1 — Foundation & Governance,OU Structure and SCP/RCP Implementation,3 days,2025-03-19,2025-03-21,AWS Control Tower Deployment,Cloud Engineer,Not Started
+Phase 1 — Foundation & Governance,IAM Identity Center Configuration,2 days,2025-03-21,2025-03-25,OU Structure and SCP/RCP Implementation,Cloud Engineer,Not Started
+Phase 1 — Foundation & Governance,Centralised Logging — Log Archive and Audit Accounts,2 days,2025-03-21,2025-03-25,OU Structure and SCP/RCP Implementation,Cloud Engineer,Not Started
+Phase 1 — Foundation & Governance,AWS Config Deployment — Both Regions,2 days,2025-03-24,2025-03-26,Centralised Logging — Log Archive and Audit Accounts,Cloud Engineer,Not Started
+Phase 1 — Foundation & Governance,Architecture Design Review and Sign-Off,2 days,2025-03-26,2025-03-28,Phase 1 Architecture Design Document,Project Manager,Not Started
+Phase 2 — Networking & Connectivity,Transit Gateway Deployment — us-east-1 and us-east-2,3 days,2025-03-31,2025-04-02,Architecture Design Review and Sign-Off,Cloud Engineer,Not Started
+Phase 2 — Networking & Connectivity,Hub VPCs and NAT Gateway Configuration,2 days,2025-04-02,2025-04-04,Transit Gateway Deployment — us-east-1 and us-east-2,Cloud Engineer,Not Started
+Phase 2 — Networking & Connectivity,VPC IPAM Configuration,2 days,2025-04-02,2025-04-04,Transit Gateway Deployment — us-east-1 and us-east-2,Cloud Engineer,Not Started
+Phase 2 — Networking & Connectivity,AWS Network Firewall Deployment,4 days,2025-04-07,2025-04-10,Hub VPCs and NAT Gateway Configuration,Cloud Engineer,Not Started
+Phase 2 — Networking & Connectivity,Spoke VPC Terraform Modules,3 days,2025-04-11,2025-04-15,VPC IPAM Configuration,Solutions Engineer,Not Started
+Phase 2 — Networking & Connectivity,Site-to-Site VPN Configuration,3 days,2025-04-14,2025-04-16,Hub VPCs and NAT Gateway Configuration,Cloud Engineer,Not Started
+Phase 2 — Networking & Connectivity,Network Flow Testing and Validation,3 days,2025-04-17,2025-04-21,Site-to-Site VPN Configuration; Spoke VPC Terraform Modules,Cloud Engineer,Not Started
+Phase 2 — Networking & Connectivity,Network Testing Report,2 days,2025-04-22,2025-04-24,Network Flow Testing and Validation,Solution Architect,Not Started
+Phase 3 — Security Automation & Handover,Security Hub and FSBP Conformance Deployment,3 days,2025-04-28,2025-04-30,Network Testing Report,Security Engineer,Not Started
+Phase 3 — Security Automation & Handover,GuardDuty Organisation-Wide Deployment,2 days,2025-04-28,2025-04-30,Network Testing Report,Security Engineer,Not Started
+Phase 3 — Security Automation & Handover,AWS Config Rules and Conformance Packs,3 days,2025-04-30,2025-05-02,GuardDuty Organisation-Wide Deployment,Security Engineer,Not Started
+Phase 3 — Security Automation & Handover,CloudTrail Lake Configuration,2 days,2025-04-30,2025-05-02,Security Hub and FSBP Conformance Deployment,Security Engineer,Not Started
+Phase 3 — Security Automation & Handover,AFT Pipeline Deployment and Validation,4 days,2025-05-05,2025-05-08,AWS Config Rules and Conformance Packs,Cloud Engineer,Not Started
+Phase 3 — Security Automation & Handover,Two Workload Accounts Vended via AFT,2 days,2025-05-09,2025-05-12,AFT Pipeline Deployment and Validation,Cloud Engineer,Not Started
+Phase 3 — Security Automation & Handover,CI/CD Pipeline Finalisation,3 days,2025-05-09,2025-05-13,AFT Pipeline Deployment and Validation,Solutions Engineer,Not Started
+Phase 3 — Security Automation & Handover,Cost Explorer and AWS Budgets Configuration,1 day,2025-05-09,2025-05-09,Two Workload Accounts Vended via AFT,Solutions Engineer,Not Started
+Phase 3 — Security Automation & Handover,Centralised CloudWatch Dashboards and SNS Alerting,2 days,2025-05-09,2025-05-12,Two Workload Accounts Vended via AFT,Solutions Engineer,Not Started
+Phase 3 — Security Automation & Handover,Test Plan Execution — SCP and Guardrail Testing,3 days,2025-05-12,2025-05-14,CI/CD Pipeline Finalisation; Two Workload Accounts Vended via AFT,QA Engineer,Not Started
+Phase 3 — Security Automation & Handover,Account Vending Validation — Three Consecutive Runs,1 day,2025-05-14,2025-05-14,Test Plan Execution — SCP and Guardrail Testing,QA Engineer,Not Started
+Phase 3 — Security Automation & Handover,User Acceptance Testing,2 days,2025-05-15,2025-05-16,Account Vending Validation — Three Consecutive Runs,Project Manager,Not Started
+Phase 3 — Security Automation & Handover,Test Results Report,1 day,2025-05-19,2025-05-19,User Acceptance Testing,QA Engineer,Not Started
+Phase 3 — Security Automation & Handover,Operational Runbooks Development,5 days,2025-05-12,2025-05-16,CI/CD Pipeline Finalisation,Technical Writer,Not Started
+Phase 3 — Security Automation & Handover,As-Built Architecture Document,3 days,2025-05-14,2025-05-16,Operational Runbooks Development,Technical Writer,Not Started
+Phase 3 — Security Automation & Handover,Administrator and Security Team Training,3 days,2025-05-19,2025-05-21,As-Built Architecture Document,Cloud Engineer,Not Started
+Phase 3 — Security Automation & Handover,Production Go-Live,1 day,2025-05-22,2025-05-22,Test Results Report; Administrator and Security Team Training,Project Manager,Not Started
+Hypercare,Hypercare Support Weeks 13 to 16,20 days,2025-05-26,2025-06-13,Production Go-Live,Cloud Engineer,Not Started
+Hypercare,Optimization Recommendations Report,5 days,2025-06-09,2025-06-13,Hypercare Support Weeks 13 to 16,Solution Architect,Not Started
+Hypercare,Hypercare Support Closeout Report,1 day,2025-06-16,2025-06-16,Optimization Recommendations Report,Project Manager,Not Started
+
+# Milestones
+#WIDTH: 14,38,14,14,55,22,12,14
+#ALIGN: left,left,center,center,left,left,center,center
+Milestone ID,Milestone Name,Target Date,Phase,Success Criteria,Owner,Status,Actual Date
+MS-001,Kickoff Complete,2025-03-03,Phase 1 — Foundation & Governance,All stakeholders identified; RACI confirmed; requirements baseline documented,Project Manager,Not Started,
+MS-002,Discovery Report Accepted,2025-03-14,Phase 1 — Foundation & Governance,Current state documented; OU design confirmed; compliance frameworks identified; report accepted by Client IT Owner,Solution Architect,Not Started,
+MS-003,Architecture Approved,2025-03-28,Phase 1 — Foundation & Governance,"Phase 1 Architecture Design Document signed off by Client Executive Sponsor; Control Tower live; OU hierarchy, SCPs, IAM Identity Center, and centralised logging operational",Project Manager,Not Started,
+MS-004,Governance Foundation Live,2025-03-28,Phase 1 — Foundation & Governance,"Control Tower ACTIVE in us-east-1 and us-east-2; seven-OU hierarchy deployed; all SCPs and RCPs enforced; Log Archive, Audit, and IAM Identity Center SSO operational",Cloud Engineer,Not Started,
+MS-005,Network Foundation Live,2025-04-24,Phase 2 — Networking & Connectivity,"TGW hub-spoke operational in both regions; Network Firewall deployed; IPAM configured; NAT Gateway egress active; VPN to on-premises established; Network Testing Report accepted",Solution Architect,Not Started,
+MS-006,Security Automation Complete,2025-05-16,Phase 3 — Security Automation & Handover,"Security Hub FSBP active in all accounts and both regions; GuardDuty org-wide; Config rules deployed; CloudTrail Lake configured; AFT pipeline validated; two workload accounts vended",Cloud Engineer,Not Started,
+MS-007,Go-Live,2025-05-22,Phase 3 — Security Automation & Handover,"All success metrics validated; UAT signed off by Client Executive Sponsor and Client IT Owner; zero critical Security Hub findings; AFT <30 min confirmed; production go-live confirmed",Project Manager,Not Started,
+MS-008,Hypercare End,2025-06-16,Hypercare,"4-week hypercare concluded; Optimization Recommendations Report delivered; Hypercare Closeout Report accepted by Client Executive Sponsor; BAU handover confirmed",Project Manager,Not Started,
+
+# RACI Matrix
+#WIDTH: 42,14,14,14,11,13,13,13,13
+#ALIGN: left,center,center,center,center,center,center,center,center
+Task/Deliverable,Vendor PM,Vendor Arch,Vendor Eng,Vendor QA,Client Exec,Client IT,Client Sec,Client SME
+Project Kickoff and RACI Finalisation,A,C,I,I,C,R,C,C
+Discovery and Requirements Gathering,C,A,R,I,I,C,C,R
+Phase 1 Architecture Design Document,I,A,R,C,I,C,C,C
+Architecture Design Review Sign-Off,C,R,C,I,A,C,C,I
+AWS Control Tower Deployment,C,C,A,I,I,C,I,I
+OU Structure and SCP/RCP Implementation,C,C,R,I,I,C,A,C
+IAM Identity Center Configuration,C,C,R,I,I,A,C,C
+Centralised Logging — CloudTrail and Config,C,C,R,I,I,C,A,I
+Transit Gateway and Networking Build,C,C,A,I,I,C,I,C
+Network Firewall and IPAM Configuration,C,C,A,I,I,C,C,I
+Site-to-Site VPN to On-Premises,C,C,R,I,I,A,I,C
+Network Testing Report,C,R,R,A,I,C,I,I
+AFT Pipeline Setup and Validation,C,C,A,R,I,C,I,I
+Security Hub and GuardDuty Deployment,C,C,R,I,I,C,A,I
+AWS Config Rules and Conformance Packs,C,C,R,C,I,C,A,I
+CloudTrail Lake Configuration,C,C,R,I,I,C,A,I
+CI/CD Pipeline Finalisation,C,C,A,C,I,C,I,I
+Test Plan Development,C,C,C,A,I,C,I,I
+SCP and Guardrail Testing,I,C,R,C,I,C,A,I
+Account Vending Validation,C,C,R,A,I,C,C,I
+Network Flow Testing,I,C,R,A,I,C,I,I
+Security Posture Validation,I,C,R,C,I,C,A,I
+User Acceptance Testing,R,C,C,C,A,C,C,R
+Go-Live Planning and Cutover,A,C,R,C,C,C,C,I
+Operational Runbooks Development,C,C,R,I,I,C,C,A
+Administrator and Security Team Training,C,C,R,I,I,A,C,C
+Two Workload Accounts Vended via AFT,C,C,R,A,I,C,I,I
+As-Built Architecture Document,C,A,R,I,I,C,C,I
+Hypercare Support,R,C,A,I,I,C,C,I
+Budget Monitoring and Cost Governance,A,I,I,I,C,R,I,C
+Change Control Management,A,C,C,I,C,R,C,I
+Optimization Recommendations Report,C,A,R,I,C,C,I,I
+Project Closeout and BAU Transition,A,C,C,I,C,R,C,I
+R = Responsible | A = Accountable | C = Consulted | I = Informed,,,,,,,,
+
+# Communications Plan
+#WIDTH: 28,15,40,45,22,18
+#ALIGN: left,center,left,left,left,center
+Meeting Type,Frequency,Participants,Purpose,Owner,Day/Time
+Project Kickoff Workshop,Once,All stakeholders — Vendor and Client teams; Executive Sponsor; Cloud IT Owner; Security Lead; SMEs,Launch project; align on scope; confirm RACI; agree governance cadence and tools,Project Manager,2025-03-03 (4 hours)
+Weekly Status Call,Weekly,"Cloud IT Owner; Security Lead; Vendor PM; Vendor Arch; Vendor Eng leads",Review progress against plan; discuss blockers; track risks and decisions,Project Manager,Mondays 10:00 AM ET
+Architecture Design Review Workshop,Once,"Client Executive Sponsor; Client IT Owner; Client Security Lead; Vendor PM; Vendor Arch",Review and approve Phase 1 Architecture Design Document; agree go/no-go for deployment,Solution Architect,2025-03-26 (3 hours)
+Phase Gate Review — Phase 1,Once,Client Executive Sponsor; Client IT Owner; Vendor PM; Vendor Arch,Review Phase 1 completion criteria; confirm governance foundation live; approve Phase 2 start,Project Manager,2025-03-28 (1 hour)
+Phase Gate Review — Phase 2,Once,Client Executive Sponsor; Client IT Owner; Client Networking Lead; Vendor PM; Vendor Arch,Review Phase 2 completion criteria; confirm network foundation live; approve Phase 3 start,Project Manager,2025-04-25 (1 hour)
+Design Q&A and Technical Sync,Bi-weekly,"Client IT Owner; Client Security Lead; Vendor Arch; Vendor Eng leads",Resolve open technical design questions; review configuration decisions; confirm approach,Solution Architect,Wednesdays 2:00 PM ET
+Risk and Issue Review,Weekly,Vendor PM; Client IT Owner; Client Executive Sponsor (escalation),Review risk register; track open issues; agree mitigation actions and owners,Project Manager,Fridays 11:00 AM ET
+Security Review Sync,Weekly,"Client Security Lead; Vendor Arch; Vendor Security Eng",Review SCP design; confirm compliance framework inputs; validate security posture progress,Security Engineer,Tuesdays 11:00 AM ET
+UAT Session,Once,"Client IT Owner; Client Security Lead; Client SMEs; Vendor PM; Vendor Eng; Vendor QA",Client performs end-to-end platform walkthrough; validate all success criteria against acceptance checklist,Project Manager,2025-05-15 (4 hours)
+Go-Live Readiness Review,Once,"Client Executive Sponsor; Client IT Owner; Client Security Lead; Vendor PM; Vendor Arch",Present UAT results and go-live readiness checklist; obtain go-live approval sign-off,Project Manager,2025-05-21 (1 hour)
+Administrator Training — Infrastructure Track,Once,"Client IT Owner; Client Platform Administrators; Vendor Eng",Control Tower operations; AFT account vending; day-2 operations and Cost Explorer,Cloud Engineer,2025-05-19 (6 hours — 3 × 2-hour sessions)
+Security Team Training — Security Track,Once,"Client Security Lead; Client Security Team; Vendor Security Eng",Security Hub triage; GuardDuty investigation; CloudTrail Lake queries and runbook walkthrough,Security Engineer,2025-05-20 (6 hours — 3 × 2-hour sessions)
+Hypercare Incident Escalation,As required,Client IT Owner; Vendor PM; Vendor Eng on-call,Notify and resolve P1 incidents during hypercare period; confirm resolution and prevention,Cloud Engineer,Within 2 business hours of detection
+Hypercare Weekly Check-In,Weekly during hypercare,"Client IT Owner; Client Security Lead; Vendor PM; Vendor Eng",Review hypercare issues and resolutions; track any open P2/P3 items; confirm operational readiness,Project Manager,Mondays 10:00 AM ET (Weeks 13-16)
+Project Closeout and Handover,Once,Client Executive Sponsor; Client IT Owner; Vendor PM; Vendor Arch,Formal project closure; BAU handover confirmation; deliver Optimization Recommendations Report,Project Manager,2025-06-16 (1 hour)

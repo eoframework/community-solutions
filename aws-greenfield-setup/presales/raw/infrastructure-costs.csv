@@ -1,0 +1,63 @@
+# Sizing Guidelines
+#WIDTH: 24,36,28,28,28,51
+#ALIGN: left,left,center,center,center,left
+Category,Component,Small,Medium,Large,Notes
+Cloud Services,AWS Accounts,5-10 accounts,11-30 accounts,31+ accounts,Total accounts enrolled in Control Tower
+Cloud Services,Governed Regions,1-2 regions,2-4 regions,4+ regions,AWS regions enrolled and governed by Control Tower
+Cloud Services,Config Rules,50-100 rules,100-300 rules,300+ rules,AWS Config managed rules across all accounts
+Cloud Services,CloudTrail Events,<100M events/month,100M-500M events/month,>500M events/month,Organization trail event volume
+Cloud Services,GuardDuty Finding Volume,<10K findings/month,10K-100K findings/month,>100K findings/month,Threat detection events processed
+Connectivity,Transit Gateway Attachments,5-10 attachments,11-50 attachments,51+ attachments,VPC and VPN attachments per TGW
+Cloud Services,Log Storage (S3),500 GB/month,1-5 TB/month,5+ TB/month,CloudTrail and Config logs in S3 (Log Archive)
+Support & Maintenance,AWS Support Tier,Developer,Business,Enterprise,AWS support plan level
+
+# Infrastructure Costs
+#WIDTH: 23,30,50,12,16,12,15,12,12,15,30
+#ALIGN: left,left,left,right,left,right,right,right,right,right,left
+Category,Component,Description,Quantity,Unit,Unit Price,Annual Cost,Year 2,Year 3,3-Year Total,Notes
+Cloud Services,AWS Control Tower,"Multi-region governance (us-east-1 + us-east-2)",1,Service/Month,0,0,0,0,0,No direct charge; costs reflected in underlying services
+Cloud Services,AWS Organizations,Multi-account management service,1,Service/Month,0,0,0,0,0,No additional charge for AWS Organizations
+Cloud Services,AWS IAM Identity Center,SSO for all accounts (up to 50 users),1,Service/Month,0,0,0,0,0,No charge for IAM Identity Center
+Cloud Services,AWS Config,"Config recorder + rules (both regions; ~150 rules x 10 accounts)",1,Service/Month,270,3240,3240,3240,9720,Config rules at $0.003/rule/eval; ~150 rules across 10 accounts per region
+Cloud Services,AWS CloudTrail,"Organization trail (both regions; ~100M events/month)",1,Service/Month,200,2400,2400,2400,7200,CloudTrail Lake + management events; ~$0.002/10K management events
+Cloud Services,Amazon GuardDuty,"Threat detection (both regions; ~500GB analyzed/month)",1,Service/Month,150,1800,1800,1800,5400,GuardDuty at ~$0.80/GB for VPC Flow Logs + CloudTrail
+Cloud Services,AWS Security Hub,"CSPM aggregated findings (both regions; 10 accounts x ~1000 findings)",1,Service/Month,100,1200,1200,1200,3600,Security Hub $0.001/finding check; aggregated to Audit account
+Cloud Services,Amazon CloudWatch,"Centralized monitoring; logs ingestion ~50GB/month",1,Service/Month,180,2160,2160,2160,6480,Metrics + logs ingestion + dashboards in Shared Services account
+Cloud Services,AWS Transit Gateway,"TGW in us-east-1 + us-east-2 (~10 attachments x 2 regions)",2,Gateway/Month,219,5256,5256,5256,15768,TGW $0.05/attachment/hr + $0.02/GB data processed (~100GB/month)
+Cloud Services,NAT Gateway,Centralized egress in Network Hub (both regions),2,Gateway/Month,35,840,840,840,2520,NAT Gateway $0.045/hr + $0.045/GB; low initial traffic
+Cloud Services,VPC IPAM,IP address management across all VPCs and accounts,1,Service/Month,20,240,240,240,720,IPAM $0.00027/IP/hr for advanced tier; ~2000 IPs managed
+Cloud Services,AWS Network Firewall,"North-south + east-west inspection (both regions)",2,Firewall/Month,395,9480,9480,9480,28440,Network Firewall $0.395/hr per endpoint + $0.065/GB processed
+Cloud Services,Amazon S3,Log Archive bucket (CloudTrail + Config logs ~500GB/month),500,GB/Month,0.023,138,138,138,414,S3 Standard $0.023/GB; centralized logging account
+Cloud Services,S3 Glacier Instant,Long-term log retention (compliance archive ~500GB/month),500,GB/Month,0.004,24,24,24,72,Glacier Instant Retrieval for older audit logs
+Cloud Services,AWS Budgets,Budget alerts (10 accounts x 2 budget rules each),20,Budget/Month,0.1,24,24,24,72,First 2 budgets/account free; additional at $0.10/budget/day
+Cloud Services,AWS Cost Explorer,FinOps cost visibility and anomaly detection,1,Service/Month,10,120,120,120,360,Cost Explorer activated; anomaly detection included
+Cloud Services,Amazon VPC,VPC + subnets for hub + spoke topology (~8 VPCs),1,Service/Month,50,600,600,600,1800,VPC data processing fees; minimal baseline cost
+Cloud Services,Account Factory for Terraform,AFT CodePipeline + CodeBuild execution (CI/CD for account vending),1,Service/Month,75,900,900,900,2700,CodePipeline $1/pipeline + CodeBuild minutes for AFT automation
+Software Licenses,Terraform Cloud,"IaC platform for AFT and workload infrastructure (Team tier)",1,Service/Month,40,480,480,480,1440,HashiCorp Terraform Cloud Team tier; ~5 users
+Support & Maintenance,AWS Business Support,"Business support plan (min 10% of monthly AWS charges)",1,Service/Month,350,4200,4200,4200,12600,AWS Business Support; scales with usage; estimated minimum baseline
+Facilities,Facilities,Cloud-only solution — no data center facilities required,1,Service/Month,0,0,0,0,0,Greenfield AWS deployment; no co-location or on-premises costs
+
+# Credits
+#WIDTH: 25,25,15,50
+#ALIGN: left,left,right,left
+Category,Credit Type,Credit Amount,Credit Comments
+Hardware,Equipment Credit,0,No hardware credits — greenfield cloud-only solution
+Cloud Services,AWS Activate Credit,(-5000),AWS Activate Founders credit for net-new AWS customers (up to $5000 in service credits)
+Cloud Services,AWS MAP Credit,(-10000),AWS Migration Acceleration Program credit — applicable for greenfield landing zone engagements
+Cloud Services,AWS Control Tower Promo,0,No additional promotional credit available beyond MAP
+Software Licenses,Terraform Credit,0,No partner credit available for Terraform Cloud at Team tier
+Connectivity,Connectivity Credit,0,No connectivity credits — VPN connectivity pending discovery
+Support & Maintenance,Support Credit,0,No support plan credits available
+Facilities,Facilities Credit,0,No facilities — cloud-only solution
+
+# 3-Year Summary
+#WIDTH: 25,15,15,15,12,12,15
+#ALIGN: left,right,right,right,right,right,right
+Category,Year 1 List,Year 1 Credits,Year 1 Net,Year 2,Year 3,3-Year Total
+Hardware,0,0,0,0,0,0
+Cloud Services,28422,-15000,13422,28422,28422,70266
+Software Licenses,480,0,480,480,480,1440
+Connectivity,0,0,0,0,0,0
+Support & Maintenance,4200,0,4200,4200,4200,12600
+Facilities,0,0,0,0,0,0
+TOTAL,33102,-15000,18102,33102,33102,84306
